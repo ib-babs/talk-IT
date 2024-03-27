@@ -1,0 +1,17 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/new_post.css?{{cache_id}}" rel="stylesheet" />
+<div id='edit-post'>
+<h1>Edit a post</h1>
+<form
+  action="{{url_for('edit', question_id=question_id)}}"
+  method="post"
+  enctype="application/x-www-form-urlencoded"
+>
+  {{ edit_form.hidden_tag() }}
+  
+  <div>{{ edit_form.title}}</div>
+  <div>{{ edit_form.question }}</div>
+  <div id="post-btn-div">{{ edit_form.done }}</div>
+</form>
+</div>
+{% endblock %}

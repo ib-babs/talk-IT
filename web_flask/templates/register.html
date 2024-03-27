@@ -1,0 +1,69 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/common.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/register.css?{{cache_id}}" rel="stylesheet" />
+<script
+  type="module"
+  src="../static/scripts/register.js?{{cache_id}}"
+  defer
+></script>
+<div id="account-success">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <span id="flash-message">{{messages[0]}}</span>
+  {% endif %} {% endwith %}
+</div>
+<div class="container">
+  <h3>Talk-IT Registration</h3>
+  <form
+    id="register-form"
+    action="{{ url_for('register') }}"
+    method="POST"
+    enctype="application/x-www-form-urlencoded"
+  >
+    {{ register.hidden_tag() }}
+    <div class="register_field firstname">
+      <i class="fa-regular fa-user-circle" aria-hidden="true"></i>
+      {{register.full_name }}
+    </div>
+
+    <div class="register_field username">
+      <i class="fa-solid fa-user" aria-hidden="true"></i> {{ register.username
+      }}
+    </div>
+
+    <div class="register_field email">
+      <i class="fa-solid fa-envelope" aria-hidden="true"></i> {{ register.email
+      }}
+    </div>
+
+    <div class="register_field password">
+      <i class="fa-solid fa-key" aria-hidden="true"></i> {{ register.password }}
+      <i
+        class="fa-solid fa-eye-slash"
+        id="pwd-show"
+        aria-hidden="true"
+        style="color: black"
+      ></i>
+    </div>
+
+    <div class="register_field confirm_password">
+      <i class="fa-solid fa-key" aria-hidden="true"></i> {{
+      register.confirm_password }}
+      <i
+        class="fa-solid fa-eye-slash"
+        aria-hidden="true"
+        id="c-pwd-shown"
+        style="color: black"
+      ></i>
+      <p id="incorrect-pwd"></p>
+    </div>
+
+    <div class="register_field gender">
+      <label id="gender">Gender:</label> {{ register.gender }}
+    </div>
+    <div class="register_field">{{ register.signup }}</div>
+    <span id="goto-signup-page">
+      Already have account? <a href="{{ url_for('login') }}">Sign In</a>
+    </span>
+  </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %} {% block content%}
+<link href="../static/styles/new_post.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/profile.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/edit_profile.css?{{cache_id}}" rel="stylesheet" />
+<div class='user-profile'>
+<form
+  id="edit-profile"
+  action="{{ url_for('edit_profile') }}"
+  method="POST"
+  enctype="multipart/form-data"
+>
+  <div class="container">
+    <div class="img-container">
+      <img
+        id="user-image"
+        src="data:image/{{user.image_fmt}};base64,{{ user.image }}"
+      />
+    </div>
+  </div>
+  {{ profile.hidden_tag() }}
+  <div class="register_field choose-image">{{profile.image }}</div>
+  <div class="register_field firstname">
+    {{profile.full_name.label }} {{profile.full_name }}
+  </div>
+
+  <div class="register_field username">
+    {{ profile.username.label }} {{ profile.username }}
+  </div>
+
+  <div class="register_field email">
+    {{ profile.email.label }} {{ profile.email }}
+  </div>
+
+  <div class="register_field gender">
+    <label id="gender">Gender:</label> {{ profile.gender }}
+  </div>
+  {{ profile.submit }}
+</div>
+</form>
+
+
+{% endblock %}

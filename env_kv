@@ -1,0 +1,32 @@
+TALK_IT_MYSQL_USER=khalil TALK_IT_MYSQL_PWD=root TALK_IT_MYSQL_HOST=localhost TALK_IT_MYSQL_DB=talk-IT python3 -m web_flask.app
+
+
+
+
+        # update_profile_pic = UpdateProfilePicture()
+        # if update_profile_pic.validate_on_submit():
+        #     if 'image' in request.files:
+        #         image = request.files.get('image')
+        #         if image.filename != '':
+        #             # image_open = Image.open(io.BytesIO(image.read()))
+        #             image_byte = io.BytesIO(image.read())
+        #             # mage_open.save(image_byte, format='JPEG')
+        #             user.image = image_byte.read()
+        #             credential['image'] = user.image
+        #             storage.save()
+        #         return redirect(url_for('profile'))
+# @app.route('/upload', methods=['GET', 'POST'])
+# def upload():
+#     update_profile_pic = UpdateProfilePicture()
+#     if update_profile_pic.validate_on_submit():
+#         if 'image' in request.files:
+#             image = request.files.get('image')
+
+#             if image.filename != '':
+#                 read_image = image.read()
+#                 byte_read = io.BytesIO(read_image)
+#                 #image_open = Image.open(byte_read)
+#                 print(byte_read.read())
+#                 # image_open.save(image_byte, format='JPEG')
+#     return render_template('profile.html', image=update_profile_pic, cache_id=uuid4())
+

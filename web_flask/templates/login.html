@@ -1,0 +1,33 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/common.css?{{cache_id}}" rel="stylesheet" />
+<script type="module" src="../static/scripts/login.js?{{cache_id}}" defer></script>
+<div id="account-success">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <span id="flash-message">{{ messages[0] }}</span> {% endif %} {% endwith %}
+</div>
+<div class="container">
+  <h3>Talk-IT Login</h3>
+  <form id="login-form" action="{{ url_for('login') }}" method="POST">
+    {{ login.hidden_tag() }}
+
+    <div class="login_field username">
+      <i class="fa-solid fa-user" aria-hidden="true"></i> {{ login.username }}
+    </div>
+
+    <div class="login_field password">
+      <i class="fa-solid fa-key" aria-hidden="true"></i> {{ login.password }}
+      <i
+        class="fa-solid fa-eye-slash"
+        id="pwd-show"
+        aria-hidden="true"
+        style="color: black"
+      ></i>
+    </div>
+    <div id="pwd">{{password}}</div>
+    <div class="login_field">{{ login.sign_in}}</div>
+  </form>
+  <span id="goto-signup-page">
+    New User? <a href="{{ url_for('register') }}">Sign In</a>
+  </span>
+</div>
+{% endblock content %}

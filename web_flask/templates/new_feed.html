@@ -1,0 +1,46 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/new_feed.css?{{cache_id}}" rel="stylesheet" />
+<script src="../static/scripts/jquery-3.7.1.min.js"></script>
+<script>
+  let activeNav = $("nav .nav-link");
+  $(activeNav[0]).css('background', 'red');
+  $(activeNav[0]).css('color', 'white');
+</script>
+<div class="container">
+  <div class="img-container">
+    <img
+      id="user-image"
+      src="data:image/{{user.image_fmt}};base64,{{ user.image }}"
+    />
+    <p>Username: <strong>{{user.username}}</strong></p>
+  </div>
+  <div id="edit-and-post">
+    <a href="{{url_for('ask_question') }}">New post</a>
+  </div> 
+</div>
+<div class="question-card">
+  {% if questions %} {% for (question, user) in questions %}
+  <div class="'question-container">
+    <div id="question-title"><h3>{{ question.title }}</h3></div>
+    <div id="question-body">
+      <img
+        id="new-feed-user-image"
+        src="data:image/jpg;base64,{{ user.image}}"
+      /><br />
+      <strong>{{user.username}}</strong><br />
+      <small>Created At: {{question.updated_at}}</small>
+      <div id="question-options-container">
+        <a href="{{url_for('read_post', question_id=question.id)}}" title='Read More'><i class="fab fa-readme" aria-hidden="true"></i
+          ></a>
+      </div>
+      <p class="question-id" style="display: none">{{ question.id }}</p>
+      <p>{{ question.question }}</p>
+    </div>
+  </div>
+  {%endfor %} {%else%}
+  <div><em>No post.</em></div>
+  {% endif %}
+</div>
+
+{% endblock content %}

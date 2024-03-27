@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if title %}
+    <title>Talk-IT | {{title}}</title>
+    {% else %}
+    <title>Talk-IT</title>
+    {% endif %}
+    <link rel="stylesheet" href="../static/image/css/all.css" />
+    <link rel="stylesheet" href="../static/styles/layout.css" />
+    <link
+      rel="shortcut icon"
+      href="../static/image/svgs/brands/teamspeak.svg"
+      type="image/x-icon"
+    />
+    <script src="../static/scripts/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    {% if nav%}
+    <header>
+      <nav>
+        <a href="{{url_for('new_feed')}}"
+          ><h1 id="page-brand">
+            <i class="fa-brands fa-teamspeak" aria-hidden="true"></i> TalkIT
+          </h1></a
+        >
+        {% if not a %}
+        <a href="{{url_for('new_feed')}}" class="nav-link"
+          ><i class="fa fa-home" aria-hidden="true"></i> New Feed</a
+        >
+        <a href="{{url_for('my_post')}}" class="nav-link"
+          ><i class="fa fa-book" aria-hidden="true"></i> My Post</a
+        >
+        <a href="{{url_for('profile')}}" class="nav-link"
+          ><i class="fa fa-user-circle" aria-hidden="true"></i> Profile</a
+        >
+      </nav>
+      {% endif %}
+    </header>
+    {% endif %} {% block content %} {% endblock content %}
+  </body>
+</html>

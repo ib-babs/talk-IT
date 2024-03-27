@@ -1,0 +1,90 @@
+#read-post-container {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}
+#read-post-container h1 {
+  position: sticky;
+  background-color: white;
+  color: #444;
+  top: 33px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bolder;
+  box-shadow: 0 0 12px 2px #ccc;
+  box-sizing: content-box;
+  padding: 5px;
+}
+article p {
+  font-size: calc(14pt + 2px);
+  word-wrap: break-word;
+  white-space-collapse: break-spaces;
+}
+#comments-container {
+  margin: 10px;
+  margin-bottom: 5em;
+}
+
+#comment-div {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+#user-img {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+#comment-div p {
+  margin: 0 0 5px 0;
+  white-space-collapse: break-spaces;
+  word-wrap: break-word;
+}
+section h3 {
+  text-decoration: underline;
+  text-decoration-color: #ccc;
+  text-underline-offset: 8px;
+}
+#comment-div strong {
+  color: blue;
+}
+#user-comments {
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  background-color: rgba(210, 210, 210, 0.5);
+}
+
+.comment-box-form .cmt-txt-area {
+  font-size: 14pt;
+  resize: none;
+  width: 85%;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: -10px;
+  outline: solid 1px #ccc;
+}
+.comment-box-form .cmt_sumit-btn {
+  right: 20px;
+  top: 15px;
+  color: white;
+  background-color: red;
+  border: 0;
+  border-radius: 4px;
+  padding: 5px;
+  text-align: center;
+}
+.comment-box-form {
+  position: fixed;
+  width: 97%;
+  bottom: 10px;
+  margin: 0 8px;
+}
+#comment-options {
+  margin-bottom: 10px;
+  margin-left: 3em;
+  display: flex;
+  gap: 15px;
+}

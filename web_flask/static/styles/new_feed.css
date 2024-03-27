@@ -1,0 +1,32 @@
+#new-feed-user-image {
+  width: 70px;
+  float: left;
+  border-radius: 100%;
+  margin: 6px;
+  clear: both;
+  width: clamp(60px, 33vw, 80px);
+  height: clamp(60px, calc(32vw - 4px), 80px);
+}
+#question-body p {
+  -webkit-line-clamp: 4;
+}
+#question-options-container {
+  border-bottom: 0;
+}
+#question-options-container a:first-child {
+  border-bottom: 0;
+  color: #333;
+  border: 1px #ccc solid;
+}
+.container {
+  padding-block: 0.8em 40px;
+}
+#edit-and-post a:first-child {
+  text-decoration: none;
+  background: blue;
+  color: white;
+}
+
+#question-body strong{
+  color: blue;
+}

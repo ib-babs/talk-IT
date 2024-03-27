@@ -1,0 +1,17 @@
+
+#c-pwd-shown,
+#pwd-show {
+  font-size: 0.7em;
+}
+
+
+select {
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+}
+
+
+#incorrect-pwd {
+  color: beige;
+}
+

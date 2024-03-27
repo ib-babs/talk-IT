@@ -1,0 +1,35 @@
+.user-profile {
+  display: grid;
+  place-content: center;
+  margin: 15px;
+}
+img {
+  border-radius: 100%;
+  margin: 6px;
+  float: left;
+  width: clamp(150px, 33vw, 300px);
+  height: clamp(150px, calc(32vw - 4px), 300px);
+  box-shadow: 0 2px 8px 1px rgb(65, 58, 58);
+}
+#edit-and-logout {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  gap: 15px;
+}
+#edit-link,
+#logout {
+  color: white;
+  border-radius: 4px;
+  font-size: 1em;
+  padding: 2px 4px;
+}
+#logout {
+  background-color: red;
+  border: none;
+  border-radius: 4px;
+}
+#edit-link {
+  text-decoration: none;
+  background: blue;
+}

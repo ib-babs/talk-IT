@@ -1,0 +1,27 @@
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  border-bottom: 1px solid #ccc;
+}
+.register_field {
+  margin: 18px;
+}
+input[type="submit"] {
+    color: white;
+    background: #222;
+    display: grid;
+    margin: auto;
+    padding: 3px 20px 3px 20px;
+    border-radius: 4px;
+  }
+
+.img-container{
+    position: relative;
+}
+#image{
+    margin-top: 14px;
+    accent-color: blue;
+}

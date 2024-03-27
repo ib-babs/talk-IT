@@ -1,0 +1,51 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/home.css?{{cache_id}}" rel="stylesheet" />
+<script
+  type="module"
+  src="../static/scripts/home.js?{{cache_id}}"
+  defer
+></script>
+<div class="container">
+  <div class="img-container">
+    <img
+      id="user-image"
+      src="data:image/{{img_format}};base64,{{ user_img }}"
+    />
+    <p>Username: <strong>{{info.username}}</strong></p>
+  </div>
+  <div id="edit-and-post">
+    <a href="{{url_for('edit_profile')}}">
+      Edit Profile <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+    </a>
+    <a href="{{url_for('ask_question') }}">New post</a>
+  </div>
+</div>
+
+<div class="question-card">
+  {% if questions %}
+  <h1>Posts</h1>
+  {% for question in questions%}
+  <div class="'question-container">
+    <div id="question-title"><h3>{{ question.title }}</h3></div>
+    <div id="question-body">
+      <small>Created At: {{question.updated_at}}</small>
+      <div id="question-options-container">
+        <a href="{{url_for('read_post', question_id=question.id)}}">Read</a>
+        <a href="{{ url_for('edit', question_id=question.id)}}">Edit</a>
+
+        <!-- Delete Form -->
+        <form action="{{url_for('home')}}" method="post" class="delete_form">
+          {{ delete_post.hidden_tag() }} {{ delete_post.post_id }} {{
+          delete_post.submit }}
+        </form>
+      </div>
+      <p class="question-id" style="display: none">{{ question.id }}</p>
+      <p>{{ question.question }}</p>
+    </div>
+  </div>
+  {%endfor %} {%else%}
+  <div><em>No post.</em></div>
+  {% endif %}
+</div>
+
+{% endblock content %}

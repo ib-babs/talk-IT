@@ -1,0 +1,24 @@
+
+.comment-box-form .cmt-txt-area {
+    font-size: 14pt;
+    resize: none;
+    border: solid 1px #ccc;
+    border-radius: 10px;
+    padding: 11px;
+    outline: solid 1px #ccc;
+  }
+  .comment-box-form .cmt_sumit-btn {
+    color: white;
+    background-color: green;
+    border: 0;
+    border-radius: 4px;
+    padding: 5px;
+    text-align: center;
+    font-size: large;
+  }
+  .comment-box-form {
+display: grid;
+margin: auto;
+padding: 1em;
+
+  }
