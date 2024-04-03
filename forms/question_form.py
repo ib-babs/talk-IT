@@ -2,22 +2,19 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import DataRequired
-
-
+"""question_form module has two main classes:
+    QuestionForm - For taking user post, it includes title of the post,
+    and the post itself
+    EditPostForm class - For editing user post
+    """
 class QuestionForm(FlaskForm):
-
+    '''Flask form subclass'''
     title = StringField(validators=[DataRequired(
     )], id='question_title', name='question_title', render_kw={'placeholder': 'Title'})
 
     question = TextAreaField(validators=[DataRequired(
     )], id='question-area', name='question-area', render_kw={'placeholder': 'Your question goes here', 'cols': 80, 'rows': 22})
     post = SubmitField('Post', id='post-btn')
-
-
-class DeletePostForm(FlaskForm):
-    '''Form to delete a post based on post ID'''
-    post_id = StringField(render_kw={'class': 'post-ids'})
-    submit = SubmitField('Delete', render_kw={'class': 'delete-button'})
 
 
 class EditPostForm(FlaskForm):

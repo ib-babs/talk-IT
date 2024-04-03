@@ -1,6 +1,10 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "log_reg_layout.html" %} {% block content %}
 <link href="../static/styles/common.css?{{cache_id}}" rel="stylesheet" />
-<script type="module" src="../static/scripts/login.js?{{cache_id}}" defer></script>
+<script
+  type="module"
+  src="../static/scripts/login.js?{{cache_id}}"
+  defer
+></script>
 <div id="account-success">
   {% with messages = get_flashed_messages() %} {% if messages %}
   <span id="flash-message">{{ messages[0] }}</span> {% endif %} {% endwith %}
@@ -24,10 +28,11 @@
       ></i>
     </div>
     <div id="pwd">{{password}}</div>
+    <a href="{{url_for('reset_request')}}" id='forgot-pwd'>Forgot password?</a>
     <div class="login_field">{{ login.sign_in}}</div>
   </form>
   <span id="goto-signup-page">
-    New User? <a href="{{ url_for('register') }}">Sign In</a>
+    New User? <a href="{{ url_for('register') }}">Sign Up</a>
   </span>
 </div>
 {% endblock content %}

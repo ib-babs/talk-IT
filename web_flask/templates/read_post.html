@@ -1,20 +1,45 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/read_post.css?{{cache_id}}" rel="stylesheet" />
-<link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
-<link href="../static/styles/layout.css?{{cache_id}}" rel="stylesheet" />
-<script>
-  window.onload = () => {
-    $("#delete-question-btn").on("click", () => {
-      return confirm("Are you sure on deleting this comment?") ? true : false;
-    });
-  };
-</script>
+<link rel="stylesheet" href="../static/jssocials-1.4.0/dist/jssocials.css" />
+<link
+  rel="stylesheet"
+  href="../static/jssocials-1.4.0/dist/jssocials-theme-classic.css"
+/>
+<script src="../static/jssocials-1.4.0/dist/jssocials.min.js"></script>
+<script type="text/javascript" src="../static/scripts/readPost.js"></script>
+
 <div id="read-post-container">
   <article>
-    <h1>{{ post.title}}</h1>
-    <p>{{ post.question }}</p>
+    <h1 id="post-title">{{ post.title}}</h1>
+    <p id='post-question'>{{ post.question }}</p>
+    <div id="lkes-and-comments-container">
+      <span>
+        <i class="fa fa-comment" aria-hidden="true"></i> {{total_comment}}</span
+      >
+      <form
+      action="{{url_for('read_post', question_id=post.id)}}"
+      method="post"
+      name="like"
+      ,
+      id="like"
+      >
+      {{like.hidden_tag()}}
+      <label for="like-btn">
+        <i
+        class="far fa-thumbs-up"
+        aria-hidden="true"
+        style="color: {% if post.has_liked %}
+          blue {% else %} black {% endif %};"
+          ></i>
+        </label>
+        {{like.like}} {{post.likes}}
+      </form>
+    </div>
   </article>
+  <div id="live"></div>
 </div>
+
+<!-- Comments -->
 <div id="comments-container">
   {% if comments %}
   <h3>Comment(s)</h3>
@@ -27,7 +52,7 @@
     />
     <div id="user-comments">
       <strong>{{user.username}}</strong>
-      <p>{{comment.comment}}</p>
+      <p id="post-comment">{{comment.comment}}</p>
     </div>
   </div>
   <!--  Comment options -->
@@ -38,7 +63,8 @@
     <a
       id="delete-question-btn"
       href="{{url_for('delete_comment', comment_id=comment.id)}}"
-      style='color:red'>Delete</a
+      style="color: red"
+      >Delete</a
     >
     {% endif %}
   </div>
@@ -57,8 +83,11 @@
     id="comment-form"
     method="post"
   >
-    {{ comment_form.hidden_tag() }} {{ comment_form.comment}} {{
-    comment_form.submit_comment}}
+    {{ comment_form.hidden_tag() }} {{ comment_form.comment}}
+    <label id="submit-comment-label" for="submit-comment"
+      ><i class="fa fa-paper-plane" aria-hidden="true"></i
+    ></label>
+    {{ comment_form.submit_comment}}
   </form>
 </div>
 

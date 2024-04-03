@@ -1,0 +1,64 @@
+body {
+  min-height: 100vh;
+  font-size: clamp(16pt, calc(14pt - 4px), 18pt);
+  
+}
+.talkit {
+  margin: 15px;
+  transition-duration: 1ss;
+}
+.talkit h1 {
+  margin-bottom: 5px;
+}
+
+img {
+  box-sizing: content-box;
+  width: clamp(300px, 400px, 500px);
+  height: clamp(300px, 250px, 470px);
+}
+section {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10%;
+}
+
+.section-2 img {
+  grid-column-start: 2;
+}
+.section-4 a {
+  color: white;
+  background-color: blue;
+  padding: 5px 2em 5px 2em;
+  text-decoration: none;
+  border-radius: 8px;
+}
+footer h3 {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 0;
+  user-select: none;
+  text-decoration: underline;
+  text-decoration-color: blue;
+  color: #ccc;
+}
+footer {
+  display: grid;
+  grid-auto-flow: column;
+  background-color: #222;
+  color: white;
+  align-items: center;
+  margin-top: 20px;
+  padding: 8px;
+}
+footer a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+@media (200px <= width < 768px) {
+  section {
+    display: block;
+  }
+  main {
+    text-align: center;
+  }
+}

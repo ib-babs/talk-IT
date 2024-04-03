@@ -12,32 +12,70 @@
     <link rel="stylesheet" href="../static/styles/layout.css" />
     <link
       rel="shortcut icon"
-      href="../static/image/svgs/brands/teamspeak.svg"
+      href="../static/teamspeak.svg"
       type="image/x-icon"
     />
     <script src="../static/scripts/jquery-3.7.1.min.js"></script>
+    <script src="../static/scripts/layout.js" defer></script>
   </head>
   <body>
-    {% if nav%}
+    {% if nav %}
     <header>
-      <nav>
-        <a href="{{url_for('new_feed')}}"
-          ><h1 id="page-brand">
-            <i class="fa-brands fa-teamspeak" aria-hidden="true"></i> TalkIT
-          </h1></a
-        >
-        {% if not a %}
-        <a href="{{url_for('new_feed')}}" class="nav-link"
-          ><i class="fa fa-home" aria-hidden="true"></i> New Feed</a
-        >
-        <a href="{{url_for('my_post')}}" class="nav-link"
-          ><i class="fa fa-book" aria-hidden="true"></i> My Post</a
-        >
-        <a href="{{url_for('profile')}}" class="nav-link"
-          ><i class="fa fa-user-circle" aria-hidden="true"></i> Profile</a
-        >
-      </nav>
+      <label for="theme-check" id="theme-label"
+        ><h1 id="page-brand">
+          <i class="fa-brands fa-teamspeak" aria-hidden="true"></i> TalkIT
+        </h1></label
+      ><input
+        type="checkbox"
+        name="theme-check"
+        id="theme-check"
+        style="display: none"
+      />
+
+      {% if read %}
+      <button id="play-btn">
+        <i class="fa fa-volume-up" aria-hidden="true"></i>
+      </button>
+      <button id="stop-btn" disabled>
+        <i class="far fa-stop-circle" aria-hidden="true"></i>
+      </button>
       {% endif %}
+      <!-- Navigation Bar -->
+      <nav>
+        <ul>
+          {% if a %}
+          <a href="{{url_for('new_feed')}}" class="nav-link">
+            <li><i class="fa fa-home" aria-hidden="true"></i> New Feed</li>
+          </a>
+
+          <a href="{{url_for('my_post')}}" class="nav-link"
+            ><li><i class="fa fa-book" aria-hidden="true"></i> My Post</li>
+          </a>
+          <a href="{{url_for('profile')}}" class="nav-link"
+            ><li>
+              <i class="fa fa-user-circle" aria-hidden="true"></i> Profile
+            </li>
+          </a>
+          <a href="/" class="nav-link"
+            ><li><i class="fa fa-info-circle" aria-hidden="true"></i> About</li>
+          </a>
+          {% if dev %}
+          <a href="/developer" class="nav-link"
+            ><li><i class="fa fa-code" aria-hidden="true"></i> Developer</li>
+          </a>
+          {%endif%} {% endif %} {% if sign_in_up %}
+          <a href="{{url_for('register')}}" class="nav-link">
+            <li id="sign-up">Sign Up</li>
+          </a>
+          <a href="{{url_for('login')}}" class="nav-link sign-in">
+            <li id="sign-in">
+              <i class="fa fa-sign-in" aria-hidden="true"></i> Sign In
+            </li>
+          </a>
+          {% endif %}
+        </ul>
+      </nav>
+      <i class="fa-solid fa-equals" id="collapse-btn" aria-hidden="true"></i>
     </header>
     {% endif %} {% block content %} {% endblock content %}
   </body>

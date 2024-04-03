@@ -1,0 +1,70 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/landing_page.css" rel="stylesheet" />
+{% if not sign_in_up %}
+<script>
+  let activeNav = $("nav .nav-link li");
+  $(activeNav[3]).css("background", "blue");
+  $(activeNav[3]).css("color", "white");
+</script>
+<script type='text/javascript' src='../static/scripts/landing_page.js'></script>
+{% endif %}
+<main>
+  <section class="introducing-talkIT-section talkit">
+    <img class="img-1" src="../static/image/talk-IT-computer-app.png" alt="" srcset="">
+    <div>
+      <h1>Welcome to TalkIT: Your Premier Destination for Knowledge Exchange</h1>
+      <p>Embark on a journey of discovery and enlightenment with TalkIT, the
+        foremost platform for meaningful conversations, insightful discussions,
+        and unrivaled knowledge sharing. Whether you're a tech enthusiast, a
+        curious mind, or an expert in your field, TalkIT provides the perfect
+        space to engage, explore, and connect with like-minded individuals from
+        around the globe.</p>
+      </div>
+  </section>
+ 
+  <section class="section-2 talkit">
+    <img class="img-2" src="../static/image/talk-IT-read-page.png" alt="" srcset="">
+    <div>
+      <h1>Unleash Your Curiosity</h1>
+      <p>At TalkIT, curiosity knows no bounds. Have a burning question about the
+        latest technology trends? Need advice on coding challenges? Want to
+        explore the intricacies of artificial intelligence? With TalkIT, you have
+        the power to ask anything and everything. Our vibrant community of experts
+        and enthusiasts is here to provide answers, insights, and inspiration.</p>
+      </div>
+  </section>
+
+  <section class="section-3 talkit">
+    <img class="img-3" src="../static/image/talk-IT-laptop-profile.png" alt="" srcset="">
+    <div>
+      <h1>Empowement Through Engagement</h1>
+      <p>Join the conversation and make your voice heard. Whether you're sharing your
+      expertise, offering guidance, or seeking advice, TalkIT empowers you to
+      engage with a diverse community of learners, thinkers, and innovators. Spark
+      discussions, exchange ideas, and collaborate on projects that push the
+      boundaries of knowledge.</p>
+    </div>
+  </section>
+  
+
+  
+  <section class="section-4 talkit">
+    <div>
+      <h1>Start Your Journey Today</h1>
+      <p>Ready to embark on a journey of discovery and enlightenment? Join the
+    vibrant community of knowledge seekers on TalkIT today. Sign up now to start
+    asking questions, sharing your expertise, and connecting with a global
+    network of innovators. With TalkIT, the world is at your fingertips. Seize
+    the opportunity to learn, grow, and thrive in an environment fueled by
+    curiosity and collaboration. Join TalkIT today and let your voice be heard
+    in the ever-evolving landscape of technology and beyond.</p>
+  <a href="{{url_for('register')}}" target="_parent">Get Started</a>
+  </div>
+  </section>
+</main>
+<footer>
+  <h3><i class="fa-brands fa-teamspeak" aria-hidden="true"></i>
+    TalkIT</h3>
+  <a href="/developer"><i class="fa fa-code" aria-hidden="true"></i>Developer</a>
+</footer>
+{% endblock content %}

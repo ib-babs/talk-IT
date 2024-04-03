@@ -1,64 +1,74 @@
-{% extends "layout.html" %} {% block content %}
+{% extends "layout.html" %}
+{% block content %}
 <link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
-<script
-  type="module"
-  src="../static/scripts/my_post.js?{{cache_id}}"
-  defer
-></script>
-<script>
-  window.onload = () => {
-    let activeNav = $("nav .nav-link");
-    $(activeNav[1]).css("background", "red");
-    $(activeNav[1]).css("color", "white");
-
-    $("#delete-question-btn").on("click", () => {
-      return confirm("Are you sure about deleting this post?") ? true : false;
-    });
-  };
-</script>
+<script type="module" src="../static/scripts/my_post.js?{{cache_id}}" defer></script>
 <div class="container">
   <div class="img-container">
     <img id="user-image" src="data:image/{{jpg}};base64,{{ user.image }}" />
-    <p>Username: <strong>{{info.username}}</strong></p>
+    <p><strong>{{info.username}}</strong></p>
   </div>
   <div id="edit-and-post">
     <a href="{{url_for('ask_question') }}">New post</a>
   </div>
 </div>
 
-<div class="question-card">
-  {% if questions %}
-  <h1>Posts</h1>
-  {% for question in questions%}
-  <div class="'question-container">
-    <div id="question-title"><h3>{{ question.title }}</h3></div>
-    <div id="question-body">
-      <div id="question-options-container">
-        <small>Created At: {{question.updated_at}}</small>
-        <a
-          href="{{url_for('read_post', question_id=question.id)}}"
-          title="Read More"
-          ><i class="fab fa-readme" aria-hidden="true"></i
-        ></a>
-        <a href="{{ url_for('edit', question_id=question.id)}}" title="Edit"
-          ><i class="fa fa-edit" aria-hidden="true"></i
-        ></a>
-        <a
-          id="delete-question-btn"
-          href="{{ url_for('delete_post', question_id=question.id)}}"
-          title="Delete"
-          ><i class="fa fa-remove" aria-hidden="true"></i
-        ></a>
+<main class="mypost-main">
+  <div class="question-card">
+    {% if questions %}
+    {% for question in questions%}
+    <div class="question-container">
+              <!-- Title -->
+              <div class="question-title">
+                <h3>{{ question.title }}</h3>
+              </div>
+              <!-- === -->
 
-        <!-- Delete Form -->
+              <!-- Post Body -->
+              <div class="question-body">
+                    <!-- Options -->
+                    <div id="question-options-container">
+                      <small>Created At: {{question.updated_at}}</small>
+                      <!-- Read a post -->
+                      <a
+                        href="{{url_for('read_post', question_id=question.id)}}"
+                        title="Read More"
+                        ><i class="fab fa-readme" aria-hidden="true"></i>
+                      </a>
+                      <!-- Edit a post -->
+                      <a href="{{ url_for('edit', question_id=question.id)}}" title="Edit"
+                        ><i class="fa fa-edit" aria-hidden="true"></i></a>
+                      <!-- Delete post -->
+                      <a href="" id="delete-question-btn" onclick="return false;">
+                        <i class="fa fa-remove" aria-hidden="true"></i></a>
+                      <div id="modal-container">
+                        <div id="modal">
+                          <p>Are you sure about deleting this post?</p>
+                            <div>
+                              <button type="button" id="delete-yes-btn">
+                                <a
+                                href="{{ url_for('delete_post', question_id=question.id)}}"
+                                >Yes</a>
+                              </button>
+                              <button type="button">No</button>
+                            </div>
+                        </div>
+                      </div>
+                    <!-- ======== -->
+                  </div>
+                  <!-- ======== -->
+                  <p>{{ question.question }}</p>
+                  
+                  <!-- Likes and comments -->
+                  <div id="lkes-and-comments-container">
+                    <span><i class="far fa-thumbs-up" aria-hidden="true"></i> {{question.likes}}</span>
+                  </div>
+                  <!-- ======== -->
+
+              </div>
       </div>
-      <p class="question-id" style="display: none">{{ question.id }}</p>
-      <p>{{ question.question }}</p>
-    </div>
-  </div>
-  {%endfor %} {%else%}
+  {%endfor %}
+  {%else%}
   <div><em>No post.</em></div>
   {% endif %}
-</div>
-
+</main>
 {% endblock content %}

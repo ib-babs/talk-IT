@@ -37,7 +37,6 @@ h1{
     color: white;
     background: blue;
     border: 0;
-    border-radius: 4px;
-    padding: 0 20px;
+    padding: 5px 50px;
     font-size: clamp(20px, calc(15px), 40px);
 }

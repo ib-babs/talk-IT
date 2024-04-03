@@ -1,22 +1,42 @@
 #!/usr/bin/python3
 from flask import flash, render_template, url_for, redirect, session, request
-from forms.login_resgistration import (RegistrationForm, LoginForm, LogOutForm,
+from forms.login_resgistration import (RegistrationForm, LoginForm,
                                        UpdateProfile)
 from forms.question_form import QuestionForm, EditPostForm
-from web_flask import (app, save_image_to_db, login_manager)
+from forms.reset_forms import RequestResetForm, ResetPasswordForm
+from web_flask import (app, save_image_to_db, login_manager, send_reset_email)
 from models.user import User
-from models.question import Question
-from models.answer import Answer
+from models.post import Post
+from models.comment import Comment
 from hashlib import md5
 from uuid import uuid4
 from models import storage
-from flask_login import login_required, current_user, login_user, logout_user, user_logged_in, user_logged_out
+from flask_login import login_required, current_user, login_user, logout_user
 from random import randint
-from forms.answer_form import CommentForm, EditCommentForm
+from forms.answer_form import CommentForm, EditCommentForm, LikeForm
 
+"""TalkIT application has the following router:
+1. /register - To registration page
+2. /login - To log in page
+3. /new_post - To creating a post
+4. /edit - To editing a post
+5. /read_post - To read a post
+6. /edit_profile - To edit current user's profile
+7. /new_feed - For other users' post
+8. /my_post - For current user's post
+9. /profile - To current user profile
+10. /edit_comment - To edit comment
+11. /delete_comment - For user to delete a comment
+12. /delete_post - To deleting a current user post
+13. /reset_request - To requesting for reseting a password
+14 /reset_token/<token> - To resetting password using generated token
+15. /home - To landing page
+16. /developer - To deveolper page
+"""
 
 @login_manager.user_loader
 def load_user(id):
+    '''Load user'''
     user_data = storage.get(User, id)
     if user_data:
         return user_data
@@ -25,6 +45,7 @@ def load_user(id):
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    '''Registration'''
     form = RegistrationForm()
     if form.validate_on_submit():
         flash('Account created succesfully!', category='message')
@@ -49,11 +70,13 @@ def register():
         storage.new(user)
         storage.save()
         return redirect(url_for('login'))
+
     return render_template('register.html', register=form, title='SignUp', cache_id=uuid4())
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    '''Login'''
     login = LoginForm()
     if current_user.is_authenticated:
         return redirect(url_for('new_feed'))
@@ -74,6 +97,7 @@ def login():
 @app.route('/new_post', methods=['GET', 'POST'])
 @login_required
 def ask_question():
+    '''Creating a new post'''
     user_info = current_user.to_dict()
     ask_question = QuestionForm()
     if ask_question.validate_on_submit():
@@ -82,18 +106,19 @@ def ask_question():
             'title': ask_question.title.data,
             'question': ask_question.question.data,
         }
-        question = Question(**question_detail)
+        question = Post(**question_detail)
         storage.new(question)
         storage.save()
         return redirect(url_for('my_post'))
-    return render_template('new_post.html', ask_question=ask_question,  a=True, nav=True)
+    return render_template('new_post.html', ask_question=ask_question, nav=True, a=True)
 
 
 @app.route('/edit/<question_id>', methods=['GET', 'POST'])
 @login_required
 def edit(question_id):
+    '''Editing a post based on post_id'''
     edit_form = EditPostForm()
-    question_object = storage.get(Question, question_id)
+    question_object = storage.get(Post, question_id)
     question_object_dict = question_object.to_dict()
     edit_form.title.data = question_object_dict['title']
     edit_form.question.data = question_object_dict['question']
@@ -102,22 +127,29 @@ def edit(question_id):
         question_object.question = request.form['edit-question-area']
         storage.save()
         return redirect(url_for('my_post'))
-    return render_template('edit_post.html', edit_form=edit_form, question_id=question_id, a=True, nav=True)
+    return render_template('edit_post.html', edit_form=edit_form, question_id=question_id, nav=True, a=True)
 
 
 @app.route('/read_post/<question_id>', methods=['GET', 'POST'])
 def read_post(question_id):
-    question_object = storage.get(Question, question_id)
+    '''Read a post based on post_id selected/clicked'''
+    if not current_user.is_authenticated:
+        return redirect(url_for('login'))
+
+    question_object = storage.get(Post, question_id)
     session['question_id'] = question_object.id
-    comments = storage.get_comments(Answer, question_id)
+    comments = storage.get_comments(Comment, question_id)
     sorted_comments = []
     if comments:
         sorted_comments = sorted(
             [comment for comment in comments], key=lambda x: x[1].created_at)
     comment_form = CommentForm()
+    form = LikeForm()
     user_id = current_user.id
-    # Take comment
+
+    current_user.checked = False
     if request.method == 'POST':
+        # Take comment
         if 'comment' in request.form:
             if comment_form.validate_on_submit():
                 answer_detail = {
@@ -126,18 +158,33 @@ def read_post(question_id):
                     'comment': comment_form.comment.data,
                     'like': 0
                 }
-                answer_obj = Answer(**answer_detail)
+                answer_obj = Comment(**answer_detail)
                 storage.new(answer_obj)
                 storage.save()
                 return redirect(url_for('read_post', question_id=question_id))
+        # Take likes
+        if 'like' in request.form:
+            if form.validate():
+                if not question_object.has_liked:
+                    question_object.likes += 1
+                    question_object.has_liked = True
+                else:
+                    question_object.likes -= 1
+                    question_object.has_liked = False
+                storage.save()
+                return redirect(url_for('read_post', question_id=question_id))
+
+    total_comment = storage.count_comment(question_id)
+
     return render_template('read_post.html', post=question_object,
                            comments=sorted_comments, nav=True, a=True, comment_form=comment_form, question_id=question_id, user_id=user_id,
-                           cache_id=uuid4())
+                           cache_id=uuid4(), read=True, total_comment=total_comment, like=form)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
+    '''Edit a current user profile'''
     c_user = current_user.to_dict()
     user_obj = storage.get(User, c_user['id'])
     update_profile = UpdateProfile()
@@ -168,12 +215,13 @@ def edit_profile():
     return render_template('edit_profile.html', profile=update_profile, user=user_obj, nav=True, a=True)
 
 
-@app.route('/')
-@app.route('/home')
 @app.route('/new_feed', methods=['GET', 'POST'])
 @login_required
 def new_feed():
-    all_questions = storage.all(Question)
+    '''Other users posts'''
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
+    all_questions = storage.all(Post)
     gt = storage.get_other_question(User, current_user.id)
     user = storage.get(User, current_user.id)
     loader = [v.to_dict() for v in all_questions.values() if v.to_dict()['user_id'] !=
@@ -184,16 +232,17 @@ def new_feed():
             [q for q in gt], key=lambda x: x[0].created_at, reverse=True)
     get_users = [storage.get(User, user['user_id'])
                  for user in loader or []]
-    return render_template('new_feed.html', questions=sorted_questions, nav=True, users=get_users, user=user, title='New Feed')
+    return render_template('new_feed.html', questions=sorted_questions, nav=True, a=True, users=get_users, user=user, title='New Feed')
 
 
+# My posts
 @app.route('/my_post', methods=['GET', 'POST'])
 @login_required
 def my_post():
+    '''Current user post excluding other users posts'''
     user_credential = current_user.to_dict()
-
     user = storage.get_user(User, user_credential['username'])
-    loader = storage.get_questions(Question, user_credential['id'])
+    loader = storage.get_questions(Post, user_credential['id'])
 
     # Sorting question in an ascending order
     load_questions = [obj.to_dict() for obj in loader or []]
@@ -203,27 +252,26 @@ def my_post():
             load_questions, key=lambda x: x['created_at'], reverse=True)
 
     return render_template('my_post.html', info=user_credential, user=user, cache_id=uuid4(),
-                           title='Home', questions=sorted_questions, nav=True)
+                           title='My Post', questions=sorted_questions, nav=True, a=True)
 
 
+# Profile
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    logout = LogOutForm()
+    '''Current user\'s profile'''
+    if not current_user.is_authenticated:
+        return redirect(url_for('home'))
     user = storage.get(User, current_user.id)
-    # Log user out
-    if 'logout' in request.form:
-        if logout.validate_on_submit():
-            logout_user()
-            return redirect(url_for('login'))
-    return render_template('profile.html', nav=True, user=user, logout=logout, title='Profile')
+    return render_template('profile.html', nav=True, a=True,  user=user, logout=logout, title='Profile')
 
 
 @app.route('/edit_comment/<answer_id>', methods=['GET', 'POST'])
 @login_required
 def edit_comment(answer_id):
+    '''Edit a comment made by the current user'''
     edit_cmt = EditCommentForm()
-    answer_obj = storage.get(Answer, answer_id)
+    answer_obj = storage.get(Comment, answer_id)
     edit_cmt.edit_comment.data = answer_obj.comment
     if 'submit-edit-btn' in request.form:
         if edit_cmt.validate_on_submit():
@@ -237,23 +285,101 @@ def edit_comment(answer_id):
 @app.route('/delete-comment/<comment_id>', methods=['DELETE', 'POST', 'GET'])
 @login_required
 def delete_comment(comment_id):
-    comment = storage.get(Answer, comment_id)
+    '''Delete a comment based on comment_id'''
+    comment = storage.get(Comment, comment_id)
     storage.delete(comment)
     storage.save()
-
-    # Respond with a success message
     return redirect(url_for('read_post', question_id=session['question_id']))
 
 
 @app.route('/delete-question/<question_id>', methods=['DELETE', 'POST', 'GET'])
 @login_required
 def delete_post(question_id):
-    question_obj = storage.get(Question, question_id)
+    '''Allow user to delete a post based on the post_id'''
+    question_obj = storage.get(Post, question_id)
     storage.delete(question_obj)
     storage.save()
-
-    # Respond with a success message
     return redirect(url_for('my_post'))
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    '''Log out the current user'''
+    logout_user()
+    return redirect(url_for('login'))
+
+
+@app.route('/reset_password', methods=['POST', 'GET'])
+def reset_request():
+    '''Request password reset'''
+    if current_user.is_authenticated:
+        return redirect(url_for('new_feed'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = storage.get_user_by_email(User, form.email.data)
+        send_reset_email(user)
+        flash('An email has been sent with the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html', form=form, title='Reset Password', a=True)
+
+
+@app.route('/reset_password/<token>', methods=['POST', 'GET'])
+def reset_token(token):
+    '''Request password reset'''
+    if current_user.is_authenticated:
+        return redirect(url_for('new_feed'))
+    user = User.verify_reset_token(storage, User, token)
+    form = ResetPasswordForm()
+    if user is None:
+        flash('That is an invalid or expired token')
+        return redirect(url_for('request_reset'))
+    if form.validate_on_submit():
+        user.password = md5(form.password.data.encode()).hexdigest()
+        flash('Password has been changed successfully!')
+        storage.save()
+        return redirect(url_for('login'))
+
+    return render_template('reset_password.html', form=form, token=token)
+
+
+@app.errorhandler(404)
+def url_not_found(error):
+    '''Not found page'''
+    return render_template('page_not_found.html', title='Page not found'), 404
+
+
+@login_manager.unauthorized_handler
+def unauthorized_user():
+    '''Handling unauthorized user'''
+    return redirect(url_for('login'))
+
+
+@app.route('/')
+@app.route('/about')
+def home():
+    '''About page rendering if user is authenticated, Home page if not'''
+    is_authorized = False
+    title = None
+    nav_link = False
+    if not current_user.is_authenticated:
+        is_authorized = True
+    else:
+        title = 'About'
+        nav_link = True
+    return render_template('landing_page.html', nav=True, title=title, sign_in_up=is_authorized, a=nav_link)
+
+
+@app.route('/developer')
+def developer():
+    '''Rendering Developer page'''
+    is_authorized = False
+    nav_link = False
+    if not current_user.is_authenticated:
+        is_authorized = True
+    else:
+        nav_link = True
+    return render_template('developer.html', nav=True, title='Developer', sign_in_up=is_authorized, a=nav_link, dev=True)
 
 
 if __name__ == '__main__':

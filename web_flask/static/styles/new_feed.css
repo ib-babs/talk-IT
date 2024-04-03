@@ -7,7 +7,7 @@
   width: clamp(60px, 33vw, 80px);
   height: clamp(60px, calc(32vw - 4px), 80px);
 }
-#question-body p {
+.question-body p {
   -webkit-line-clamp: 4;
 }
 #question-options-container {
@@ -29,4 +29,7 @@
 
 #question-body strong{
   color: blue;
+}
+#lkes-and-comments-container{
+  margin-left: 15px;
 }

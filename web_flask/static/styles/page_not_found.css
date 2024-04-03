@@ -1,0 +1,34 @@
+body{
+    background: black;
+    min-height: 100vh;
+    color: white;
+    display: grid;
+    place-content: center;
+}
+#p-404-container{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 2%;
+    grid-template-columns: max-content max-content;
+}
+#p-is-not-found{
+    border-left: #ccc solid 2px;
+    margin-left: 10px;
+    padding-left: 10px;
+    /* padding-inline-end: 20px;
+    padding-block-end: 50px; */
+
+}
+h2, h1{
+    letter-spacing: 5px;
+}
+#bg-404{
+    position: absolute;
+    inset: 0;
+    font-size: clamp(200px, 300px, 400px);
+    text-align: center;
+    z-index: -1;
+    color: #333;
+    display: grid;
+    place-content: center;
+}

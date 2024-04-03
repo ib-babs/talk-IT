@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% if title %}
+    <title>Talk-IT | {{title}}</title>
+    {% else %}
+    <title>Talk-IT</title>
+    {% endif %}
+    <link rel="stylesheet" href="../static/image/css/all.css" />
+    <link
+      rel="shortcut icon"
+      href="../static/image/svgs/brands/teamspeak.svg"
+      type="image/x-icon"
+    />
+    <script src="../static/scripts/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>

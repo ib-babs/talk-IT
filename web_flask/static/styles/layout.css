@@ -1,41 +1,114 @@
-body{
+body {
   margin: 0;
-  font-size: clamp(13pt, calc(12pt  - 2pt), 16pt);
+  font-size: clamp(15pt, calc(14pt - 4px), 18pt);
 }
-.is_active {
-  background-color: red;
-  color: white;
-}
-.not_active {
-  background-color: red;
-  color: white;
-}
+
 header {
   position: sticky;
   top: 0;
   z-index: 1;
-}
-header nav {
-  background-color: black;
-  display: grid;
-  margin: 0;
-  padding: 2px 0 0 0;
-  grid-auto-flow: column;
+  background-color: #222;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
 }
-nav .nav-link {
-  background-color: #fff;
-  padding-block: 0.5em;
-  margin: 0 10px;
-  border-radius: 7px 7px 0 0;
-  padding-inline: 2em;
-}
+
 
 #page-brand {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding: 0.1em;
+  font-size: 20pt;
+
+  margin: 0;
   user-select: none;
   color: white;
   text-decoration: underline;
-  text-decoration-color: blueviolet;
+  text-decoration-color: blue;
+}
+nav {
+  z-index: 1;
+  display: block;
+}
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav ul li:hover {
+  background-color: blue;
+}
+nav ul li {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+nav ul .nav-link {
+  text-decoration: none;
+  font-size: large;
+  color: white;
+}
+
+#play-btn,
+#stop-btn {
+  padding: 5px;
+  font-size: 1em;
+  margin-right: 2em;
+  color: white;
+  background-color: #222;
+  border: none;
+}
+
+.fa-equals {
+  color: white;
+  margin: 5px 5px 0 5px;
+  font-size: 1.3em;
+}
+
+nav ul {
+  list-style: none;
+}
+@media (200px <= width < 768px) {
+  #page-brand {
+    font-size: 20pt;
+  }
+  .nav-link {
+    color: rgb(237, 226, 226);
+  }
+  nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    text-align: center;
+    background-color: #222;
+    margin: 37px 0 5px 20%;
+    filter: drop-shadow(0px 0px 10px #222);
+  }
+
+  .fa-equals {
+    display: block;
+  }
+  .fa-equals:active {
+    font-size: 1.2em;
+    color: blue;
+  }
+}
+
+@media screen and (width >= 768px) {
+  .fa-equals {
+    display: none;
+  }
+  nav ul li {
+    border: none;
+  }
+  nav ul {
+    display: grid;
+    grid-auto-flow: column;
+  }
+  #sign-in,
+  #sign-up,
+  #sign-in i {
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+  }
 }

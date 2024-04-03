@@ -11,9 +11,11 @@ input[type="password"] {
 }
 input[type="submit"] {
     color: white;
-    background: #222;
+    background: blue;
     display: grid;
+    border: 1px solid blue;
     margin: auto;
+    font-size: large;
     padding: 3px 20px 3px 20px;
     border-radius: 4px;
   }

@@ -1,10 +1,9 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
 <link href="../static/styles/profile.css?{{cache_id}}" rel="stylesheet" />
-<script src="../static/scripts/layout.js?{{cache_id}}" defer></script>
 <script>
-  let activeNav = $("nav .nav-link");
-  $(activeNav[2]).css("background", "red");
+  let activeNav = $("nav .nav-link li");
+  $(activeNav[2]).css("background", "blue");
   $(activeNav[2]).css("color", "white");
 </script>
 <div class="user-profile">
@@ -18,11 +17,12 @@
   <p>Gender: <strong>{{user.gender}}</strong></p>
 
   <div id="edit-and-logout">
-      <a href="{{url_for('edit_profile')}}" id="edit-link">Edit Profile <i class="fa-solid fa-pencil" aria-hidden="true"></i></a>
-      <form action="{{url_for('profile')}}" , method="post">
-          {{ logout.hidden_tag() }} {{ logout.logout }}
-        </form>
-    </div>
+    <a href="{{url_for('edit_profile')}}" id="edit-link"
+      >Edit Profile <i class="fa-solid fa-pencil" aria-hidden="true"></i
+    ></a>
+    <a href="{{url_for('logout')}}"><i class="fa fa-sign-out" aria-hidden="true"> Log out</i></a>
+  </div>
 </div>
 
 {% endblock content %}
+

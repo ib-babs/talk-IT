@@ -1,20 +1,15 @@
-let questionIDs = $(".question-id"),
-  postIDs = $(".post-ids"),
-  editPostIDs = $(".edit-post-ids");
+$(document).ready(() => {
+  let activeNav = $("nav .nav-link li");
+  $(activeNav[1]).css("background", "blue");
+  $(activeNav[1]).css("color", "white");
 
-function storeID(classID, newID, getConfirmed = false) {
-  $.each($(classID), function (indexInArray, form) {
-    $(form).submit(function (e) {
-      //e.preventDefault();
-      $(newID[indexInArray]).val($(questionIDs[indexInArray]).text());
-      if (getConfirmed) return confirm("Are you sure?") ? true : false;
+  $("#delete-question-btn").on("click", () => {
+    let deleteModalContainer = $("#modal-container"),
+      decisionButtons = $("#modal-container button");
+
+    deleteModalContainer.css("display", "grid");
+    $(decisionButtons[1]).click(() => {
+      deleteModalContainer.css("display", "none");
     });
   });
-}
-storeID(".delete_form", postIDs, true);
-// $("#update-image").submit((e) => {
-//   if ($("#image").val() === "") {
-//     $("p#incorrect-pwd").text("Password does not match!");
-//     e.preventDefault();
-//   }
-// });
+});

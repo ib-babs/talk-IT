@@ -1,0 +1,59 @@
+{% extends "layout.html" %} {% block content %}
+<link rel="stylesheet" href="../static/styles/developer.css" />
+{% if dev %}
+<script>
+  let activeNav = $("nav .nav-link li");
+  $(activeNav[4]).css("background", "blue");
+  $(activeNav[4]).css("color", "white");
+</script>
+{% endif %}
+<main id="dev-page">
+  <figure>
+    <img
+      src="../static/image/IMG_20221231_160532_396~2.jpg"
+      alt="developer-img"
+      id="developer-img"
+    />
+    <figcaption>
+      <h2>Babatunde Ibrahim</h2>
+      <p>
+        I am a Software Engineer. A student at ALX - Software Engineering School
+        | Backend Enthusiast
+      </p>
+    </figcaption>
+  </figure>
+
+  <div class="contacts-container">
+    <strong>Contacts: </strong>
+    <ul>
+      <li>
+        <a
+          href="https://github.com/ib-babs/talk-IT" target='_blank'
+        >
+          <i class="fab fa-github" aria-hidden="true"></i> Project Repository
+        </a>
+      </li>
+      <li>
+        <a href="mailto:babatundeibrahim436@gmail.com" target='_blank'>
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+          babatundeibrahim436@gmail.com
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://twitter.com/messages/compose?recipient_id=BKhalilullahi" target='_blank'
+        >
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+          @BKhalilullahi</a
+        >
+      </li>
+      <li>
+        <a href="https://wa.me/+2348118325902" target='_blank'>
+          <i class="fab fa-whatsapp" aria-hidden="true"></i>
+          +234 811 832 5902</a
+        >
+      </li>
+    </ul>
+  </div>
+</main>
+{% endblock content %}

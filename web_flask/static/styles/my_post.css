@@ -9,25 +9,15 @@ body {
   width: clamp(50px, 33vw, 70px);
   height: clamp(50px, calc(32vw - 4px), 70px);
 }
-/* .img-container {
-  display: grid;
-  justify-content: left;
-} */
+
 .container {
   position: sticky;
-  top: 2.3em;
+  top: 2.18em;
   padding-block: 1em 40px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-bottom: 1px solid #ccc;
-  backdrop-filter: blur(5px);
-  box-shadow: 0 1px 8px 0.5px black; 
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 8px 0.5px #ccc;
 }
-hr {
-  margin-top: 2rem;
-}
-/* .img-container p {
-  margin: 10px;
-} */
 
 button,
 #question-options-container a,
@@ -40,45 +30,34 @@ button,
 }
 
 .question-card {
-  margin: 20px;
+  margin: 35px;
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
   flex-direction: column;
 }
-/* #login-success {
-  color: white;
-  text-align: center;
-  padding: 0.4em;
-  background: #24e156;
-  border-radius: 6px;
-  font-weight: bold;
-} */
-h1 {
-  margin: 0;
-}
-#question-title h3 {
+
+.question-title h3 {
   margin: 10px;
 }
-#question-title,
-#question-body {
-  border: 2px #eee solid;
+.question-title,
+.question-body {
   margin: 6px;
   padding: 0.3rem;
 }
-#question-title {
-  border-radius: 9px 9px 0 0;
-  background-color: rgb(53, 46, 46);
+.question-title {
+  background: linear-gradient(45deg, blue, #222, #555);
   color: white;
   word-wrap: break-word;
 }
-#question-body {
+.question-body {
+  box-shadow: 0 3px 10px 0.3px #bbb;
   border-radius: 0 0 9px 9px;
-  height: 200px;
+  height: 250px;
   border-top: none;
   margin-bottom: 1rem;
 }
-#question-body p {
+.question-body p {
   margin: 10px;
   display: -webkit-box;
   overflow: hidden;
@@ -104,6 +83,8 @@ a {
 
 #edit-and-post a:nth-child(1) {
   text-decoration: none;
+  border-radius: 0;
+  margin-top: 10px;
   background: blue;
 }
 #question-options-container {
@@ -116,8 +97,8 @@ a {
 #question-options-container a:nth-child(2) {
   /* background-color: rgb(38, 29, 29); */
   /* color: rgb(255, 255, 241); */
-   color: #333; 
-   border: #333 solid 1px;
+  color: #333;
+  border: #333 solid 1px;
 }
 #question-options-container a:nth-child(3) {
   background-color: green;
@@ -130,9 +111,80 @@ a {
   color: whitesmoke;
 }
 
+#lkes-and-comments-container {
+  margin-left: 15px;
+  color: blue;
+}
+#delete-yes-btn {
+  background: blue;
+  color: red;
+}
+
+
 .post-ids {
   display: none;
 }
 .container p {
   margin: 8px 0 0 0;
+}
+#computer-fact-div {
+  width: 400px;
+  height: 400px;
+  background: #ccc;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  margin: auto;
+}
+.mypost-main {
+  display: grid;
+}
+
+/* Delete modal container */
+#modal-container {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(50, 50, 50, 0.4);
+  backdrop-filter: blur(1px);
+  display: none;
+  place-content: center;
+}
+#modal #delete-yes-btn a {
+  color: black;
+}
+#modal p {
+  color: white;
+  margin-bottom: 0;
+}
+#modal button {
+  font-size: large;
+  padding: 5px;
+  margin-left: 20px;
+}
+#modal {
+  background: #222;
+  width: clamp(300px, 450px, 500px);
+  height: 150px;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  font-size: 16pt;
+  transition-duration: 3s;
+}
+
+#modal-container:active #modal {
+  transform: scaleX(1.2);
+  transition: all 1s ease-in-out;
+}
+
+@media (200px <= width <= 768px) {
+  .mypost-main {
+    grid-auto-flow: row;
+  }
+}
+
+@media (width > 768px) {
+  .mypost-main {
+    grid-auto-flow: column;
+  }
 }
