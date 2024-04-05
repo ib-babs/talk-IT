@@ -2,20 +2,23 @@ body {
   min-height: 100vh;
   display: grid;
   place-content: center;
-  background:url('../image/alex-knight-2EJCSULRwC8-unsplash.jpg'); 
-  /* background: url('../image/svgs/brands/teamspeak.svg'), linear-gradient(50deg, #fff, #222); */
+  background: url("../image/alex-knight-2EJCSULRwC8-unsplash.jpg") no-repeat;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-position-x: right;
+  /* background:rebeccapurple; */
+  /* object-fit: fill; */
+  background-attachment: scroll;
+  /* background-size: cover; */
+  /* background-repeat: repeat; */
   font-size: larger;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-
 
 .container {
   /* backdrop-filter: blur(2px); */
   padding: 0.5em 2em;
   border-radius: 0 0 10px 10px;
-  box-shadow: 0 3px 15px 2px  rgb(1, 17, 1);
+  box-shadow: 0 3px 15px 2px rgb(1, 17, 1);
 }
 i,
 label#gender {
@@ -69,13 +72,18 @@ input[type="password"] {
   text-decoration-thickness: 4px;
   text-underline-offset: 5px;
 }
-#forgot-pwd{
+#forgot-pwd {
   color: grey;
 }
 
-@media (width > 768px) {
+@media (200px <= width <= 768px) {
   body{
-    background-size: 130%;
+
+  }
+}
+@media (width > 768px) {
+  body {
+    background-size: cover;
     background-position-x: left;
     background-position-y: top;
     background-origin: padding-box;

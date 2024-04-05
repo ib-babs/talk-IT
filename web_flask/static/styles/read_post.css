@@ -49,7 +49,8 @@ section h3 {
 #comment-div strong {
   color: blue;
 }
-#user-comments {
+.user-comments {
+  margin-bottom: 5px;
   padding: 10px;
   margin-right: 10px;
   border-radius: 10px;
@@ -93,7 +94,7 @@ a {
   margin-bottom: 10px;
   margin-left: 3em;
   display: flex;
-  gap: 15px;
+  gap: 10px;
 }
 
 #like-btn {

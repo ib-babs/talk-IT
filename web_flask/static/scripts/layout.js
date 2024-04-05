@@ -10,7 +10,7 @@ $(document).ready(() => {
       $("#post-title").attr("style", "background:#222;");
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
-      $("#user-comments").attr(
+      $(".user-comments").attr(
         "style",
         "background:#222; box-shadow:0 3px 10px 0.3px #000"
         );
@@ -30,7 +30,7 @@ $(document).ready(() => {
             $(".question-body").css("box-shadow", "0 3px 10px 0.3px #ccc");
             $("header").css("box-shadow", "unset");
             $("footer").css("box-shadow", "unset");
-      $("#user-comments").attr(
+      $(".user-comments").attr(
         "style",
         "background:rgba(210, 210, 210, 0.5); box-shadow:unset"
       );
