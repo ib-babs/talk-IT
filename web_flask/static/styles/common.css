@@ -4,11 +4,13 @@ body {
   place-content: center;
   background: url("../image/alex-knight-2EJCSULRwC8-unsplash.jpg") no-repeat;
   background-size: cover;
-
   background-attachment: scroll;
-
   font-size: larger;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+#c-pwd-shown,
+#pwd-show {
+  font-size: 0.7em;
 }
 
 .container {
@@ -71,7 +73,7 @@ input[type="password"] {
   text-underline-offset: 5px;
 }
 #forgot-pwd {
-  color: grey;
+  color: #ccc;
 }
 
 @media (200px <= width <= 768px) {
@@ -88,9 +90,8 @@ input[type="password"] {
 }
 @media (width > 768px) {
   body {
-    background-size: cover;
+    background-size: 150%;
     background-position-x: left;
-    background-position-y: top;
-    background-origin: padding-box;
+    background-attachment: fixed;
   }
 }

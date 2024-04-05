@@ -15,7 +15,7 @@
   padding: 5px;
 }
 article p {
-  font-size: calc(14pt + 2px);
+  /* font-size: calc(14pt + 2px); */
   word-wrap: break-word;
   white-space-collapse: break-spaces;
 }
@@ -116,11 +116,17 @@ a {
   #submit-comment-label {
     right: 38px;
   }
+  #comment-div p, article p {
+    font-size: calc(14pt);
+  }
 }
 
 @media (width > 768px) {
   #read-post-container h1 {
     top: 48px;
+  }
+  article p, #comment-div p {
+    font-size: calc(14pt + 2px);
   }
 }
 

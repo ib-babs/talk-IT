@@ -1,7 +1,5 @@
 body {
   min-height: 100vh;
-/*  font-size: clamp(16pt, calc(14pt - 4px), 18pt);*/
-  
 }
 .talkit {
   margin: 15px;
@@ -20,6 +18,7 @@ section {
   display: grid;
   grid-auto-flow: column;
   gap: 10%;
+
 }
 
 .section-2 img {
@@ -57,8 +56,16 @@ footer a {
 @media (200px <= width < 768px) {
   section {
     display: block;
+    font-size: calc(14pt);
+
   }
   main {
     text-align: center;
+  }
+}
+
+@media (width > 768px) {
+  body{
+     font-size: clamp(16pt, calc(14pt - 4px), 18pt);
   }
 }

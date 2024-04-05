@@ -14,6 +14,7 @@ from models import storage
 from flask_login import login_required, current_user, login_user, logout_user
 from random import randint
 from forms.answer_form import CommentForm, EditCommentForm, LikeForm
+from datetime import timedelta
 
 """TalkIT application has the following router:
 1. /register - To registration page
@@ -33,6 +34,7 @@ from forms.answer_form import CommentForm, EditCommentForm, LikeForm
 15. /home - To landing page
 16. /developer - To deveolper page
 """
+
 
 @login_manager.user_loader
 def load_user(id):
@@ -86,7 +88,7 @@ def login():
         password = login.password.data
         user = storage.get_user(User, username)
         if user and user.password == md5(password.encode('utf-8')).hexdigest():
-            login_user(user)
+            login_user(user, login.remember_me.data, timedelta(minutes=1))
             return redirect(url_for('new_feed'))
         else:
             flash('Invalid username or password')
@@ -178,7 +180,7 @@ def read_post(question_id):
 
     return render_template('read_post.html', post=question_object,
                            comments=sorted_comments, nav=True, a=True, comment_form=comment_form, question_id=question_id, user_id=user_id,
-                           cache_id=uuid4(), read=True, total_comment=total_comment, like=form)
+                           cache_id=uuid4(), read=True, total_comment=total_comment, like=form, title='Reading...')
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -383,4 +385,4 @@ def developer():
 
 
 if __name__ == '__main__':
-    app.run(port=8000, debug=True)
+    app.run(port=randint(2000, 9000), debug=True)

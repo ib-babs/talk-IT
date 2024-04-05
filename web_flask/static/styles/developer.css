@@ -2,6 +2,7 @@
   width: clamp(300px, calc(200px + 1px), 450px);
   border-radius: 50px;
   border: 4px solid #ddd;
+ 
 }
 
 #dev-page {
@@ -26,38 +27,42 @@
   color: green;
 }
 
-
 .contacts-container ul li a {
   text-decoration: none;
 }
-.contacts-container{
-    padding: 10px;
+.contacts-container {
+  padding: 10px;
 }
 @media (200px <= width <= 768px) {
-    #dev-page *{
-        margin: auto;
-        text-align: center;
-    }
-    .contacts-container ul{
-        margin-top: 10px;
-    }
+  #dev-page * {
+    margin: auto;
+    text-align: center;
+  }
+  .contacts-container ul {
+    margin-top: 10px;
+  }
 }
 
-.contacts-container ul{
+.contacts-container ul {
   padding: 6px;
 }
-.contacts-container ul li a{
-  text-shadow: 0 15px 20px #000; 
+.contacts-container ul li a {
+  text-shadow: 0 15px 20px #000;
 }
 
 @media (width > 768px) {
-    #developer-img {
-        width: clamp(300px, calc(290px + 1px), 450px);
-      }
-      #dev-page figure{
-        display: grid;
-        grid-auto-flow: column;
-        gap: 0.5em;
-        align-items: center;
-      }
+  #developer-img {
+    width: clamp(300px, calc(290px + 1px), 450px);
+  }
+  #dev-page figure {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.5em;
+    align-items: center;
+  }
+  body {
+    font-size: clamp(16pt, calc(14pt - 4px), 18pt);
+    transition-duration: 1s;
+    transition: font-size 1s ease-in-out;
+  }
 }

@@ -9,16 +9,17 @@ window.onload = () => {
       txt.volume = 1;
       txt.onend = () => {
         $("#play-btn i").toggleClass("fa-play-circle fa-volume-up");
+        sys.cancel()
       };
       // Play the post
       $("#play-btn").on("click", () => {
-        window.speechSynthesis.speak(txt);
+        sys.speak(txt);
         $("#play-btn i").toggleClass("fa-play-circle fa-volume-up");
-        if ($("#play-btn i").hasClass("fa-play-circle") || window.speechSynthesis.paused) {
-          window.speechSynthesis.resume();
+        if ($("#play-btn i").hasClass("fa-play-circle") || sys.paused) {
+          sys.resume();
         }
         if ($("#play-btn i").hasClass("fa-volume-up")) {
-          window.speechSynthesis.pause();
+          sys.pause();
         }
         // Stop the playing
         if (window.speechSynthesis.speaking) {
@@ -51,11 +52,8 @@ window.onbeforeunload = () => {
     });
   
 
-  // ===== //
-}
-
-// Share buttons
-/*$(function () {
+    // Share buttons
+$(function () {
   $("#live").jsSocials({
     url: "127.0.0.1:5500/" + window.location.href,
     text: $("#post-title").text(),
@@ -70,4 +68,8 @@ window.onbeforeunload = () => {
       "telegram",
     ],
   });
-})*/
+})
+//====//
+  // ===== //
+}
+

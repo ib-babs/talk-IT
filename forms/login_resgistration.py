@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-from collections.abc import Sequence
 from models.user import User
 from models import storage
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired, EqualTo, Length, ValidationError
-from wtforms import StringField, EmailField, PasswordField, SubmitField, FileField, SelectField
+from wtforms import StringField, EmailField, PasswordField, SubmitField, FileField, SelectField, BooleanField
 
 
 class RegistrationForm(FlaskForm):
@@ -52,6 +51,7 @@ class LoginForm(FlaskForm):
         DataRequired()], render_kw={'placeholder': 'Username'})
     password = PasswordField('Password', validators=[
                              DataRequired()], render_kw={'placeholder': 'Password'})
+    remember_me = BooleanField('Remeber Me', id='remember_me')
     sign_in = SubmitField('Sign in')
 
 

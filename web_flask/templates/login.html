@@ -27,8 +27,9 @@
         style="color: black"
       ></i>
     </div>
+    {{ login.remember_me }} {{ login.remember_me.label }}
     <div id="pwd">{{password}}</div>
-    <a href="{{url_for('reset_request')}}" id='forgot-pwd'>Forgot password?</a>
+    <a href="{{url_for('reset_request')}}" id="forgot-pwd">Forgot password?</a>
     <div class="login_field">{{ login.sign_in}}</div>
   </form>
   <span id="goto-signup-page">

@@ -1,7 +1,6 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
-<script type="module" src="../static/scripts/my_post.js?{{cache_id}}" defer></script>
+<script type="module" src="../static/scripts/my_post.js" defer></script>
 <div class="container">
   <div class="img-container">
     <img id="user-image" src="data:image/{{jpg}};base64,{{ user.image }}" />
@@ -12,63 +11,65 @@
   </div>
 </div>
 
-<main class="mypost-main">
-  <div class="question-card">
-    {% if questions %}
-    {% for question in questions%}
-    <div class="question-container">
-              <!-- Title -->
-              <div class="question-title">
-                <h3>{{ question.title }}</h3>
-              </div>
-              <!-- === -->
+<div class="question-card">
+  {% if questions %} {% for question in questions%}
+  <div class="question-container">
+    <!-- Title -->
+    <div class="question-title">
+      <h3>{{ question.title }}</h3>
+    </div>
+    <!-- === -->
 
-              <!-- Post Body -->
-              <div class="question-body">
-                    <!-- Options -->
-                    <div id="question-options-container">
-                      <small>Created At: {{question.updated_at}}</small>
-                      <!-- Read a post -->
-                      <a
-                        href="{{url_for('read_post', question_id=question.id)}}"
-                        title="Read More"
-                        ><i class="fab fa-readme" aria-hidden="true"></i>
-                      </a>
-                      <!-- Edit a post -->
-                      <a href="{{ url_for('edit', question_id=question.id)}}" title="Edit"
-                        ><i class="fa fa-edit" aria-hidden="true"></i></a>
-                      <!-- Delete post -->
-                      <a href="" id="delete-question-btn" onclick="return false;">
-                        <i class="fa fa-remove" aria-hidden="true"></i></a>
-                      <div id="modal-container">
-                        <div id="modal">
-                          <p>Are you sure about deleting this post?</p>
-                            <div>
-                              <button type="button" id="delete-yes-btn">
-                                <a
-                                href="{{ url_for('delete_post', question_id=question.id)}}"
-                                >Yes</a>
-                              </button>
-                              <button type="button">No</button>
-                            </div>
-                        </div>
-                      </div>
-                    <!-- ======== -->
-                  </div>
-                  <!-- ======== -->
-                  <p>{{ question.question }}</p>
-                  
-                  <!-- Likes and comments -->
-                  <div id="lkes-and-comments-container">
-                    <span><i class="far fa-thumbs-up" aria-hidden="true"></i> {{question.likes}}</span>
-                  </div>
-                  <!-- ======== -->
-
-              </div>
+    <!-- Post Body -->
+    <div class="question-body">
+      <!-- Options -->
+      <div id="question-options-container">
+        <small>Created At: {{question.updated_at}}</small>
+        <!-- Read a post -->
+        <a
+          href="{{url_for('read_post', question_id=question.id)}}"
+          title="Read More"
+          ><i class="fab fa-readme" aria-hidden="true"></i>
+        </a>
+        <!-- Edit a post -->
+        <a href="{{ url_for('edit', question_id=question.id)}}" title="Edit"
+          ><i class="fa fa-edit" aria-hidden="true"></i
+        ></a>
+        <!-- Delete post -->
+        <a href="" class="delete-question-btn" onclick="return false;">
+          <i class="fa fa-remove" aria-hidden="true"></i
+        ></a>
+        <div class="modal-container">
+          <div class="modal">
+            <p>Are you sure about deleting this post?</p>
+            <div>
+              <button type="button" class="delete-yes-btn">
+                <a
+                  href="{{ url_for('delete_post', question_id=question.id)}}"
+                  class="del-link"
+                  >Yes</a
+                >
+              </button>
+              <button type="button" class="del-no-btn">No</button>
+            </div>
+          </div>
+        </div>
+        <!-- ======== -->
       </div>
-  {%endfor %}
-  {%else%}
+      <!-- ======== -->
+      <p>{{ question.question }}</p>
+
+      <!-- Likes and comments -->
+      <div class="lkes-and-comments-container">
+        <span
+          ><i class="far fa-thumbs-up" aria-hidden="true"></i>
+          {{question.likes}}</span
+        >
+      </div>
+      <!-- ======== -->
+    </div>
+  </div>
+  {%endfor %} {%else%}
   <div><em>No post.</em></div>
-  {% endif %}
-</main>
-{% endblock content %}
+  {% endif %} {% endblock content %}
+</div>

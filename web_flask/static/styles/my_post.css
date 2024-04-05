@@ -31,10 +31,6 @@ button,
 
 .question-card {
   margin: 35px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-  flex-direction: column;
 }
 
 .question-title h3 {
@@ -60,6 +56,7 @@ button,
 .question-body p {
   margin: 10px;
   display: -webkit-box;
+  font-size: calc(14pt);
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
@@ -111,15 +108,12 @@ a {
   color: whitesmoke;
 }
 
-#lkes-and-comments-container {
+.lkes-and-comments-container {
   margin-left: 15px;
-  color: blue;
 }
-#delete-yes-btn {
+.delete-yes-btn {
   background: blue;
-  color: red;
 }
-
 
 .post-ids {
   display: none;
@@ -127,41 +121,29 @@ a {
 .container p {
   margin: 8px 0 0 0;
 }
-#computer-fact-div {
-  width: 400px;
-  height: 400px;
-  background: #ccc;
-  margin: 20px;
-  padding: 10px;
-  border-radius: 4px;
-  margin: auto;
-}
-.mypost-main {
-  display: grid;
-}
 
-/* Delete modal container */
-#modal-container {
-  position: absolute;
+/* Delete.modal container */
+.modal-container {
+  position: fixed;
   inset: 0;
   background-color: rgba(50, 50, 50, 0.4);
   backdrop-filter: blur(1px);
   display: none;
   place-content: center;
 }
-#modal #delete-yes-btn a {
+.modal .delete-yes-btn a {
   color: black;
 }
-#modal p {
+.modal p {
   color: white;
   margin-bottom: 0;
 }
-#modal button {
+.modal button {
   font-size: large;
   padding: 5px;
   margin-left: 20px;
 }
-#modal {
+.modal {
   background: #222;
   width: clamp(200px, 300px, 400px);
   height: 150px;
@@ -172,19 +154,22 @@ a {
   transition-duration: 3s;
 }
 
-#modal-container:active #modal {
+.modal-container:active .modal {
   transform: scaleX(1.2);
   transition: all 1s ease-in-out;
 }
-
+.fa-thumbs-up {
+  color: blue;
+}
 @media (200px <= width <= 768px) {
-  .mypost-main {
-    grid-auto-flow: row;
+  .question-card {
+    margin: 35px 10px;
   }
 }
-
 @media (width > 768px) {
-  .mypost-main {
-    grid-auto-flow: column;
+  .modal {
+    background: #222;
+    width: clamp(300px, 350px, 400px);
+    height: 150px;
   }
 }
