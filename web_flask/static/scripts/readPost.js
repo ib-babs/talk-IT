@@ -1,22 +1,20 @@
-$(document).ready(() => {
+window.onload = () => {
   const sys = speechSynthesis;
-
   if (sys) {
-    sys.addEventListener("voiceschanged", () => {
       let text = $("article h1").text() + $("article p").text();
       let txt = new SpeechSynthesisUtterance(text);
-      txt.voice = sys.getVoices()[1];
+      txt.voice = sys.getVoices()[0];
       txt.volume = 1;
       txt.onend = () => {
         $("#play-btn i").toggleClass("fa-play-circle fa-volume-up");
       };
-
       // Play the post
       $("#play-btn").on("click", () => {
         window.speechSynthesis.speak(txt);
         $("#play-btn i").toggleClass("fa-play-circle fa-volume-up");
-        if ($("#play-btn i").hasClass("fa-play-circle")) {
+        if ($("#play-btn i").hasClass("fa-play-circle") || window.speechSynthesis.paused) {
           window.speechSynthesis.resume();
+		alert(sys.paused)
         }
         if ($("#play-btn i").hasClass("fa-volume-up")) {
           window.speechSynthesis.pause();
@@ -31,16 +29,19 @@ $(document).ready(() => {
           });
         }
       });
-    });
-  } else alert("This browser doesn't support Reading Mode!");
-
-  window.onbeforeunload = () => {
+  } else {
+	  console.log("This browser doesn't support Reading Mode!");
+	  
+	  $('#play-btn').css('display', 'none')
+	  $('#stop-btn').css('display', 'none')
+  }
+/*window.onbeforeunload = () => {
     if (window.speechSynthesis) window.speechSynthesis.cancel();
-  };
-});
+  };*/
+}
 
 // Share buttons
-$(function () {
+/*$(function () {
   $("#live").jsSocials({
     url: "127.0.0.1:5500/" + window.location.href,
     text: $("#post-title").text(),
@@ -55,8 +56,8 @@ $(function () {
       "telegram",
     ],
   });
+})*/
   // Confirm post deletion
   $("#delete-question-btn").click(() => {
     return confirm("Are you sure about deleting this comment?") ? true : false;
   });
-});

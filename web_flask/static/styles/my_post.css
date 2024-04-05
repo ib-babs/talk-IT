@@ -163,7 +163,7 @@ a {
 }
 #modal {
   background: #222;
-  width: clamp(300px, 450px, 500px);
+  width: clamp(200px, 300px, 400px);
   height: 150px;
   display: grid;
   place-content: center;

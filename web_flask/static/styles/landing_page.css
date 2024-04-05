@@ -1,11 +1,11 @@
 body {
   min-height: 100vh;
-  font-size: clamp(16pt, calc(14pt - 4px), 18pt);
+/*  font-size: clamp(16pt, calc(14pt - 4px), 18pt);*/
   
 }
 .talkit {
   margin: 15px;
-  transition-duration: 1ss;
+  transition-duration: 1s;
 }
 .talkit h1 {
   margin-bottom: 5px;
@@ -13,8 +13,8 @@ body {
 
 img {
   box-sizing: content-box;
-  width: clamp(300px, 400px, 500px);
-  height: clamp(300px, 250px, 470px);
+  width: clamp(250px, 300px, 450px);
+  height: clamp(250px, 250px, 420px);
 }
 section {
   display: grid;

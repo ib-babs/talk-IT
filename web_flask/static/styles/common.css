@@ -16,6 +16,8 @@ body {
 
 .container {
   /* backdrop-filter: blur(2px); */
+margin-left: 10px;
+margin-right: 10px;
   padding: 0.5em 2em;
   border-radius: 0 0 10px 10px;
   box-shadow: 0 3px 15px 2px rgb(1, 17, 1);
@@ -60,6 +62,8 @@ input[type="password"] {
   padding: 0.4em;
   background: #222;
   border-radius: 10px 10px 0 0;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 #goto-signup-page {
@@ -75,8 +79,13 @@ input[type="password"] {
 #forgot-pwd {
   color: grey;
 }
+<<<<<<< HEAD
 
 @media (200px <= width <= 768px) {
+=======
+/*
+@media (width > 768px) {
+>>>>>>> 9658db47f61adbdcf4012f6d1a857a2d1d10a2e6
   body{
 
   }
@@ -88,4 +97,8 @@ input[type="password"] {
     background-position-y: top;
     background-origin: padding-box;
   }
+<<<<<<< HEAD
 }
+=======
+}*/
+>>>>>>> 9658db47f61adbdcf4012f6d1a857a2d1d10a2e6
