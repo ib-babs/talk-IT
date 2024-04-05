@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-size: clamp(15pt, calc(14pt - 4px), 18pt);
+ /* font-size: clamp(15pt, calc(14pt - 4px), 18pt);*/
 }
 
 header {
