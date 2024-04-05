@@ -14,7 +14,6 @@ window.onload = () => {
         $("#play-btn i").toggleClass("fa-play-circle fa-volume-up");
         if ($("#play-btn i").hasClass("fa-play-circle") || window.speechSynthesis.paused) {
           window.speechSynthesis.resume();
-		alert(sys.paused)
         }
         if ($("#play-btn i").hasClass("fa-volume-up")) {
           window.speechSynthesis.pause();
