@@ -4,18 +4,14 @@ body {
   place-content: center;
   background: url("../image/alex-knight-2EJCSULRwC8-unsplash.jpg") no-repeat;
   background-size: cover;
-  background-position-x: right;
-  /* background:rebeccapurple; */
-  /* object-fit: fill; */
+
   background-attachment: scroll;
-  /* background-size: cover; */
-  /* background-repeat: repeat; */
+
   font-size: larger;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 .container {
-  /* backdrop-filter: blur(2px); */
 margin-left: 10px;
 margin-right: 10px;
   padding: 0.5em 2em;
@@ -52,9 +48,7 @@ input[type="password"] {
 .login_field {
   margin: 10px;
 }
-#pwd-show {
-  font-size: 0.7em;
-}
+
 #account-success,
 #account-curve {
   color: white;
@@ -79,16 +73,18 @@ input[type="password"] {
 #forgot-pwd {
   color: grey;
 }
-<<<<<<< HEAD
 
 @media (200px <= width <= 768px) {
-=======
-/*
-@media (width > 768px) {
->>>>>>> 9658db47f61adbdcf4012f6d1a857a2d1d10a2e6
   body{
-
+    background-position-x: center;
   }
+  .container {
+    margin-left: 10px;
+    margin-right: 10px;
+      padding: 0.5em 1em;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 3px 15px 2px rgb(1, 17, 1);
+    }
 }
 @media (width > 768px) {
   body {
@@ -97,8 +93,4 @@ input[type="password"] {
     background-position-y: top;
     background-origin: padding-box;
   }
-<<<<<<< HEAD
 }
-=======
-}*/
->>>>>>> 9658db47f61adbdcf4012f6d1a857a2d1d10a2e6

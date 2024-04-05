@@ -1,7 +1,9 @@
 window.onload = () => {
+  // ======= //
+  $("#stop-btn i").css("color", 'grey');
   const sys = speechSynthesis;
   if (sys) {
-      let text = $("article h1").text() + $("article p").text();
+      let text = $("article h2").text() + $("article p").text();
       let txt = new SpeechSynthesisUtterance(text);
       txt.voice = sys.getVoices()[0];
       txt.volume = 1;
@@ -21,9 +23,11 @@ window.onload = () => {
         // Stop the playing
         if (window.speechSynthesis.speaking) {
           $("#stop-btn").attr("disabled", false);
+          $("#stop-btn i").css("color", 'white');
           $("#stop-btn").on("click", () => {
             window.speechSynthesis.cancel();
             $("#stop-btn").attr("disabled", true);
+            $("#stop-btn i").css("color", 'grey');
             $("#play-btn i").toggleClass("fa-volume-up fa-play-circle");
           });
         }
@@ -34,9 +38,20 @@ window.onload = () => {
 	  $('#play-btn').css('display', 'none')
 	  $('#stop-btn').css('display', 'none')
   }
-/*window.onbeforeunload = () => {
+window.onbeforeunload = () => {
     if (window.speechSynthesis) window.speechSynthesis.cancel();
-  };*/
+  };
+
+    // Confirm post deletion
+    $.each($(".delete-question-btn"), function (indexInArray, deleteBtn) { 
+      $(deleteBtn).click(() => {
+        return confirm("Are you sure about deleting this comment?") ? true : false;
+      });
+      
+    });
+  
+
+  // ===== //
 }
 
 // Share buttons
@@ -56,7 +71,3 @@ window.onload = () => {
     ],
   });
 })*/
-  // Confirm post deletion
-  $("#delete-question-btn").click(() => {
-    return confirm("Are you sure about deleting this comment?") ? true : false;
-  });
