@@ -129,4 +129,9 @@ a {
     font-size: calc(14pt + 2px);
   }
 }
-
+.post-imgs-div{
+  margin-bottom: 10px;
+}
+.post-imgs{
+  width: 99%;
+}

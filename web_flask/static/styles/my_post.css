@@ -49,7 +49,7 @@ button,
 .question-body {
   box-shadow: 0 3px 10px 0.3px #bbb;
   border-radius: 0 0 9px 9px;
-  height: 250px;
+
   border-top: none;
   margin-bottom: 1rem;
 }
@@ -92,20 +92,21 @@ a {
   border-bottom: 1px solid #ccc;
 }
 #question-options-container a:nth-child(2) {
-  /* background-color: rgb(38, 29, 29); */
-  /* color: rgb(255, 255, 241); */
-  color: #333;
-  border: #333 solid 1px;
+  color: #666;
+  border: #ccc solid 1px;
 }
 #question-options-container a:nth-child(3) {
   background-color: green;
 }
 
-#question-options-container a:nth-child(4) {
+#question-options-container .delete-question-btn {
   background-color: red;
+  color: whitesmoke;
+  margin: 0;
 }
 #question-options-container a {
   color: whitesmoke;
+  margin: 0 5px;
 }
 
 .lkes-and-comments-container {
@@ -130,6 +131,7 @@ a {
   backdrop-filter: blur(1px);
   display: none;
   place-content: center;
+  user-select: none;
 }
 .modal .delete-yes-btn a {
   color: black;
@@ -161,6 +163,19 @@ a {
 .fa-thumbs-up {
   color: blue;
 }
+
+.post-imgs-div {
+  overflow-x: scroll;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: nowrap;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+.post-imgs {
+  width: 200px;
+  height: 200px;
+}
 @media (200px <= width <= 768px) {
   .question-card {
     margin: 35px 10px;
@@ -172,4 +187,10 @@ a {
     width: clamp(300px, 350px, 400px);
     height: 150px;
   }
+  .post-imgs {
+    width: 300px;
+    height: 300px;
+  }
+
+
 }

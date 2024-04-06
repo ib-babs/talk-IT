@@ -1,17 +1,21 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/new_post.css?{{cache_id}}" rel="stylesheet" />
-<div id='new-post'>
-<h1>Make a new post</h1>
-<form
-  action="{{url_for('ask_question')}}"
-  method="post"
-  id="make_post"
-  enctype="application/x-www-form-urlencoded"
->
-  {{ ask_question.hidden_tag() }}
-  <div>{{ ask_question.title }}</div> 
-  <div>{{ ask_question.question }}</div>
-  <div id="post-btn-div">{{ ask_question.post }}</div>
-</form>
+<div id="new-post">
+  <h1>Make a new post</h1>
+  <form
+    action="{{url_for('ask_question')}}"
+    method="post"
+    id="make_post"
+    enctype="multipart/form-data"
+  >
+    {{ ask_question.hidden_tag() }}
+    <div>{{ ask_question.title }}</div>
+    <div>{{ ask_question.question }}</div>
+    <label for="post-images"
+      ><i class="fas fa-camera" aria-hidden="true"></i> Add images</label
+    >
+    <div>{{ ask_question.post_images }}</div>
+    <div id="post-btn-div">{{ ask_question.post }}</div>
+  </form>
 </div>
 {% endblock %}

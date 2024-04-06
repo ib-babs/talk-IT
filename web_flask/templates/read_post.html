@@ -11,24 +11,38 @@
 <div id="read-post-container">
   <article>
     <h2 id="post-title">{{ post.title}}</h2>
-    <p id='post-question'>{{ post.question }}</p>
+    <p id="post-question">{{ post.question }}</p>
+
+    <!-- Post images container -->
+    {% if post.post_images %}
+    <div class="post-imgs-div">
+      {% for image in post.post_images %}
+      <img
+        src="{{url_for('static', filename=image)}}"
+        alt="{{image}}"
+        class="post-imgs"
+      />
+      {% endfor %}
+    </div>
+    {% endif %}
+    <!-- ===== -->
     <div id="lkes-and-comments-container">
       <span>
         <i class="fa fa-comment" aria-hidden="true"></i> {{total_comment}}</span
       >
       <form
-      action="{{url_for('read_post', question_id=post.id)}}"
-      method="post"
-      name="like"
-      ,
-      id="like"
+        action="{{url_for('read_post', question_id=post.id)}}"
+        method="post"
+        name="like"
+        ,
+        id="like"
       >
-      {{like.hidden_tag()}}
-      <label for="like-btn">
-        <i
-        class="far fa-thumbs-up"
-        aria-hidden="true"
-        style="color: {% if post.has_liked %}
+        {{like.hidden_tag()}}
+        <label for="like-btn">
+          <i
+            class="far fa-thumbs-up"
+            aria-hidden="true"
+            style="color: {% if post.has_liked %}
           blue {% else %} black {% endif %};"
           ></i>
         </label>

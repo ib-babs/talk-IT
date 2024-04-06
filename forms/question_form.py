@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, TextAreaField, SubmitField, MultipleFileField
+from wtforms.validators import DataRequired, Length
 """question_form module has two main classes:
     QuestionForm - For taking user post, it includes title of the post,
     and the post itself
     EditPostForm class - For editing user post
     """
+
+
 class QuestionForm(FlaskForm):
     '''Flask form subclass'''
     title = StringField(validators=[DataRequired(
@@ -14,6 +16,8 @@ class QuestionForm(FlaskForm):
 
     question = TextAreaField(validators=[DataRequired(
     )], id='question-area', name='question-area', render_kw={'placeholder': 'Your question goes here', 'cols': 80, 'rows': 22})
+    post_images = MultipleFileField(render_kw={
+                                    'accept': 'image/*', 'class': 'post_images'}, id='post-images', name='post-images', validators=[Length(1, 10)])
     post = SubmitField('Post', id='post-btn')
 
 

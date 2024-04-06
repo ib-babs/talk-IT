@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
-<script type="module" src="../static/scripts/my_post.js" defer></script>
+<script type="module" src="../static/scripts/my_post.js?{{cache_id}}" defer></script>
 <div class="container">
   <div class="img-container">
     <img id="user-image" src="data:image/{{jpg}};base64,{{ user.image }}" />
@@ -36,9 +36,9 @@
           ><i class="fa fa-edit" aria-hidden="true"></i
         ></a>
         <!-- Delete post -->
-        <a href="" class="delete-question-btn" onclick="return false;">
-          <i class="fa fa-remove" aria-hidden="true"></i
-        ></a>
+        <button href="" class="delete-question-btn" onclick="return false;">
+          <i class="fa fa-remove" aria-hidden="true"></i>
+        </button>
         <div class="modal-container">
           <div class="modal">
             <p>Are you sure about deleting this post?</p>
@@ -57,7 +57,21 @@
         <!-- ======== -->
       </div>
       <!-- ======== -->
+
+      <!-- Post images container -->
       <p>{{ question.question }}</p>
+      {% if question.post_images %}
+      <div class="post-imgs-div">
+        {% for image in question.post_images %}
+        <img
+          src="{{url_for('static', filename=image)}}"
+          alt="{{image}}"
+          class="post-imgs"
+        />
+        {% endfor %}
+      </div>
+      {% endif %}
+      <!-- ===== -->
 
       <!-- Likes and comments -->
       <div class="lkes-and-comments-container">

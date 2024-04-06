@@ -20,7 +20,6 @@
   </div>
 </div>
 
-
 <div class="question-card">
   {% if questions %} {% for (question, user) in questions %}
   <div class="'question-container">
@@ -40,15 +39,32 @@
         ></a>
       </div>
       <p>{{ question.question }}</p>
+      <!-- Post images container -->
+      {% if question.post_images %}
+      <div class="post-imgs-div">
+        {% for image in question.post_images %}
+        <img
+          src="{{url_for('static', filename=image)}}"
+          alt="{{image}}"
+          class="post-imgs"
+        />
+        {% endfor %}
+      </div>
+      {% endif %}
+      <!-- ===== -->
       <div class="lkes-and-comments-container">
-            <i class="far fa-thumbs-up" aria-hidden="true"
-            style="color: blue";></i>
-          {{question.likes}}
+        <i
+          class="far fa-thumbs-up"
+          aria-hidden="true"
+          style="color: blue"
+          ;
+        ></i>
+        {{question.likes}}
       </div>
     </div>
   </div>
   {%endfor %} {%else%}
   <div><em>No post.</em></div>
   {% endif %}
-</div> 
+</div>
 {% endblock content %}

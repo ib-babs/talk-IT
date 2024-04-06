@@ -4,13 +4,16 @@ from forms.login_resgistration import (RegistrationForm, LoginForm,
                                        UpdateProfile)
 from forms.question_form import QuestionForm, EditPostForm
 from forms.reset_forms import RequestResetForm, ResetPasswordForm
-from web_flask import (app, save_image_to_db, login_manager, send_reset_email)
+from web_flask import (app, save_image_to_db, login_manager,
+                       send_reset_email, Image, BytesIO)
 from models.user import User
 from models.post import Post
 from models.comment import Comment
 from hashlib import md5
+from pathlib import Path
 from uuid import uuid4
 from models import storage
+import shutil
 from flask_login import login_required, current_user, login_user, logout_user
 from random import randint
 from forms.answer_form import CommentForm, EditCommentForm, LikeForm
@@ -88,7 +91,7 @@ def login():
         password = login.password.data
         user = storage.get_user(User, username)
         if user and user.password == md5(password.encode('utf-8')).hexdigest():
-            login_user(user, login.remember_me.data, timedelta(minutes=1))
+            login_user(user, login.remember_me.data, timedelta(days=10))
             return redirect(url_for('new_feed'))
         else:
             flash('Invalid username or password')
@@ -102,13 +105,28 @@ def ask_question():
     '''Creating a new post'''
     user_info = current_user.to_dict()
     ask_question = QuestionForm()
+
     if ask_question.validate_on_submit():
         question_detail = {
             'user_id': user_info['id'],
             'title': ask_question.title.data,
             'question': ask_question.question.data,
         }
+        images = request.files.getlist('post-images')
         question = Post(**question_detail)
+        # Post images
+        if images and images[0].filename:
+            question.post_images = [
+                f'post-images/{question.id}/{image.filename}' for image in images]
+            for image in images:
+                try:
+                    path = Path(f'web_flask/static/post-images/{question.id}')
+                    path.mkdir(mode=511, exist_ok=True)
+                    img = Image.open(BytesIO(image.read()))
+                    img.thumbnail((600, 600))
+                    img.save(path.joinpath(image.filename))
+                except Exception as e:
+                    print(e)
         storage.new(question)
         storage.save()
         return redirect(url_for('my_post'))
@@ -298,9 +316,13 @@ def delete_comment(comment_id):
 @login_required
 def delete_post(question_id):
     '''Allow user to delete a post based on the post_id'''
+    import os
     question_obj = storage.get(Post, question_id)
     storage.delete(question_obj)
     storage.save()
+    path = Path(f'web_flask/static/post-images/{question_id}')
+    if path.exists() and path.is_dir():
+        shutil.rmtree(path)
     return redirect(url_for('my_post'))
 
 
