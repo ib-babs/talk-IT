@@ -58,7 +58,10 @@
       id="user-img"
     />
     <div class="user-comments">
-      <strong>{{user.username}}</strong>
+      <a
+        href="{{url_for('other_user_profile', other_user_username=user.username)}}"
+        ><strong>{{user.username}}</strong><br
+      /></a>
       <p id="post-comment">{{comment.comment}}</p>
     </div>
   </div>
@@ -103,8 +106,8 @@
   <i class="fa fa-arrow-alt-circle-left" aria-hidden="true" id="back-arrow"></i>
   <img src="" alt="" />
   <div id="prev-next">
-    <i class="fa fa-chevron-circle-left" aria-hidden="true" id='prev'></i>
-    <i class="fa fa-chevron-circle-right" aria-hidden="true" id='next'></i>
+    <i class="fa fa-chevron-circle-left" aria-hidden="true" id="prev"></i>
+    <i class="fa fa-chevron-circle-right" aria-hidden="true" id="next"></i>
   </div>
 </div>
 
