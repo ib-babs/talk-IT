@@ -15,6 +15,7 @@ from uuid import uuid4
 from models import storage
 import shutil
 from flask_login import login_required, current_user, login_user, logout_user
+from random import randint
 from forms.answer_form import CommentForm, EditCommentForm, LikeForm
 from datetime import timedelta
 
@@ -122,7 +123,7 @@ def ask_question():
                     path = Path(f'web_flask/static/post-images/{question.id}')
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
-                    img.thumbnail((1000, 1000))
+                    img.thumbnail((700, 700))
                     img.save(path.joinpath(image.filename))
                 except Exception as e:
                     print(e)
