@@ -407,4 +407,4 @@ def developer():
 
 
 if __name__ == '__main__':
-    app.run(port=randint(2000, 9000), debug=True)
+    app.run(port=8000)
