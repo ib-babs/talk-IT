@@ -60,7 +60,8 @@ button,
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-box-orient: vertical;
-  white-space-collapse: break-spaces;
+  white-space: pre-wrap; /* Preserve white space */
+  word-wrap: break-word; /* Break long words */
   -webkit-line-clamp: 7;
   min-height: 3em;
 }
@@ -133,9 +134,7 @@ a {
   place-content: center;
   user-select: none;
 }
-.modal .delete-yes-btn a {
-  color: black;
-}
+
 .modal p {
   color: white;
   margin-bottom: 0;
@@ -163,7 +162,6 @@ a {
 .fa-thumbs-up {
   color: blue;
 }
-
 
 .post-imgs-div {
   margin-top: 15px;
@@ -197,7 +195,7 @@ a {
     margin: 35px 10px;
   }
   .post-imgs-div {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
 }
 @media (width > 768px) {

@@ -15,7 +15,7 @@
 }
 article p {
   word-wrap: break-word;
-  white-space-collapse: break-spaces;
+  white-space: pre-wrap; /* Preserve white space */
 }
 #comments-container {
   margin: 10px;
@@ -35,8 +35,8 @@ article p {
 }
 #comment-div p {
   margin: 0 0 5px 0;
-  white-space-collapse: break-spaces;
-  word-wrap: break-word;
+  white-space: pre-wrap; /* Preserve white space */
+  word-wrap: break-word; /* Break long words */
 }
 section h3 {
   text-decoration: underline;
