@@ -3,7 +3,16 @@
   place-content: center;
   margin: 15px;
 }
-img {
+.other-user-profile p {
+  margin: 10px;
+}
+.other-user-profile {
+  border-bottom: #ccc solid 1px;
+  margin: 0;
+  padding-top: 15px;
+}
+
+#user-image {
   border-radius: 100%;
   margin: 6px;
   float: left;
@@ -32,4 +41,15 @@ img {
 #edit-link {
   text-decoration: none;
   background: blue;
+}
+
+@media (width > 768px) {
+  .other-user-profile {
+    top: 55px;
+  }
+}
+@media (200px <= width <= 768px) {
+  .other-user-profile {
+    top: 40px;
+  }
 }

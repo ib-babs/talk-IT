@@ -1,3 +1,4 @@
+import { shortenPostImages } from "./common.js";
 $(document).ready(() => {
   let activeNav = $("nav .nav-link li");
   $(activeNav[1]).css("background", "blue");
@@ -15,8 +16,8 @@ $(document).ready(() => {
       });
 
       // // ===End modal == //
-      // // ===== //
     });
-    //====//
   });
+
+  shortenPostImages()
 });

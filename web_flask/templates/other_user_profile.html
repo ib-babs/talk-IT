@@ -1,18 +1,29 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
-<script
-  type="module"
-  src="../static/scripts/my_post.js?{{cache_id}}"
-  defer
-></script>
-<div class="container">
-  <div class="img-container">
-    <img id="user-image" src="data:image/{{jpg}};base64,{{ user.image }}" />
-    <p><strong>{{info.username}}</strong></p>
-  </div>
-  <div id="edit-and-post">
-    <a href="{{url_for('ask_question') }}">New post</a>
-  </div>
+<link href="../static/styles/profile.css?{{cache_id}}" rel="stylesheet" />
+{% if other_u_username %}
+<script>
+    let activeNav = $("nav .nav-link li");
+    $(activeNav[4]).css("background", "blue");
+    $(activeNav[4]).css("color", "white");
+</script>
+{% endif %}
+<script type="module" defer="defer">
+  import { shortenPostImages } from "../static/scripts/common.js";
+  $(document).ready(function () {
+    shortenPostImages();
+  });
+</script>
+<div class="user-profile other-user-profile">
+  <img 
+    src="data:image/{{user.image_fmt}};base64,{{user.image}}"
+    alt="user-image"
+    id='user-image'
+  />
+  <p>Full Name: <strong>{{user.full_name}}</strong></p>
+  <p>Username: <strong>{{user.username}}</strong></p>
+  <p>Email: <strong>{{user.email}}</strong></p>
+  <p>Gender: <strong>{{user.gender}}</strong></p>
 </div>
 
 <div class="question-card">
@@ -35,30 +46,6 @@
           title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i>
         </a>
-        <!-- Edit a post -->
-        <a href="{{ url_for('edit', question_id=question.id)}}" title="Edit"
-          ><i class="fa fa-edit" aria-hidden="true"></i
-        ></a>
-        <!-- Delete post -->
-        <button href="" class="delete-question-btn" onclick="return false;">
-          <i class="fa fa-remove" aria-hidden="true"></i>
-        </button>
-        <div class="modal-container">
-          <div class="modal">
-            <p>Are you sure about deleting this post?</p>
-            <div>
-              <button type="button" class="delete-yes-btn">
-                <a
-                  href="{{ url_for('delete_post', question_id=question.id)}}"
-                  class="del-link"
-                  >Yes</a
-                >
-              </button>
-              <button type="button" class="del-no-btn">No</button>
-            </div>
-          </div>
-        </div>
-        <!-- ======== -->
       </div>
       <!-- ======== -->
 

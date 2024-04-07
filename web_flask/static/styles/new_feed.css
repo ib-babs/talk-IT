@@ -10,10 +10,10 @@
 .question-body p {
   -webkit-line-clamp: 4;
 }
-#question-options-container {
+.question-options-container {
   border-bottom: 0;
 }
-#question-options-container a:first-child {
+.question-options-container a:first-child {
   border-bottom: 0;
   color: #666;
   border: 1px #ccc solid;
@@ -27,6 +27,6 @@
   color: white;
 }
 
-#question-body strong{
+.question-body strong{
   color: blue;
 }

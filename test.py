@@ -21,3 +21,14 @@ storage.reload()
 # from flask_tinymce import TinyMCE
 
 # print(TinyMCE)
+
+
+# Twitter sharing link - https://twitter.com/share?url=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327&text=Three%20Muskeeter
+
+# Facebook - https://facebook.com/sharer/sharer.php?u=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327
+
+# Linkedin - https://www.linkedin.com/shareArticle?mini=true&url=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327
+
+# WhatsApp - whatsapp://send?text=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327%20Three%20Muskeeter
+
+# Telegram - tg://msg?text=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327%20Three%20Muskeeter

@@ -1,11 +1,5 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/read_post.css?{{cache_id}}" rel="stylesheet" />
-<link rel="stylesheet" href="../static/jssocials-1.4.0/dist/jssocials.css" />
-<link
-  rel="stylesheet"
-  href="../static/jssocials-1.4.0/dist/jssocials-theme-classic.css"
-/>
-<script src="../static/jssocials-1.4.0/dist/jssocials.min.js"></script>
 
 <script src="../static/scripts/readPost.js"></script>
 <div id="read-post-container">
@@ -50,7 +44,6 @@
       </form>
     </div>
   </article>
-  <div id="live"></div>
 </div>
 
 <!-- Comments -->
@@ -88,21 +81,31 @@
     <i>No comments. Be the first person to comment!</i>
   </p>
   {% endif %}
+
+  <div class="comment-box-form">
+    <form
+      action="{{url_for('read_post', question_id=question_id)}}"
+      ,
+      id="comment-form"
+      method="post"
+    >
+      {{ comment_form.hidden_tag() }} {{ comment_form.comment}}
+      <label id="submit-comment-label" for="submit-comment"
+        ><i class="fa fa-paper-plane" aria-hidden="true"></i
+      ></label>
+      {{ comment_form.submit_comment}}
+    </form>
+  </div>
 </div>
 
-<div class="comment-box-form">
-  <form
-    action="{{url_for('read_post', question_id=question_id)}}"
-    ,
-    id="comment-form"
-    method="post"
-  >
-    {{ comment_form.hidden_tag() }} {{ comment_form.comment}}
-    <label id="submit-comment-label" for="submit-comment"
-      ><i class="fa fa-paper-plane" aria-hidden="true"></i
-    ></label>
-    {{ comment_form.submit_comment}}
-  </form>
+<!-- Preview Image -->
+<div id="preview-image">
+  <i class="fa fa-arrow-alt-circle-left" aria-hidden="true" id="back-arrow"></i>
+  <img src="" alt="" />
+  <div id="prev-next">
+    <i class="fa fa-chevron-circle-left" aria-hidden="true" id='prev'></i>
+    <i class="fa fa-chevron-circle-right" aria-hidden="true" id='next'></i>
+  </div>
 </div>
 
 {% endblock %}

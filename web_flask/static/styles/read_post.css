@@ -10,12 +10,10 @@
   text-align: center;
   text-transform: uppercase;
   font-weight: bolder;
-  /* box-shadow: 0 0 12px 2px #ccc; */
   box-sizing: content-box;
   padding: 5px;
 }
 article p {
-  /* font-size: calc(14pt + 2px); */
   word-wrap: break-word;
   white-space-collapse: break-spaces;
 }
@@ -104,10 +102,7 @@ a {
   display: flex;
   gap: 1em;
 }
-.jssocials-share-link {
-  font-size: 0.6em;
-  margin-top: 10px;
-}
+
 #post-comment {
   word-break: break-all;
 }
@@ -116,22 +111,96 @@ a {
   #submit-comment-label {
     right: 38px;
   }
-  #comment-div p, article p {
+  #comment-div p,
+  article p {
     font-size: calc(14pt);
   }
 }
 
-@media (width > 768px) {
-  #read-post-container h1 {
-    top: 48px;
-  }
-  article p, #comment-div p {
-    font-size: calc(14pt + 2px);
-  }
+#preview-image img {
+  z-index: 2;
+  width: 100%;
+  height: 80%;
+  display: grid;
+  margin: auto;
 }
-.post-imgs-div{
+
+.post-imgs-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px;
+}
+.post-imgs {
+  width: 100%;
+  height: 100%;
+}
+.post-imgs-div {
   margin-bottom: 10px;
 }
-.post-imgs{
-  width: 99%;
+
+#preview-image #back-arrow:hover,
+#prev-next i:hover {
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+#preview-image #back-arrow {
+  opacity: 0.4;
+  position: absolute;
+  top: 10px;
+  color: #fff;
+  background-color: blue;
+  border-radius: 100%;
+  border: none;
+  padding: 10px;
+  font-size: 2em;
+  z-index: 0;
+}
+#preview-image {
+  display: none;
+  position: fixed;
+  place-content: center;
+  inset: 0;
+  z-index: 1;
+  padding: 10px;
+}
+#preview-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(10px);
+  z-index: -1;
+  filter: blur();
+}
+
+#prev-next i {
+  opacity: 0.5;
+  font-size: 2.5em;
+  color: blue;
+  text-shadow: 0 2px 1px blue;
+}
+#prev-next {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  right: 15px;
+  justify-content: space-between;
+}
+
+@media (width > 768px) {
+  #read-post-container h2 {
+    top: 48px;
+  }
+  article p,
+  #comment-div p {
+    font-size: calc(14pt + 2px);
+  }
+  #preview-image img {
+    width: 70%;
+    height: 90%;
+  }
+  #prev-next {
+    left: 80px;
+    right: 80px;
+  }
 }

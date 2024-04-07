@@ -15,7 +15,6 @@ from uuid import uuid4
 from models import storage
 import shutil
 from flask_login import login_required, current_user, login_user, logout_user
-from random import randint
 from forms.answer_form import CommentForm, EditCommentForm, LikeForm
 from datetime import timedelta
 
@@ -123,7 +122,7 @@ def ask_question():
                     path = Path(f'web_flask/static/post-images/{question.id}')
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
-                    img.thumbnail((600, 600))
+                    img.thumbnail((1000, 1000))
                     img.save(path.joinpath(image.filename))
                 except Exception as e:
                     print(e)
@@ -260,9 +259,8 @@ def new_feed():
 @login_required
 def my_post():
     '''Current user post excluding other users posts'''
-    user_credential = current_user.to_dict()
-    user = storage.get_user(User, user_credential['username'])
-    loader = storage.get_questions(Post, user_credential['id'])
+    user = storage.get_user(User, current_user.username)
+    loader = storage.get_questions(Post, current_user.id)
 
     # Sorting question in an ascending order
     load_questions = [obj.to_dict() for obj in loader or []]
@@ -271,7 +269,7 @@ def my_post():
         sorted_questions = sorted(
             load_questions, key=lambda x: x['created_at'], reverse=True)
 
-    return render_template('my_post.html', info=user_credential, user=user, cache_id=uuid4(),
+    return render_template('my_post.html', info=current_user, user=user, cache_id=uuid4(),
                            title='My Post', questions=sorted_questions, nav=True, a=True)
 
 
@@ -404,6 +402,21 @@ def developer():
     else:
         nav_link = True
     return render_template('developer.html', nav=True, title='Developer', sign_in_up=is_authorized, a=nav_link, dev=True)
+
+
+@app.route('/other_user_profile/<other_user_username>')
+def other_user_profile(other_user_username):
+    other_user = storage.get_user(User, other_user_username)
+    loader = storage.get_questions(Post, other_user.id)
+
+    # Sorting question in an ascending order
+    load_questions = [obj.to_dict() for obj in loader or []]
+    sorted_questions = []
+    if load_questions:
+        sorted_questions = sorted(
+            load_questions, key=lambda x: x['created_at'], reverse=True)
+    return render_template('other_user_profile.html', user=other_user, other_u_username=other_user_username, nav=True, title=f'{other_user_username} Profile', cache_id=uuid4(),
+                           questions=sorted_questions, a=True)
 
 
 if __name__ == '__main__':

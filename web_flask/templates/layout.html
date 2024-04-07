@@ -31,7 +31,6 @@
         id="theme-check"
         style="display: none"
       />
-
       {% if read %}
       <button id="play-btn">
         <i class="fa fa-volume-up" aria-hidden="true"></i>
@@ -59,7 +58,16 @@
           <a href="/" class="nav-link"
             ><li><i class="fa fa-info-circle" aria-hidden="true"></i> About</li>
           </a>
-          {% if dev %}
+          {% if other_u_username %}
+          <a
+            href="{{url_for('other_user_profile', other_user_username=other_u_username)}}"
+            class="nav-link"
+            ><li>
+              <i class="fa fa-info-circle" aria-hidden="true"></i>
+              {{other_u_username}} Profile
+            </li>
+          </a>
+          {% endif %} {% if dev %}
           <a href="/developer" class="nav-link"
             ><li><i class="fa fa-code" aria-hidden="true"></i> Developer</li>
           </a>

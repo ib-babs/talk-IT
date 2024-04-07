@@ -7,6 +7,12 @@
   $(activeNav[0]).css("background", "blue");
   $(activeNav[0]).css("color", "white");
 </script>
+<script type="module">
+  import { shortenPostImages } from "../static/scripts/common.js";
+  $(document).ready(function () {
+    shortenPostImages();
+  });
+</script>
 <div class="container">
   <div class="img-container">
     <img
@@ -29,9 +35,12 @@
         id="new-feed-user-image"
         src="data:image/jpg;base64,{{ user.image}}"
       /><br />
-      <strong>{{user.username}}</strong><br />
+      <a
+        href="{{url_for('other_user_profile', other_user_username=user.username)}}"
+        ><strong>{{user.username}}</strong><br
+      /></a>
       <small>Created At: {{question.updated_at}}</small>
-      <div id="question-options-container">
+      <div class="question-options-container">
         <a
           href="{{url_for('read_post', question_id=question.id)}}"
           title="Read More"
