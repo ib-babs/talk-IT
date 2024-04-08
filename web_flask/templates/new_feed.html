@@ -18,6 +18,7 @@
     <img
       id="user-image"
       src="data:image/{{user.image_fmt}};base64,{{ user.image }}"
+      alt="{{user.username}}{{cache_id}}"
     />
     <p><strong>{{user.username}}</strong></p>
   </div>
@@ -33,7 +34,7 @@
     <div class="question-body">
       <img
         id="new-feed-user-image"
-        src="data:image/jpg;base64,{{ user.image}}"
+        src="data:image/jpg;base64,{{ user.image}}" alt="{{user.username}}{{cache_id}}"
       /><br />
       <a
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"

@@ -9,7 +9,7 @@
 <div class="user-profile">
   <img
     src="data:image/{{user.image_fmt}};base64,{{user.image}}"
-    alt="user-image"
+    alt="{{user.username}}{{cache_id}}"
     id='user-image'
   />
   <p>Full Name: <strong>{{user.full_name}}</strong></p>
