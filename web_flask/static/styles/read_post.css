@@ -188,13 +188,13 @@ a {
   justify-content: space-between;
 }
 
-#share-container h1{
+#share-container h1 {
   padding: 3px;
-  margin: 0; 
+  margin: 0;
   margin-bottom: 10px;
   color: grey;
 }
-#share-container div{
+#share-container div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -208,14 +208,16 @@ a {
 }
 #share-container a {
   display: grid;
+  font-size: 1.9em;
 }
 #share-container p {
   margin: 12px 0;
   color: black;
+  font-size: 1.4em;
 }
-#share-container a, #share-container p {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 1.9em;
+#share-container a,
+#share-container p {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 #share-container {
   text-align: center;
@@ -223,7 +225,7 @@ a {
   inset: 0;
   top: 60%;
   background: white;
-  margin: 0 30px;
+  margin: 0 5px;
   padding: 10px;
   box-shadow: 0 0 10px 2px black;
   z-index: 1;
@@ -231,8 +233,8 @@ a {
 }
 
 #share-container a span {
- font-size: 14pt;
- color: black; 
+  font-size: 14pt;
+  color: black;
 }
 /* #share-outer-div:active #share-container {
   display: none;
@@ -245,7 +247,6 @@ a {
   z-index: 1;
   display: none;
 }
-
 
 @media (width > 768px) {
   #read-post-container h2 {
@@ -262,5 +263,8 @@ a {
   #prev-next {
     left: 80px;
     right: 80px;
+  }
+  #share-container {
+    margin: 0 30px;
   }
 }
