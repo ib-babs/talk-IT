@@ -33,7 +33,7 @@ class RegistrationForm(FlaskForm):
     def validate_email(self, email):
         if storage.get_user_by_email(User, email.data):
             raise ValidationError(
-                'Email is already taken.')
+                'Email has been already taken.')
 
     # Validating username
     def validate_username(self, username):
@@ -51,6 +51,14 @@ class LoginForm(FlaskForm):
         DataRequired()], render_kw={'placeholder': 'Username'})
     password = PasswordField('Password', validators=[
                              DataRequired()], render_kw={'placeholder': 'Password'})
+    # Validating username
+
+    def validate_username(self, username):
+        from hashlib import md5
+        user = storage.get_user(User, username.data)
+        if user is None or user.password != md5(self.password.data.encode('utf-8')).hexdigest():
+            raise ValidationError('Incorrect username or password!')
+
     remember_me = BooleanField('Remeber Me', id='remember_me')
     sign_in = SubmitField('Sign in')
 

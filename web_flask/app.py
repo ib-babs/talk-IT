@@ -9,7 +9,6 @@ from web_flask import (app, save_image_to_db, login_manager,
 from models.user import User
 from models.post import Post
 from models.comment import Comment
-from hashlib import md5
 from pathlib import Path
 from uuid import uuid4
 from models import storage
@@ -90,14 +89,9 @@ def login():
 
     if login.validate_on_submit():
         username = login.username.data
-        password = login.password.data
         user = storage.get_user(User, username)
-        if user and user.password == md5(password.encode('utf-8')).hexdigest():
-            login_user(user, login.remember_me.data, timedelta(days=10))
-            return redirect(url_for('new_feed'))
-        else:
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
+        login_user(user, login.remember_me.data, timedelta(days=10))
+        return redirect(url_for('new_feed'))
     return render_template('login.html', login=login, title='Sign In', cache_id=uuid4())
 
 
@@ -372,6 +366,7 @@ def reset_token(token):
         flash('That is an invalid or expired token')
         return redirect(url_for('request_reset'))
     if form.validate_on_submit():
+        from hashlib import md5
         user.password = md5(form.password.data.encode()).hexdigest()
         flash('Password has been changed successfully!')
         storage.save()

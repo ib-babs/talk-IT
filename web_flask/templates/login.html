@@ -1,5 +1,5 @@
 {% extends "log_reg_layout.html" %} {% block content %}
-<link href="../static/styles/common.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/common.css" rel="stylesheet" />
 <script
   type="module"
   src="../static/scripts/login.js?{{cache_id}}"
@@ -26,9 +26,14 @@
         aria-hidden="true"
         style="color: black"
       ></i>
+      {% if login.errors.username %}
+      <p class="login-form-error">
+        {{login.errors.username[0]}}
+      </p>
+      {% endif %}
     </div>
     {{ login.remember_me }} {{ login.remember_me.label }}
-    <div id="pwd">{{password}}</div>
+    <br>
     <a href="{{url_for('reset_request')}}" id="forgot-pwd">Forgot password?</a>
     <div class="login_field">{{ login.sign_in}}</div>
   </form>

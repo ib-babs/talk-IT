@@ -75,6 +75,11 @@ input[type="password"] {
 #forgot-pwd {
   color: #ccc;
 }
+.login-form-error{
+  font-size: 12pt;
+  color: red;
+  margin: 4px;
+}
 
 @media (200px <= width <= 768px) {
   body{

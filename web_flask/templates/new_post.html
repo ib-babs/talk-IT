@@ -1,5 +1,17 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/new_post.css?{{cache_id}}" rel="stylesheet" />
+<script>
+  $(document).ready(function () {
+    $.each($(".post_images"), function (idx, img) {
+      img.addEventListener("change", () => {
+        let imgLength = img.files.length;
+        $("#post-img-length").text(
+          `| ${imgLength} ${imgLength > 1 ? "images" : "image"} added`
+        );
+      });
+    });
+  });
+</script>
 <div id="new-post">
   <h1>Make a new post</h1>
   <form
@@ -12,9 +24,13 @@
     <div>{{ ask_question.title }}</div>
     <div>{{ ask_question.question }}</div>
     <label for="post-images"
-      ><i class="fas fa-camera" aria-hidden="true"></i> Add images</label
+      ><i class="fas fa-camera" aria-hidden="true"></i> Add image</label
     >
+    <em id="post-img-length"></em>
     <div>{{ ask_question.post_images }}</div>
+    {% if ask_question.errors.post_images %}
+    <p><strong style="color: red;">Error: </strong>{{ask_question.errors.post_images[1]}}</p>
+    {% endif %}
     <div id="post-btn-div">{{ ask_question.post }}</div>
   </form>
 </div>
