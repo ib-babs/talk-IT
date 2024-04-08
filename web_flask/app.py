@@ -16,6 +16,10 @@ from models import storage
 from flask_login import login_required, current_user, login_user, logout_user
 from forms.answer_form import CommentForm, EditCommentForm, LikeForm
 from datetime import timedelta
+from dotenv import load_dotenv
+
+# Load env variables from .env file
+load_dotenv()
 
 """TalkIT application has the following router:
 1. /register - To registration page
