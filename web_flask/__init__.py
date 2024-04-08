@@ -43,7 +43,7 @@ Ignore the message if you don't request for password reset and no change will be
 def save_image_to_db(image_file=None, is_file_storage=True, img_fmt=True):
     if is_file_storage and img_fmt:
         image_path = os.path.join(
-            os.getcwd(), f'web_flask/static/image/avatar/{image_file}')
+            os.getcwd(), f'talk-IT/web_flask/static/image/avatar/{image_file}')
         with open(image_path, 'rb') as fp:
             img_format = fp.raw.name.split('.')[-1]
             bytes = BytesIO(fp.read())
