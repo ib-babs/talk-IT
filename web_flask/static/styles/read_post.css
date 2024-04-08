@@ -238,7 +238,7 @@ a {
   display: none;
 } */
 #share-outer-div {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-color: rgba(30, 30, 30, 0.3);
   backdrop-filter: blur(3px);
