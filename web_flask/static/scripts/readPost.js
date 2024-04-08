@@ -99,5 +99,10 @@ window.onload = () => {
   });
   // ===== //
 
-  // Previous and Next Button
+  $("#share-post").click(() => {
+    $("#share-outer-div, #share-container").css("display", "block");
+  });
+  $("#share-outer-div").click(() => {
+    $("#share-outer-div, #share-container").css("display", "none");
+  });
 };

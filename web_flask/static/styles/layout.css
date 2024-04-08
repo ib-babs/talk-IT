@@ -1,10 +1,6 @@
 body {
   margin: 0;
-<<<<<<< HEAD
   /* font-size: clamp(15pt, calc(14pt - 4px), 18pt); */
-=======
- /* font-size: clamp(15pt, calc(14pt - 4px), 18pt);*/
->>>>>>> 9658db47f61adbdcf4012f6d1a857a2d1d10a2e6
 }
 
 header {
@@ -16,7 +12,6 @@ header {
   justify-content: space-between;
   align-items: center;
 }
-
 
 #page-brand {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -70,6 +65,13 @@ nav ul .nav-link {
 nav ul {
   list-style: none;
 }
+#close-nav-on-blur {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(30, 30, 30, 0.3);
+  backdrop-filter: blur(2px);
+  display: none;
+}
 @media (200px <= width < 768px) {
   #page-brand {
     font-size: 20pt;
@@ -83,7 +85,7 @@ nav ul {
     inset: 0;
     text-align: center;
     background-color: #222;
-    margin: 37px 0 5px 20%;
+    margin: 37px 0 5px 40%;
     filter: drop-shadow(0px 0px 10px #222);
   }
 

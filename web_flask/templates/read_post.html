@@ -42,6 +42,7 @@
         </label>
         {{like.like}} {{post.likes}}
       </form>
+      <i class="fa fa-share-alt" aria-hidden="true" id="share-post"></i>
     </div>
   </article>
 </div>
@@ -111,4 +112,42 @@
   </div>
 </div>
 
+<!-- Share Container-->
+<div id="share-outer-div"></div>
+<div id="share-container">
+  <h1><i class="fa fa-share-alt" aria-hidden="true"></i> Share</h1>
+  <p><i class="fa fa-link" aria-hidden="true"></i> {{post.title}}</p>
+  <div>
+    <a
+      target="_blank"
+      href="https://facebook.com/sharer/sharer.php?u=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327"
+      ><i class="fab fa-facebook-square" aria-hidden="true"></i
+      ><span>Facebook</span></a
+    >
+    <a
+      target="_blank"
+      href="https://twitter.com/share?url=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327&text={{post.title}}"
+      ><i class="fab fa-twitter-square" aria-hidden="true"></i
+      ><span>Twitter</span></a
+    >
+    <a
+      target="_blank"
+      href="whatsapp://send?text=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327%20{{post.title}}"
+      ><i class="fab fa-whatsapp" aria-hidden="true"></i
+      ><span>WhatsApp</span></a
+    >
+    <a
+      target="_blank"
+      href="tg://msg?text=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327%20{{post.title}}"
+      ><i class="fab fa-telegram" aria-hidden="true"></i
+      ><span>Telegram</span></a
+    >
+    <a
+      target="_blank"
+      href="https://www.linkedin.com/shareArticle?mini=true&url=127.0.0.1%3A5500%2Fhttp%3A%2F%2F127.0.0.1%3A6522%2Fread_post%2Fb920cb02-f7dc-4042-973a-2e6132933327"
+    >
+      <i class="fab fa-linkedin" aria-hidden="true"></i><span>Linkedin</span></a
+    >
+  </div>
+</div>
 {% endblock %}
