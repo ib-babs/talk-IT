@@ -3,7 +3,7 @@ window.onload = () => {
 
   // Declaring share URLs
   let urlOnly = new URL(window.location.href),
-    urlWithTitle = new URL(`${window.location.href}?${$("article h2").text().replace(' ', '%20')}`);
+    urlWithTitle = new URL(`${window.location.href}?${$("article h2").text()}`);
   const link_url = [
     "https://facebook.com/sharer/sharer.php?u=" + urlOnly,
     `https://twitter.com/share?url=${urlOnly}&text=${$("article h2").text()}`,
