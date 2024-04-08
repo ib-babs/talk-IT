@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import flash, render_template, url_for, redirect, session, request
+from flask import flash, render_template, url_for, redirect, session, request, abort
 from forms.login_resgistration import (RegistrationForm, LoginForm,
                                        UpdateProfile)
 from forms.question_form import QuestionForm, EditPostForm
@@ -13,9 +13,7 @@ from hashlib import md5
 from pathlib import Path
 from uuid import uuid4
 from models import storage
-import shutil
 from flask_login import login_required, current_user, login_user, logout_user
-from random import randint
 from forms.answer_form import CommentForm, EditCommentForm, LikeForm
 from datetime import timedelta
 
@@ -139,6 +137,8 @@ def edit(question_id):
     '''Editing a post based on post_id'''
     edit_form = EditPostForm()
     question_object = storage.get(Post, question_id)
+    if question_object is None:
+        return abort(404)
     question_object_dict = question_object.to_dict()
     edit_form.title.data = question_object_dict['title']
     edit_form.question.data = question_object_dict['question']
@@ -157,6 +157,9 @@ def read_post(question_id):
         return redirect(url_for('login'))
 
     question_object = storage.get(Post, question_id)
+
+    if question_object is None:
+        return abort(404)
     session['question_id'] = question_object.id
     comments = storage.get_comments(Comment, question_id)
     sorted_comments = []
@@ -291,6 +294,9 @@ def edit_comment(answer_id):
     '''Edit a comment made by the current user'''
     edit_cmt = EditCommentForm()
     answer_obj = storage.get(Comment, answer_id)
+    if answer_obj is None:
+        return abort(404)
+
     edit_cmt.edit_comment.data = answer_obj.comment
     if 'submit-edit-btn' in request.form:
         if edit_cmt.validate_on_submit():
@@ -306,6 +312,8 @@ def edit_comment(answer_id):
 def delete_comment(comment_id):
     '''Delete a comment based on comment_id'''
     comment = storage.get(Comment, comment_id)
+    if comment is None:
+        return abort(404)
     storage.delete(comment)
     storage.save()
     return redirect(url_for('read_post', question_id=session['question_id']))
@@ -315,8 +323,10 @@ def delete_comment(comment_id):
 @login_required
 def delete_post(question_id):
     '''Allow user to delete a post based on the post_id'''
-    import os
+    import shutil
     question_obj = storage.get(Post, question_id)
+    if question_obj is None:
+        return abort(404)
     storage.delete(question_obj)
     storage.save()
     path = Path(f'web_flask/static/post-images/{question_id}')
@@ -408,6 +418,8 @@ def developer():
 @app.route('/other_user_profile/<other_user_username>')
 def other_user_profile(other_user_username):
     other_user = storage.get_user(User, other_user_username)
+    if other_user is None:
+        return abort(404)
     loader = storage.get_questions(Post, other_user.id)
 
     # Sorting question in an ascending order
