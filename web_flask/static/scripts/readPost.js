@@ -1,5 +1,22 @@
 window.onload = () => {
   // ======= //
+
+  // Declaring share URLs
+  let urlOnly = new URL(window.location.href),
+    urlWithTitle = new URL(`${window.location.href}?${$("article h2").text()}`);
+  const link_url = [
+    "https://facebook.com/sharer/sharer.php?u=" + urlOnly,
+    `https://twitter.com/share?url=${urlOnly}&text=${$("article h2").text()}`,
+    `whatsapp://send?text=${urlWithTitle}`,
+    `tg://msg?text=${urlWithTitle}`,
+    "https://www.linkedin.com/shareArticle?mini=true&url=" + urlWithTitle,
+  ];
+
+  $.each($("#share-container div a"), function (indexInArray, link) {
+    $("#share-container div a")[indexInArray].href = link_url[indexInArray];
+    console.log($("#share-container div a")[indexInArray].href);
+  });
+
   $("#stop-btn i").css("color", "grey");
   const sys = speechSynthesis;
   if (sys) {
