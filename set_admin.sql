@@ -1,4 +1,0 @@
-CREATE DATABASE IF NOT EXISTS `talk-IT`;
-CREATE USER IF NOT EXISTS 'khalil'@'%' IDENTIFIED WITH mysql_native_password BY 'drkhalil';
-GRANT ALL PRIVILEGES ON `talk-IT`.* TO 'khalil'@'%';
-FLUSH PRIVILEGES;

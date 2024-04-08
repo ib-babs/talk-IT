@@ -432,4 +432,5 @@ def other_user_profile(other_user_username):
 
 
 if __name__ == '__main__':
-    app.run()
+    from random import randint
+    app.run(port=randint(2000, 9000), debug=True)
