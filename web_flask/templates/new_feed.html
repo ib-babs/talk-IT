@@ -64,13 +64,16 @@
       {% endif %}
       <!-- ===== -->
       <div class="lkes-and-comments-container">
-        <i
-          class="far fa-thumbs-up"
-          aria-hidden="true"
-          style="color: blue"
-          ;
-        ></i>
-        {{question.likes}}
+        <span
+          ><i
+            class="far fa-thumbs-up"
+            aria-hidden="true"
+            style="color: blue"
+            ;
+          ></i> 
+          {{question.likes}} {% if question.likes > 1%} Likes {%else %} Like {%
+          endif %}</span
+        >
       </div>
     </div>
   </div>

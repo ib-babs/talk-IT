@@ -21,13 +21,11 @@ article p {
   margin: 10px;
   margin-bottom: 5em;
 }
-
 #comment-div {
   display: inline-flex;
   flex-direction: row;
   gap: 10px;
 }
-
 #user-img {
   border-radius: 100%;
   width: 40px;
@@ -43,7 +41,6 @@ section h3 {
   text-decoration-color: #ccc;
   text-underline-offset: 8px;
 }
-
 #comment-div strong {
   color: blue;
 }
@@ -54,7 +51,6 @@ section h3 {
   border-radius: 10px;
   background-color: rgba(210, 210, 210, 0.5);
 }
-
 .comment-box-form .cmt-txt-area {
   font-size: 14pt;
   border: solid 1px #ccc;
@@ -65,7 +61,6 @@ section h3 {
   position: relative;
   margin-bottom: -10px;
 }
-
 .comment-box-form {
   position: fixed;
   bottom: 10px;
@@ -94,7 +89,6 @@ a {
   display: flex;
   gap: 10px;
 }
-
 #like-btn {
   display: none;
 }
@@ -103,21 +97,20 @@ a {
   font-size: 1.3em;
   gap: 1em;
 }
-
 #post-comment {
   word-break: break-all;
 }
-
 @media (200px <= width <= 768px) {
   #submit-comment-label {
     right: 38px;
   }
-  #comment-div p,
   article p {
-    font-size: calc(14pt);
+    font-size: 13pt;
+  }
+  article h2 {
+    font-size: 14pt;
   }
 }
-
 #preview-image img {
   z-index: 2;
   width: 100%;
@@ -125,7 +118,6 @@ a {
   display: grid;
   margin: auto;
 }
-
 .post-imgs-div {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -138,7 +130,6 @@ a {
 .post-imgs-div {
   margin-bottom: 10px;
 }
-
 #preview-image #back-arrow:hover,
 #prev-next i:hover {
   opacity: 1;
@@ -172,7 +163,6 @@ a {
   z-index: -1;
   filter: blur();
 }
-
 #prev-next i {
   opacity: 0.5;
   font-size: 2.5em;
@@ -187,7 +177,6 @@ a {
   right: 15px;
   justify-content: space-between;
 }
-
 #share-container h1 {
   padding: 3px;
   margin: 0;
@@ -231,7 +220,6 @@ a {
   z-index: 1;
   display: none;
 }
-
 #share-container a span {
   font-size: 14pt;
   color: black;
@@ -247,7 +235,21 @@ a {
   z-index: 1;
   display: none;
 }
-
+#share-container a span {
+  font-size: 14pt;
+  color: black;
+}
+/* #share-outer-div:active #share-container {
+  display: none;
+} */
+#share-outer-div {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(30, 30, 30, 0.3);
+  backdrop-filter: blur(3px);
+  z-index: 1;
+  display: none;
+}
 @media (width > 768px) {
   #read-post-container h2 {
     top: 48px;

@@ -85,7 +85,7 @@
       <div class="lkes-and-comments-container">
         <span
           ><i class="far fa-thumbs-up" aria-hidden="true"></i>
-          {{question.likes}}</span
+          {{question.likes}} {% if question.likes > 1%} Likes {%else %} Like {% endif %}</span
         >
       </div>
       <!-- ======== -->

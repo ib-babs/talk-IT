@@ -8,7 +8,6 @@ body {
 .talkit h1 {
   margin-bottom: 5px;
 }
-
 img {
   box-sizing: content-box;
   width: clamp(250px, 300px, 450px);
@@ -19,7 +18,6 @@ section {
   grid-auto-flow: column;
   gap: 10%;
 }
-
 .section-2 img {
   grid-column-start: 2;
 }
@@ -30,6 +28,7 @@ section {
   text-decoration: none;
   border-radius: 8px;
 }
+
 footer h3 {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   margin: 0;
@@ -51,17 +50,14 @@ footer a {
   color: #ccc;
   text-decoration: none;
 }
-
 @media (200px <= width < 768px) {
   section {
     display: block;
-    font-size: calc(14pt);
   }
   main {
     text-align: center;
   }
 }
-
 @media (width > 768px) {
   body {
     font-size: clamp(16pt, calc(14pt - 4px), 18pt);
