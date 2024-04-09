@@ -22,11 +22,10 @@ $(document).ready(() => {
       );
     } else {
       $("#question_title").attr("style", "background:initial;");
-      $(".container").css("box-shadow", "0 1px 8px 0.5px #f00");
       $(document.body).attr("style", "background:initial; color: initial");
       $(".container").attr(
         "style",
-        "background-color:unset; box-shadow: 0 1px 8px 0.5px #ccc"
+        "background-color:#fff; box-shadow: 0 1px 8px 0.5px #ccc"
       );
       $(".question-body").css("box-shadow", "0 3px 10px 0.3px #ccc");
       $("header").css("box-shadow", "unset");

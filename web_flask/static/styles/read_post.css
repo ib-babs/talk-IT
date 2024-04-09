@@ -101,6 +101,9 @@ a {
   word-break: break-all;
 }
 @media (200px <= width <= 768px) {
+  #read-post-container h2 {
+    top: 30px;
+  }
   #submit-comment-label {
     right: 38px;
   }
@@ -108,7 +111,7 @@ a {
     font-size: 13pt;
   }
   article h2 {
-    font-size: 14pt;
+    font-size: 13pt;
   }
 }
 #preview-image img {

@@ -14,7 +14,6 @@ body {
   top: 2.18em;
   padding-block: 1em 40px;
   background-color: rgb(255, 255, 255);
-  /*  backdrop-filter: blur(6px);*/
   box-shadow: 0 1px 8px 0.5px #ccc;
 }
 button,
