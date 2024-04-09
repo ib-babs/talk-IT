@@ -68,7 +68,7 @@
   </div>
   <!--  Comment options -->
   <div id="comment-options">
-    <small>{{comment.created_at}}</small>
+      <small>{{time_created[loop.index - 1]}}</small>
     {% if comment.user_id == user_id %}
     <a href="{{url_for('edit_comment', answer_id=comment.id)}}">Edit</a>
     <a

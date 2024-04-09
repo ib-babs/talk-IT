@@ -5,7 +5,7 @@ from forms.login_resgistration import (RegistrationForm, LoginForm,
 from forms.question_form import QuestionForm, EditPostForm
 from forms.reset_forms import RequestResetForm, ResetPasswordForm
 from web_flask import (app, save_image_to_db, login_manager,
-                       send_reset_email, Image, BytesIO)
+                       send_reset_email, Image, BytesIO, timeConversion)
 from models.user import User
 from models.post import Post
 from models.comment import Comment
@@ -161,9 +161,13 @@ def read_post(question_id):
     session['question_id'] = question_object.id
     comments = storage.get_comments(Comment, question_id)
     sorted_comments = []
+    time_created = []
     if comments:
         sorted_comments = sorted(
             [comment for comment in comments], key=lambda x: x[1].created_at)
+        time_created = [a[1].to_dict()['created_at_time']
+                        for a in sorted_comments]
+
     comment_form = CommentForm()
     form = LikeForm()
     user_id = current_user.id
@@ -199,7 +203,8 @@ def read_post(question_id):
 
     return render_template('read_post.html', post=question_object,
                            comments=sorted_comments, nav=True, a=True, comment_form=comment_form, question_id=question_id, user_id=user_id,
-                           cache_id=uuid4(), read=True, total_comment=total_comment, like=form, title='Reading...')
+                           cache_id=uuid4(), read=True, total_comment=total_comment, like=form, title='Reading...',
+                           time_created=time_created)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -248,12 +253,15 @@ def new_feed():
     loader = [v.to_dict() for v in all_questions.values() if v.to_dict()['user_id'] !=
               current_user.id or []]
     sorted_questions = []
+    time_created = []
     if gt:
         sorted_questions = sorted(
             [q for q in gt], key=lambda x: x[0].created_at, reverse=True)
+        time_created = [a[0].to_dict()['created_at_time']
+                        for a in sorted_questions]
     get_users = [storage.get(User, user['user_id'])
                  for user in loader or []]
-    return render_template('new_feed.html', questions=sorted_questions, nav=True, a=True, users=get_users, user=user, title='New Feed')
+    return render_template('new_feed.html', questions=sorted_questions, nav=True, a=True, users=get_users, user=user, title='New Feed', time_created=time_created)
 
 
 # My posts
@@ -267,12 +275,15 @@ def my_post():
     # Sorting question in an ascending order
     load_questions = [obj.to_dict() for obj in loader or []]
     sorted_questions = []
+    time_created = []
     if load_questions:
         sorted_questions = sorted(
             load_questions, key=lambda x: x['created_at'], reverse=True)
+        time_created = [a['created_at_time'] for a in sorted_questions]
 
     return render_template('my_post.html', info=current_user, user=user, cache_id=uuid4(),
-                           title='My Post', questions=sorted_questions, nav=True, a=True)
+                           title='My Post', questions=sorted_questions, nav=True, a=True,
+                           time_created=time_created)
 
 
 # Profile

@@ -3,6 +3,7 @@ from typing import Any
 from uuid import uuid4
 from sqlalchemy import Column, String, DateTime
 import sqlalchemy
+from web_flask import timeConversion
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
@@ -44,6 +45,15 @@ class BaseModel:
             new_dict['created_at'] = new_dict['created_at'].strftime(time)
         if 'updated_at' in new_dict:
             new_dict['updated_at'] = new_dict['updated_at'].strftime(time)
+
+        if not 'created_at_time' in new_dict:
+            new_dict['created_at_time'] = timeConversion(
+                new_dict['created_at'])
+
+        if not 'updated_at_time' in new_dict:
+            new_dict['updated_at_time'] = timeConversion(
+                new_dict['updated_at'])
+
         if '__class__' in new_dict:
             new_dict['__class__'] = self.__class__.__name__
         if 'password' in new_dict:

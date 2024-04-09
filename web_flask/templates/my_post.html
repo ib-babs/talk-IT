@@ -7,7 +7,11 @@
 ></script>
 <div class="container">
   <div class="img-container">
-    <img id="user-image" src="data:image/{{jpg}};base64,{{ user.image }}" alt="{{info.username}}{{cache_id}}"/>
+    <img
+      id="user-image"
+      src="data:image/{{jpg}};base64,{{ user.image }}"
+      alt="{{info.username}}{{cache_id}}"
+    />
     <p><strong>{{info.username}}</strong></p>
   </div>
   <div id="edit-and-post">
@@ -28,7 +32,7 @@
     <div class="question-body">
       <!-- Options -->
       <div class="question-options-container">
-        <small>Created At: {{question.updated_at}}</small>
+        <small>{{time_created[loop.index - 1]}}</small>
         <!-- Read a post -->
         <a
           href="{{url_for('read_post', question_id=question.id)}}"

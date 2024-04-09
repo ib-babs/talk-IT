@@ -55,3 +55,46 @@ def save_image_to_db(image_file=None, is_file_storage=True, img_fmt=True):
         buffered = BytesIO()
         img.save(buffered, format=f'{image_fmt}')
         return (base64.b64encode(buffered.getvalue()).decode('utf-8'), image_fmt)
+
+
+def timeConversion(time_given):
+    '''Convert time object to year | day | hour | minute | second '''
+    from datetime import datetime
+
+    # Your given date
+    given_date = datetime.strptime(
+        time_given, "%Y-%m-%d %H:%M:%S.%f")
+
+    # Current date
+    current_date = datetime.now()
+
+    # Calculate the difference in days
+    difference = current_date - given_date
+
+    days_ago = difference.days
+    sec_ago = difference.seconds
+    # Convert seconds to minutes
+    mins_ago = sec_ago // 60
+    # Convert minutes to hours
+    hours_ago = (mins_ago // 60) % 24
+
+
+
+    find_time = f"{days_ago} {'days' if days_ago > 1 else 'day'} ago"
+    if days_ago < 1:
+        # Hour
+        find_time = f"{hours_ago} {'hours' if hours_ago > 1 else 'hour'} ago"
+    if hours_ago < 1:
+        # Minute
+        find_time = f"{mins_ago} {'mins' if mins_ago > 1 else 'min'} ago"
+    if mins_ago < 1:
+        # Second
+        find_time = f"{sec_ago} {'seconds' if sec_ago > 1 else 'second'} ago"
+    if sec_ago > 60 and mins_ago < 60:
+        # Go back to min
+        find_time = f"{mins_ago} {'mins' if mins_ago > 1 else 'min'} ago"
+    if days_ago > 365:
+        # Year
+        find_time = f"{days_ago//365} {'years' if days_ago//365 > 1 else 'year'} ago"
+    
+    return find_time

@@ -34,13 +34,14 @@
     <div class="question-body">
       <img
         id="new-feed-user-image"
-        src="data:image/jpg;base64,{{ user.image}}" alt="{{user.username}}{{cache_id}}"
+        src="data:image/jpg;base64,{{ user.image}}"
+        alt="{{user.username}}{{cache_id}}"
       /><br />
       <a
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
         ><strong>{{user.username}}</strong><br
       /></a>
-      <small>Created At: {{question.updated_at}}</small>
+      <small>{{time_created[loop.index - 1]}}</small>
       <div class="question-options-container">
         <a
           href="{{url_for('read_post', question_id=question.id)}}"
