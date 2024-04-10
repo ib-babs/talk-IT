@@ -4,3 +4,4 @@ __pycache__
 .env
 
 web_flask/static/post-images/*
+web_flask/static/image/*
