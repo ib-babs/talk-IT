@@ -102,7 +102,7 @@ $(document).ready(() => {
     p = p
       .replace(
         /< *(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
-        '<div style="background: #ddd; color: black; display:flex;"><code>'
+        '<div style="background: #ddd; color: black; display:block;"><code>'
       )
       .replace(
         /< *\/(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
