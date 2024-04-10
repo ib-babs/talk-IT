@@ -102,11 +102,11 @@ $(document).ready(() => {
     p = p
       .replace(
         /< *(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
-        '<code style="background: #ddd; color: black;">'
+        '<div style="background: #ddd; color: black; display:flex;"><code>'
       )
       .replace(
         /< *\/(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
-        "</code>"
+        "</code></div>"
       );
     //console.log(p)
     $(el).html(p);
