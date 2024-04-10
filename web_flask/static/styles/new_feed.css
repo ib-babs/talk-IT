@@ -11,12 +11,15 @@
   -webkit-line-clamp: 4;
 }
 .question-options-container {
+  margin-top: 5px;
+  display: block;
   border-bottom: 0;
+  padding-bottom: 32px;
 }
 .question-options-container a:first-child {
   border-bottom: 0;
   color: #666;
-  border: 1px #ccc solid;
+  border: 1px #ccc none;
 }
 .container {
   padding-block: 0.8em 40px;

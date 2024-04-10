@@ -435,11 +435,15 @@ def other_user_profile(other_user_username):
     # Sorting question in an ascending order
     load_questions = [obj.to_dict() for obj in loader or []]
     sorted_questions = []
+    time_created = []
     if load_questions:
         sorted_questions = sorted(
             load_questions, key=lambda x: x['created_at'], reverse=True)
+        time_created = [a['created_at_time']
+                        for a in sorted_questions]
+
     return render_template('other_user_profile.html', user=other_user, other_u_username=other_user_username, nav=True, title=f'{other_user_username} Profile', cache_id=uuid4(),
-                           questions=sorted_questions, a=True)
+                           questions=sorted_questions, a=True, time_created=time_created)
 
 
 if __name__ == '__main__':

@@ -3,9 +3,9 @@
 <link href="../static/styles/profile.css?{{cache_id}}" rel="stylesheet" />
 {% if other_u_username %}
 <script>
-    let activeNav = $("nav .nav-link li");
-    $(activeNav[4]).css("background", "blue");
-    $(activeNav[4]).css("color", "white");
+  let activeNav = $("nav .nav-link li");
+  $(activeNav[4]).css("background", "blue");
+  $(activeNav[4]).css("color", "white");
 </script>
 {% endif %}
 <script type="module" defer="defer">
@@ -15,10 +15,10 @@
   });
 </script>
 <div class="user-profile other-user-profile">
-  <img 
+  <img
     src="data:image/{{user.image_fmt}};base64,{{user.image}}"
     alt="user-image{{cache_id}}"
-    id='user-image'
+    id="user-image"
   />
   <p>Full Name: <strong>{{user.full_name}}</strong></p>
   <p>Username: <strong>{{user.username}}</strong></p>
@@ -39,7 +39,7 @@
     <div class="question-body">
       <!-- Options -->
       <div class="question-options-container">
-        <small>Created At: {{question.updated_at}}</small>
+        <small>{{time_created[loop.index - 1]}}</small>
         <!-- Read a post -->
         <a
           href="{{url_for('read_post', question_id=question.id)}}"

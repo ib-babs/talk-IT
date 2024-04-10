@@ -83,18 +83,18 @@ def timeConversion(time_given):
     find_time = f"{days_ago} {'days' if days_ago > 1 else 'day'} ago"
     if days_ago < 1:
         # Hour
-        find_time = f"{hours_ago} {'hours' if hours_ago > 1 else 'hour'} ago"
+        find_time = f"{hours_ago} {'hrs' if hours_ago > 1 else 'hr'} ago"
     if hours_ago < 1:
         # Minute
         find_time = f"{mins_ago} {'mins' if mins_ago > 1 else 'min'} ago"
     if mins_ago < 1:
         # Second
-        find_time = f"{sec_ago} {'seconds' if sec_ago > 1 else 'second'} ago"
+        find_time = 'Just now'
     if sec_ago > 60 and mins_ago < 60:
         # Go back to min
         find_time = f"{mins_ago} {'mins' if mins_ago > 1 else 'min'} ago"
     if days_ago > 365:
         # Year
-        find_time = f"{days_ago//365} {'years' if days_ago//365 > 1 else 'year'} ago"
+        find_time = f"{days_ago//365} {'yrs' if days_ago//365 > 1 else 'yr'} ago"
     
     return find_time

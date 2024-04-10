@@ -18,6 +18,5 @@ $(document).ready(() => {
       // // ===End modal == //
     });
   });
-
-  shortenPostImages()
+  shortenPostImages();
 });

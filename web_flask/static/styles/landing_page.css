@@ -59,7 +59,7 @@ footer a {
   }
 }
 @media (width > 768px) {
-  body {
+  .talkit {
     font-size: clamp(16pt, calc(14pt - 4px), 18pt);
   }
 }

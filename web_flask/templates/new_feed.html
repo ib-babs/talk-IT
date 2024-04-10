@@ -41,15 +41,15 @@
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
         ><strong>{{user.username}}</strong><br
       /></a>
-      <small>{{time_created[loop.index - 1]}}</small>
       <div class="question-options-container">
+        <span>{{time_created[loop.index - 1]}}</span>
         <a
           href="{{url_for('read_post', question_id=question.id)}}"
           title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i
         ></a>
       </div>
-      <p>{{ question.question }}</p>
+      <p class='post-write-up'>{{ question.question }}</p>
       <!-- Post images container -->
       {% if question.post_images %}
       <div class="post-imgs-div">
@@ -70,7 +70,7 @@
             aria-hidden="true"
             style="color: blue"
             ;
-          ></i> 
+          ></i>
           {{question.likes}} {% if question.likes > 1%} Likes {%else %} Like {%
           endif %}</span
         >

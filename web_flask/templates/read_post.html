@@ -5,7 +5,7 @@
 <div id="read-post-container">
   <article>
     <h2 id="post-title">{{ post.title}}</h2>
-    <p id="post-question">{{ post.question }}</p>
+    <p id="post-question" class='post-write-up'>{{ post.question }}</p>
 
     <!-- Post images container -->
     {% if post.post_images %}
@@ -63,12 +63,12 @@
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
         ><strong>{{user.username}}</strong><br
       /></a>
-      <p id="post-comment">{{comment.comment}}</p>
+      <p id="post-comment" class='post-write-up'>{{comment.comment}}</p>
     </div>
   </div>
   <!--  Comment options -->
   <div id="comment-options">
-      <small>{{time_created[loop.index - 1]}}</small>
+      <span>{{time_created[loop.index - 1]}}</span>
     {% if comment.user_id == user_id %}
     <a href="{{url_for('edit_comment', answer_id=comment.id)}}">Edit</a>
     <a

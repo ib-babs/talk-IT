@@ -73,4 +73,42 @@ $(document).ready(() => {
       theme("light");
     }
   });
+
+  $.each($(".post-write-up"), function (idx, el) {
+    let p = $(el).text().trimStart().trimEnd(),
+      splitter = p.split(/([*]\b[^*]+\b[*])/gm),
+      italic = p.split(/([`]\b[^`]+\b[`])/gm);
+      console.log(italic)
+    //(/\*(\w+) ?(\w+)?\*/gim),
+    //  bold = p.match(/([^\w]+)?`.+` ?/gm);
+
+    for (let index = 0; index < splitter.length; index++) {
+      if (splitter[index].startsWith("*") && splitter[index].endsWith("*")) {
+        p = p.replace(
+          splitter[index],
+          `<strong style="color: unset">${splitter[index].replace(/\*/g, "")}</strong>`
+        );
+      }
+    }
+    for (let index = 0; index < italic.length; index++) {
+      if (italic[index].startsWith("`") && italic[index].endsWith("`")) {
+        p = p.replace(
+          italic[index],
+          `<i>${italic[index].replace(/\`/g, "")}</i>`
+        );
+      }
+    }
+
+    p = p
+      .replace(
+        /< *(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
+        '<code style="background: #ddd; color: black;">'
+      )
+      .replace(
+        /< *\/(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
+        "</code>"
+      );
+    //console.log(p)
+    $(el).html(p);
+  });
 });
