@@ -39,7 +39,7 @@
       /><br />
       <a
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
-        ><strong class='user-username'>{{user.username}}</strong><br
+        ><strong class="user-username">{{user.username}}</strong><br
       /></a>
       <div class="question-options-container">
         <span>{{time_created[loop.index - 1]}}</span>
@@ -49,7 +49,7 @@
           ><i class="fab fa-readme" aria-hidden="true"></i
         ></a>
       </div>
-      <p class='post-write-up'>{{ question.question }}</p>
+      <p class="post-write-up">{{ question.question }}</p>
       <!-- Post images container -->
       {% if question.post_images %}
       <div class="post-imgs-div">
@@ -71,8 +71,10 @@
             style="color: blue"
             ;
           ></i>
-          {{question.likes}} {% if question.likes > 1%} Likes {%else %} Like {%
-          endif %}</span
+          <span>
+            {{question.likes}} {% if question.likes > 1%} Likes {%else %} Like
+            {% endif %}</span
+          ></span
         >
       </div>
     </div>
