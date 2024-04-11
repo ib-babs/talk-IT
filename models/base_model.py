@@ -27,13 +27,13 @@ class BaseModel:
                 if kwargs.get('created_at') and type(kwargs['created_at']) is str:
                     self.created_at = datetime.strptime(
                         str(datetime.now()), time)
-                # else:
-                #     self.created_at = datetime.now()
+                else:
+                    self.created_at = datetime.now()
                 if kwargs.get('updated_at') and type(kwargs['updated_at']) is str:
                     self.updated_at = datetime.strptime(
                         str(datetime.now()), time)
-                # else:
-                #     self.updated_at = datetime.now()
+                else:
+                    self.updated_at = datetime.now()
         else:
             self.id = str(uuid4())
             self.created_at = datetime.strptime(str(datetime.now()), time)

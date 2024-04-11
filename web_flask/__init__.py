@@ -88,7 +88,7 @@ def timeConversion(time_given):
     if mins_ago < 1:
         # Second
         find_time = 'Just now'
-    if sec_ago > 60 and mins_ago < 60:
+    if sec_ago > 60 and hours_ago < 1:
         # Go back to min
         find_time = f"{mins_ago}{'mins' if mins_ago > 1 else 'min'} ago"
     if days_ago > 365:
