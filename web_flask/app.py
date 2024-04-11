@@ -116,7 +116,10 @@ def ask_question():
                 f'post-images/{question.id}/{image.filename}' for image in images]
             for image in images:
                 try:
-                    path = Path(f'web_flask/static/post-images/{question.id}')
+                    import os
+                    path = Path(
+                        f'{os.getcwd()}/web_flask/static/post-images/{question.id}')
+                    print(path)
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
                     img.thumbnail((700, 700))
