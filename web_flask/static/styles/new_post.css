@@ -42,6 +42,7 @@ h1 {
   background: blue;
   border: 0;
   padding: 5px 50px;
+  margin-top: 10px;
   font-size: clamp(20px, calc(15px), 40px);
 }
 #post-images {
