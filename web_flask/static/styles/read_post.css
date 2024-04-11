@@ -41,9 +41,14 @@ section h3 {
   text-decoration-color: #ccc;
   text-underline-offset: 8px;
 }
-#comment-div strong {
-  color: blue;
+
+.user-comments p{
+  padding-block-start: 5px;
 }
+.user-comments a strong{
+  color: black;
+}
+
 .user-comments {
   margin-bottom: 5px;
   padding: 10px;
@@ -85,7 +90,7 @@ a {
 }
 #comment-options {
   margin-bottom: 10px;
-  margin-left: 3em;
+  margin-left: 3.5em;
   display: flex;
   gap: 10px;
 }

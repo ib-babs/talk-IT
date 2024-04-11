@@ -9,11 +9,12 @@ $(document).ready(() => {
         "background:#222; color: white"
       );
       $("#post-title").attr("style", "background:#222;");
+      $('.user-comments a strong').css('color', '#eee')
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".user-comments").attr(
         "style",
-        "background:#222; box-shadow:0 3px 10px 0.3px #000"
+        "background: rgb(55, 55, 55);"
       );
       $(".question-body").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".container").attr(
@@ -23,6 +24,7 @@ $(document).ready(() => {
     } else {
       $("#question_title").attr("style", "background:initial;");
       $(document.body).attr("style", "background:initial; color: initial");
+      $('.user-comments a strong').css('color', 'initial')
       $(".container").attr(
         "style",
         "background-color:#fff; box-shadow: 0 1px 8px 0.5px #ccc"
@@ -32,7 +34,7 @@ $(document).ready(() => {
       $("footer").css("box-shadow", "unset");
       $(".user-comments").attr(
         "style",
-        "background:rgba(210, 210, 210, 0.5); box-shadow:unset"
+        "background:rgba(210, 210, 210, 0.5)"
       );
       $("#post-title").attr("style", "background:white");
       $("textarea").attr("style", "background:white; color: initial");
@@ -74,41 +76,51 @@ $(document).ready(() => {
     }
   });
 
+  function parsingStyles(text, regex, symbol) {
+    let style = text
+      .split(regex)
+      .filter(
+        (part) =>
+          part != undefined &&
+          part.startsWith(symbol) &&
+          part.endsWith(symbol) &&
+          part[part.length - 2] != " " &&
+          part != symbol
+      );
+    console.log(style);
+    return style;
+  }
   $.each($(".post-write-up"), function (idx, el) {
     let p = $(el).text().trimStart().trimEnd(),
-      splitter = p.split(/([*]\b[^*]+\b[*])/gm),
-      italic = p.split(/([`]\b[^`]+\b[`])/gm);
-      console.log(italic)
-    //(/\*(\w+) ?(\w+)?\*/gim),
-    //  bold = p.match(/([^\w]+)?`.+` ?/gm);
-
-    for (let index = 0; index < splitter.length; index++) {
-      if (splitter[index].startsWith("*") && splitter[index].endsWith("*")) {
-        p = p.replace(
-          splitter[index],
-          `<strong style="color: unset">${splitter[index].replace(/\*/g, "")}</strong>`
-        );
-      }
-    }
-    for (let index = 0; index < italic.length; index++) {
-      if (italic[index].startsWith("`") && italic[index].endsWith("`")) {
-        p = p.replace(
-          italic[index],
-          `<i>${italic[index].replace(/\`/g, "")}</i>`
-        );
-      }
-    }
-
-    p = p
-      .replace(
-        /< *(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
-        '<div style="background: #ddd; color: black; display:block; padding: 5px;"><code>'
-      )
-      .replace(
-        /< *\/(iframe|object|script|style|embed|form|input|style|link|meta|a|svg|canvas|textarea|img)[^>]*>/gim,
-        "</code></div>"
+      splitter = parsingStyles(
+        p,
+        /(?<=\*) +|(?!\*)\n|(\*(?=\S+)[^*]+\*)/gm,
+        "*"
+      ),
+      italic = parsingStyles(p, /(?<=_) +|(?!_)\n|(_(?=\S+)[^_]+_)/gm, "_"),
+      code = parsingStyles(p, /(?<=`) +|(?!`)\n|(`(?=\S+)[^`]+`)/gm, "`");
+    p = p.replace(/</gim, "&lt;").replace(/>/gim, "&gt;");
+    for (let index = 0; index < splitter.length; index++)
+      p = p.replace(
+        splitter[index],
+        `<strong style="color: unset">${splitter[index].replace(
+          /\*/gm,
+          ""
+        )}</strong>`
       );
-    //console.log(p)
+
+    for (let index = 0; index < italic.length; index++)
+      p = p.replace(italic[index], `<i>${italic[index].replace(/_/g, "")}</i>`);
+
+    for (let index = 0; index < code.length; index++)
+      p = p.replace(
+        code[index],
+        `<code style='background: #ddd; color: black;'>${code[index].replace(
+          /`/g,
+          ""
+        )}</code>`
+      );
+
     $(el).html(p);
   });
 });

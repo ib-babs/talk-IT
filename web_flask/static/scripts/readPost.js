@@ -14,7 +14,6 @@ window.onload = () => {
 
   $.each($("#share-container div a"), function (indexInArray, link) {
     $("#share-container div a")[indexInArray].href = link_url[indexInArray];
-    console.log($("#share-container div a")[indexInArray].href);
   });
 
   $("#stop-btn i").css("color", "grey");
