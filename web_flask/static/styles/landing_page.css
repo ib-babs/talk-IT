@@ -58,8 +58,8 @@ footer a {
     text-align: center;
   }
 }
-@media (width > 768px) {
+/* @media (width > 768px) {
   .talkit {
     font-size: clamp(16pt, calc(14pt - 4px), 18pt);
   }
-}
+} */
