@@ -39,7 +39,7 @@
     <div class="question-body">
       <!-- Options -->
       <div class="question-options-container">
-        <small>{{time_created[loop.index - 1]}}</small>
+        <span>{{time_created[loop.index - 1]}}</span>
         <!-- Read a post -->
         <a
           href="{{url_for('read_post', question_id=question.id)}}"
@@ -50,7 +50,7 @@
       <!-- ======== -->
 
       <!-- Post images container -->
-      <p>{{ question.question }}</p>
+      <p class='post-write-up'>{{ question.question }}</p>
       {% if question.post_images %}
       <div class="post-imgs-div">
         {% for image in question.post_images %}

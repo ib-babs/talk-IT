@@ -199,10 +199,6 @@ a {
   color: black;
   font-size: 1.4em;
 }
-#share-container a,
-#share-container p {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-}
 #share-container {
   text-align: center;
   position: fixed;
@@ -234,9 +230,7 @@ a {
   font-size: 14pt;
   color: black;
 }
-/* #share-outer-div:active #share-container {
-  display: none;
-} */
+
 #share-outer-div {
   position: fixed;
   inset: 0;

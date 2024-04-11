@@ -22,11 +22,11 @@ section {
   grid-column-start: 2;
 }
 .section-4 a {
+  margin-top: 10px;
   color: white;
   background-color: blue;
-  padding: 5px 2em 5px 2em;
+  padding: 10px 2em 10px 2em;
   text-decoration: none;
-  border-radius: 8px;
 }
 
 footer h3 {
