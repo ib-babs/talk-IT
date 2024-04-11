@@ -119,7 +119,6 @@ def ask_question():
                     import os
                     path = Path(
                         f'{os.getcwd()}/web_flask/static/post-images/{question.id}')
-                    print(path)
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
                     img.thumbnail((700, 700))
