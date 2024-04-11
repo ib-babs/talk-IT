@@ -64,6 +64,7 @@ def timeConversion(time_given):
     # Your given date
     given_date = datetime.strptime(
         time_given, "%Y-%m-%d %H:%M:%S.%f")
+    print(time_given, given_date)
 
     # Current date
     current_date = datetime.now()
