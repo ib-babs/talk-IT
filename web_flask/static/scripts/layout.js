@@ -9,7 +9,7 @@ $(document).ready(() => {
         "background:#222; color: white"
       );
       $("#post-title").attr("style", "background:#222;");
-      $('.user-comments a strong').css('color', '#eee')
+      $('.user-username').css('color', '#eee')
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".user-comments").attr(
@@ -24,7 +24,7 @@ $(document).ready(() => {
     } else {
       $("#question_title").attr("style", "background:initial;");
       $(document.body).attr("style", "background:initial; color: initial");
-      $('.user-comments a strong').css('color', 'initial')
+      $('.user-username').css('color', 'initial')
       $(".container").attr(
         "style",
         "background-color:#fff; box-shadow: 0 1px 8px 0.5px #ccc"

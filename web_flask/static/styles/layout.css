@@ -89,6 +89,10 @@ nav ul {
     color: blue;
   }
 }
+.user-username {
+  color: black;
+}
+
 @media screen and (width >= 768px) {
   .fa-equals {
     display: none;

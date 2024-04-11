@@ -39,7 +39,7 @@
       /><br />
       <a
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
-        ><strong>{{user.username}}</strong><br
+        ><strong class='user-username'>{{user.username}}</strong><br
       /></a>
       <div class="question-options-container">
         <span>{{time_created[loop.index - 1]}}</span>

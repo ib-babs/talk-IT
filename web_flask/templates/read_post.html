@@ -61,7 +61,7 @@
     <div class="user-comments">
       <a
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
-        ><strong>{{user.username}}</strong>
+        ><strong class='user-username'>{{user.username}}</strong>
       </a>
       <p id="post-comment" class="post-write-up">{{comment.comment}}</p>
     </div>
