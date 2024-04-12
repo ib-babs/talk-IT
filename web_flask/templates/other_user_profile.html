@@ -19,6 +19,7 @@
     src="data:image/{{user.image_fmt}};base64,{{user.image}}"
     alt="user-image{{cache_id}}"
     id="user-image"
+    class='preview'
   />
   <p>Full Name: <strong>{{user.full_name}}</strong></p>
   <p>Username: <strong>{{user.username}}</strong></p>
@@ -26,34 +27,32 @@
   <p>Gender: <strong>{{user.gender}}</strong></p>
 </div>
 
-<div class="question-card">
-  {% if questions %} {% for question in questions%}
-  <div class="question-container">
+<div class="post-card">
+  {% if posts %} {% for post in posts%}
+  <div class="post-container">
     <!-- Title -->
-    <div class="question-title">
-      <h3>{{ question.title }}</h3>
+    <div class="post-title">
+      <h3>{{ post.title }}</h3>
     </div>
     <!-- === -->
 
     <!-- Post Body -->
-    <div class="question-body">
+    <div class="post-body">
       <!-- Options -->
-      <div class="question-options-container">
+      <div class="post-options-container">
         <span>{{time_created[loop.index - 1]}}</span>
         <!-- Read a post -->
-        <a
-          href="{{url_for('read_post', question_id=question.id)}}"
-          title="Read More"
+        <a href="{{url_for('read_post', post_id=post.id)}}" title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i>
         </a>
       </div>
       <!-- ======== -->
 
       <!-- Post images container -->
-      <p class='post-write-up'>{{ question.question }}</p>
-      {% if question.post_images %}
+      <p class="post-write-up">{{ post.post }}</p>
+      {% if post.post_images %}
       <div class="post-imgs-div">
-        {% for image in question.post_images %}
+        {% for image in post.post_images %}
         <img
           src="{{url_for('static', filename=image)}}"
           alt="{{image}}"
@@ -68,7 +67,7 @@
       <div class="lkes-and-comments-container">
         <span
           ><i class="far fa-thumbs-up" aria-hidden="true"></i>
-          {{question.likes}}</span
+          {{post.likes}}</span
         >
       </div>
       <!-- ======== -->
@@ -76,5 +75,15 @@
   </div>
   {%endfor %} {%else%}
   <div><em>No post.</em></div>
-  {% endif %} {% endblock content %}
+  {% endif %}
 </div>
+<!-- Preview Image -->
+<div class="preview-user-image">
+  <i class="fa fa-remove stop-preview" aria-hidden="true"></i>
+  <img
+    src="data:image/{{user.image_fmt}};base64,{{user.image}}"
+    alt="{{user.username}}{{cache_id}}"
+    id="img-previewing"
+  />
+</div>
+{% endblock content %}

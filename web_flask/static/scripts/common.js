@@ -22,7 +22,7 @@ export function fadeElement(elementID) {
 }
 
 export function shortenPostImages() {
-  let imgsDiv = $(".question-body div.post-imgs-div");
+  let imgsDiv = $(".post-body div.post-imgs-div");
   $.each(imgsDiv, function (indexInArray, imgDiv) {
     let child = imgDiv.children,
       imageRemainder = 0;

@@ -1,20 +1,12 @@
 #read-post-container {
-  padding: 10px;
+  padding: 5px;
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
 }
-#read-post-container h2 {
-  position: sticky;
-  background-color: white;
-  top: 33px;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: bolder;
-  box-sizing: content-box;
-  padding: 5px;
-}
+
 article p {
   word-wrap: break-word;
+  padding: 0 5px;
   white-space: pre-wrap; /* Preserve white space */
 }
 #comments-container {
@@ -54,7 +46,6 @@ section h3 {
   background-color: rgba(210, 210, 210, 0.5);
 }
 .comment-box-form .cmt-txt-area {
-  font-size: 14pt;
   border: solid 1px #ccc;
   border-radius: 4px;
   padding: 5px;
@@ -121,39 +112,32 @@ a {
 .post-imgs-div {
   margin-bottom: 10px;
 }
-#preview-image #back-arrow:hover,
 #prev-next i:hover {
   opacity: 1;
-  transition: opacity 2s linear;
+  transition: opacity 1s linear;
 }
+
 #preview-image #back-arrow {
-  opacity: 0.4;
   position: absolute;
   top: 10px;
   color: #fff;
   background-color: blue;
-  border-radius: 100%;
   border: none;
-  padding: 10px;
-  font-size: 2em;
+  padding: 5px;
+  font-size: 20px;
   z-index: 0;
 }
 #preview-image {
   display: none;
   position: fixed;
+  backdrop-filter: blur(2px);
   place-content: center;
+  background: rgba(50, 50, 50, 0.8);
   inset: 0;
   z-index: 1;
   padding: 10px;
 }
-#preview-image::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(10px);
-  z-index: -1;
-  filter: blur();
-}
+
 #prev-next i {
   opacity: 0.5;
   font-size: 2.5em;
@@ -211,9 +195,7 @@ a {
   font-size: 14pt;
   color: black;
 }
-/* #share-outer-div:active #share-container {
-  display: none;
-} */
+
 #share-outer-div {
   position: fixed;
   inset: 0;
@@ -236,31 +218,29 @@ a {
   display: none;
 }
 
+.img-container {
+  padding: 25px 0 20px 0;
+}
+
+.img-container img{
+  border-radius: 100%;
+  margin-top: -20px;
+  width: clamp(80px, 80px, 90px);
+  float: left;
+  height: clamp(80px, 80px, 90px);
+  margin-right: 8px;
+}
 @media (200px <= width <= 768px) {
-  #post-comment,
-  #post-question {
-    font-size: 13pt;
-  }
   #read-post-container h2 {
     top: 30px;
   }
   #submit-comment-label {
     right: 38px;
   }
-  article p {
-    font-size: 13pt;
-  }
-  article h2 {
-    font-size: 15pt;
-  }
 }
 @media (width > 768px) {
   #read-post-container h2 {
     top: 48px;
-  }
-  article p,
-  #comment-div p {
-    font-size: calc(14pt + 2px);
   }
   #preview-image img {
     width: 70%;

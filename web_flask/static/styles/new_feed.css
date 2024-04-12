@@ -7,16 +7,16 @@
   width: clamp(60px, 33vw, 80px);
   height: clamp(60px, calc(32vw - 4px), 80px);
 }
-.question-body p {
+.post-body p {
   -webkit-line-clamp: 4;
 }
-.question-options-container {
+.post-options-container {
   margin-top: 5px;
   display: block;
   border-bottom: 0;
   padding-bottom: 32px;
 }
-.question-options-container a:first-child {
+.post-options-container a:first-child {
   border-bottom: 0;
   color: #666;
   border: 1px #ccc none;
@@ -28,4 +28,7 @@
   text-decoration: none;
   background: blue;
   color: white;
+}
+.post-imgs-div {
+  margin-top: 1px;
 }

@@ -75,13 +75,13 @@ class DBStorage:
                 return obj
         return None
 
-    def get_questions(self, cls, user_id):
-        """Return all question objects based on user_id"""
+    def get_posts(self, cls, user_id):
+        """Return all post objects based on user_id"""
         objects = self.__session.query(cls).filter(
             cls.user_id == user_id).all()
         if objects:
-            question_objects = [obj for obj in objects]
-            return question_objects
+            post_objects = [obj for obj in objects]
+            return post_objects
         return None
 
     def get_user(self, cls, username):
@@ -94,25 +94,25 @@ class DBStorage:
                 return obj
         return None
 
-    def get_other_question(self, cls, id):
-        """Return all question object without the current_user's or `None` if not found"""
+    def get_other_post(self, cls, id):
+        """Return all post object without the current_user's or `None` if not found"""
         objects = self.__session.query(Post, cls).join(cls).filter(
             cls.id != id).all()
         if objects:
             return objects
         return None
 
-    def get_all_questions_and_users(self, cls):
-        """Return all question or `None` if not found"""
+    def get_all_posts_and_users(self, cls):
+        """Return all post or `None` if not found"""
         objects = self.__session.query(Post, cls).join(cls).all()
         return objects or None
 
-    def get_comments(self, cls, question_id):
+    def get_comments(self, cls, post_id):
         """Return all comment object or `None` if not found"""
         objects = self.__session.query(User, cls).\
             join(Post, cls.post_id == Post.id).\
             join(User, cls.user_id == User.id).filter(
-            cls.post_id == question_id).all()
+            cls.post_id == post_id).all()
         if objects:
             return objects
         return None

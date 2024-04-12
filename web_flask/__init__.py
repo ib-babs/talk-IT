@@ -62,38 +62,35 @@ def timeConversion(time_given):
     from datetime import datetime
 
     # Your given date
-    given_date = datetime.strptime(
-        time_given, "%Y-%m-%d %H:%M:%S.%f")
-    print(time_given, given_date)
+    given_date = datetime.strptime(time_given, "%Y-%m-%d %H:%M:%S.%f")
 
     # Current date
     current_date = datetime.now()
 
-    # Calculate the difference in days
-    difference = current_date - given_date
+    # Calculate the difference in seconds
+    difference = (current_date - given_date).total_seconds()
 
-    days_ago = difference.days
-    sec_ago = difference.seconds
-    # Convert seconds to minutes
-    mins_ago = sec_ago // 60
-    # Convert minutes to hours
-    hours_ago = (mins_ago // 60) % 24
+    # Define the time intervals in seconds
+    intervals = {
+        'yr': 365 * 24 * 60 * 60,
+        'day': 24 * 60 * 60,
+        'hr': 60 * 60,
+        'min': 60,
+        'second': 1
+    }
 
-    find_time = f"{days_ago}{'days' if days_ago > 1 else 'day'} ago"
-    if days_ago < 1:
-        # Hour
-        find_time = f"{hours_ago}{'hrs' if hours_ago > 1 else 'hr'} ago"
-    if hours_ago < 1:
-        # Minute
-        find_time = f"{mins_ago}{'mins' if mins_ago > 1 else 'min'} ago"
-    if mins_ago < 1:
-        # Second
-        find_time = 'Just now'
-    if sec_ago > 60 and hours_ago < 1:
-        # Go back to min
-        find_time = f"{mins_ago}{'mins' if mins_ago > 1 else 'min'} ago"
-    if days_ago > 365:
-        # Year
-        find_time = f"{days_ago//365}{'yrs' if days_ago//365 > 1 else 'yr'} ago"
+    # Initialize an empty list to store the time ago components
+    time_components = []
 
+    # Calculate the time ago for each interval
+    for name, count in intervals.items():
+        value = int(difference // count)
+        if value:
+            time_components.append(
+                f"{value} {'year' if name == 'year' else name + 's'}" if name == 'year' else f"{value}{name+'s' if value > 1 else name}")
+            difference %= count
+
+    # Construct the time ago string
+    find_time = ''.join(time_components[0]) + \
+        ' ago' if time_components else 'Just now'
     return find_time

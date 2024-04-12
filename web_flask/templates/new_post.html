@@ -15,23 +15,22 @@
 <div id="new-post">
   <h1>Make a new post</h1>
   <form
-    action="{{url_for('ask_question')}}"
+    action="{{url_for('post')}}"
     method="post"
     id="make_post"
     enctype="multipart/form-data"
   >
-    {{ ask_question.hidden_tag() }}
-    <div>{{ ask_question.title }}</div>
-    <div>{{ ask_question.question }}</div>
+    {{ post.hidden_tag() }}
+    <div>{{ post.post }}</div>
     <label for="post-images"
       ><i class="fas fa-camera" aria-hidden="true"></i> Add image</label
     >
     <em id="post-img-length"></em>
-    <div>{{ ask_question.post_images }}</div>
-    {% if ask_question.errors.post_images %}
-    <p><strong style="color: red;">Error: </strong>{{ask_question.errors.post_images[1]}}</p>
+    <div>{{ post.post_images }}</div>
+    {% if post.errors.post_images %}
+    <p><strong style="color: red;">Error: </strong>{{post.errors.post_images[1]}}</p>
     {% endif %}
-    <div id="post-btn-div">{{ ask_question.post }}</div>
+    <div id="post-btn-div">{{ post.submit_post }}</div>
   </form>
 </div>
 {% endblock %}

@@ -5,8 +5,7 @@ from models.base_model import BaseModel, Base
 
 class Post(BaseModel, Base):
     __tablename__ = 'posts'
-    title = Column(Text, nullable=False)
-    question = Column(Text, nullable=False)
+    post = Column(Text, nullable=False)
     likes = Column(Integer, default=0)
     user_id = Column(String(45), ForeignKey('users.id'),
                      nullable=False)

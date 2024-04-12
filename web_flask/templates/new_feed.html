@@ -23,15 +23,15 @@
     <p><strong>{{user.username}}</strong></p>
   </div>
   <div id="edit-and-post">
-    <a href="{{url_for('ask_question') }}">New post</a>
+    <a href="{{url_for('post') }}">New post</a>
   </div>
 </div>
 
-<div class="question-card">
-  {% if questions %} {% for (question, user) in questions %}
-  <div class="'question-container">
-    <div class="question-title"><h3>{{ question.title }}</h3></div>
-    <div class="question-body">
+<div class="post-card">
+  {% if posts %} {% for (post, user) in posts %}
+  <div class="'post-container">
+    <div class="post-title"><h3>{{ post.title }}</h3></div>
+    <div class="post-body">
       <img
         id="new-feed-user-image"
         src="data:image/jpg;base64,{{ user.image}}"
@@ -41,19 +41,19 @@
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
         ><strong class="user-username">{{user.username}}</strong><br
       /></a>
-      <div class="question-options-container">
+      <div class="post-options-container">
         <span>{{time_created[loop.index - 1]}}</span>
         <a
-          href="{{url_for('read_post', question_id=question.id)}}"
+          href="{{url_for('read_post', post_id=post.id)}}"
           title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i
         ></a>
       </div>
-      <p class="post-write-up">{{ question.question }}</p>
+      <p class="post-write-up">{{ post.post }}</p>
       <!-- Post images container -->
-      {% if question.post_images %}
+      {% if post.post_images %}
       <div class="post-imgs-div">
-        {% for image in question.post_images %}
+        {% for image in post.post_images %}
         <img
           src="{{url_for('static', filename=image)}}"
           alt="{{image}}"
@@ -72,7 +72,7 @@
             ;
           ></i>
           <span>
-            {{question.likes}} {% if question.likes > 1%} Likes {%else %} Like
+            {{post.likes}} {% if post.likes > 1%} Likes {%else %} Like
             {% endif %}</span
           ></span
         >

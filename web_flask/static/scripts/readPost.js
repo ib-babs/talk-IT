@@ -60,7 +60,7 @@ window.onload = () => {
   };
 
   // Confirm post deletion
-  $.each($(".delete-question-btn"), function (indexInArray, deleteBtn) {
+  $.each($(".delete-post-btn"), function (indexInArray, deleteBtn) {
     $(deleteBtn).click(() => {
       return confirm("Are you sure about deleting this comment?")
         ? true
@@ -75,10 +75,7 @@ window.onload = () => {
   $.each($(".post-imgs"), function (indexInArray, img) {
     $(img).click(function () {
       trackIndex = indexInArray;
-      prevImgDiv.attr(
-        "style",
-        `display:block; background: url('${img.src}') no-repeat;  background-size: cover; `
-      );
+      prevImgDiv.attr("style", "display:block");
       $(prevImg).attr("src", img.src);
 
       // Previous image
@@ -86,10 +83,6 @@ window.onload = () => {
         if (trackIndex > 0) {
           $("#next").css("color", "blue");
           trackIndex -= 1;
-          prevImgDiv.css(
-            "background",
-            `url('${$(".post-imgs")[trackIndex].src}')`
-          );
           $(prevImg).attr("src", $(".post-imgs")[trackIndex].src);
         } else $("#prev").css("color", "grey");
       });
@@ -99,10 +92,6 @@ window.onload = () => {
         if (trackIndex < $(".post-imgs").length - 1) {
           $("#prev").css("color", "blue");
           trackIndex += 1;
-          prevImgDiv.css(
-            "background",
-            `url('${$(".post-imgs")[trackIndex].src}')`
-          );
           $(prevImg).attr("src", $(".post-imgs")[trackIndex].src);
         } else $("#next").css("color", "grey");
       });

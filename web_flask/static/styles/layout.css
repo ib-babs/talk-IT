@@ -1,7 +1,11 @@
 body {
   margin: 0;
-  /* font-size: clamp(15pt, calc(14pt - 4px), 18pt); */
 }
+p,
+textarea {
+  font-size: 120%;
+}
+
 header {
   position: sticky;
   top: 0;
@@ -10,6 +14,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+#page-brand i {
+  font-size: 18pt;
+  margin-right: -10px;
 }
 #page-brand {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -65,10 +73,25 @@ nav ul {
   backdrop-filter: blur(2px);
   display: none;
 }
+.preview-user-image i {
+  position: fixed;
+  top: 10%;
+  right: 10px;
+  font-size: 20px;
+  background-color: blue;
+  color: white;
+  padding: 5px;
+}
+
+.preview-user-image {
+  position: fixed;
+  inset: 0;
+  background: rgba(100, 100, 100, 0.5);
+  display: none;
+  place-content: center;
+}
+
 @media (200px <= width < 768px) {
-  #page-brand {
-    font-size: 16pt;
-  }
   .nav-link {
     color: rgb(237, 226, 226);
   }

@@ -18,7 +18,7 @@ class User(BaseModel, Base, UserMixin):
     image = Column(Text)
     image_fmt = Column(Text)
     gender = Column(String(20), nullable=True)
-    question_id = relationship(
+    post_id = relationship(
         'Post', backref='user',  cascade="all, delete")
     comment_id = relationship(
         'Comment', backref='user',  cascade="all, delete")

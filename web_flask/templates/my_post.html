@@ -12,39 +12,39 @@
       src="data:image/{{jpg}};base64,{{ user.image }}"
       alt="{{info.username}}{{cache_id}}"
     />
-    <p><strong class'user-username'>{{info.username}}</strong></p>
+    <strong class'user-username'>{{info.username}}</strong>
   </div>
   <div id="edit-and-post">
-    <a href="{{url_for('ask_question') }}">New post</a>
+    <a href="{{url_for('post') }}">New post</a>
   </div>
 </div>
 
-<div class="question-card">
-  {% if questions %} {% for question in questions%}
-  <div class="question-container">
+<div class="post-card">
+  {% if posts %} {% for post in posts%}
+  <div class="post-container">
     <!-- Title -->
-    <div class="question-title">
-      <h3>{{ question.title }}</h3>
+    <div class="post-title">
+      <h3>{{ post.title }}</h3>
     </div>
     <!-- === -->
 
     <!-- Post Body -->
-    <div class="question-body">
+    <div class="post-body">
       <!-- Options -->
-      <div class="question-options-container">
-        <small>{{time_created[loop.index - 1]}}</small>
+      <div class="post-options-container">
+        <span>{{time_created[loop.index - 1]}}</span>
         <!-- Read a post -->
         <a
-          href="{{url_for('read_post', question_id=question.id)}}"
+          href="{{url_for('read_post', post_id=post.id)}}"
           title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i>
         </a>
         <!-- Edit a post -->
-        <a href="{{ url_for('edit', question_id=question.id)}}" title="Edit"
+        <a href="{{ url_for('edit', post_id=post.id)}}" title="Edit"
           ><i class="fa fa-edit" aria-hidden="true"></i
         ></a>
         <!-- Delete post -->
-        <button href="" class="delete-question-btn" onclick="return false;">
+        <button href="" class="delete-post-btn" onclick="return false;">
           <i class="fa fa-remove" aria-hidden="true"></i>
         </button>
         <div class="modal-container">
@@ -53,7 +53,7 @@
             <div>
               <button type="button" class="delete-yes-btn">
                 <a
-                  href="{{ url_for('delete_post', question_id=question.id)}}"
+                  href="{{ url_for('delete_post', post_id=post.id)}}"
                   class="del-link"
                   >Yes</a
                 >
@@ -67,10 +67,10 @@
       <!-- ======== -->
 
       <!-- Post images container -->
-      <p class='post-write-up'>{{ question.question }}</p>
-      {% if question.post_images %}
+      <p class='post-write-up'>{{ post.post }}</p>
+      {% if post.post_images %}
       <div class="post-imgs-div">
-        {% for image in question.post_images %}
+        {% for image in post.post_images %}
         <img
           src="{{url_for('static', filename=image)}}"
           alt="{{image}}"
@@ -85,7 +85,7 @@
       <div class="lkes-and-comments-container">
         <span
           ><i class="far fa-thumbs-up" aria-hidden="true"></i>
-          <span>{{question.likes}} {% if question.likes > 1%} Likes {%else %} Like {% endif %}</span>
+          <span>{{post.likes}} {% if post.likes > 1%} Likes {%else %} Like {% endif %}</span>
             </span
         >
       </div>

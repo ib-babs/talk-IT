@@ -2,21 +2,27 @@ body {
   min-height: 100vh;
   display: grid;
   place-content: center;
-  background: url("../image/alex-knight-2EJCSULRwC8-unsplash.jpg") no-repeat;
-  background-size: cover;
-  background-attachment: scroll;
+  /* background: url("../image/alex-knight-2EJCSULRwC8-unsplash.jpg") no-repeat; */
+  /* background-size: cover;
+  background-attachment: scroll; */
+  background-color: #202024;
   font-size: larger;
 }
 #c-pwd-shown,
 #pwd-show {
   font-size: 0.7em;
+  color: white;
 }
 
+.container *{
+  padding: 5px 0;
+}
 .container {
-margin-left: 10px;
-margin-right: 10px;
-  padding: 0.5em 2em;
-  border-radius: 0 0 10px 10px;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  padding: 0.5em 0.6em;
   box-shadow: 0 3px 15px 2px rgb(1, 17, 1);
 }
 i,
@@ -27,13 +33,15 @@ label#gender {
 input[type="submit"] {
   color: white;
   background: blue;
+  font-size: large;
   display: grid;
   margin: auto;
   padding: 3px 50px;
   border: 0;
 }
-.container h3 {
-  text-align: center;
+#account-success h3 {
+  margin: 0;
+  text-align: left;
   color: whitesmoke;
 }
 input[type="text"],
@@ -42,7 +50,7 @@ input[type="password"] {
   border: 0;
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 4px;
-  padding: 0.3em;
+  padding: 0.4em 1.3em;
   outline: none;
 }
 .register_field,
@@ -53,12 +61,8 @@ input[type="password"] {
 #account-success,
 #account-curve {
   color: white;
-  text-align: center;
   padding: 0.4em;
   background: blue;
-  border-radius: 10px 10px 0 0;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 #goto-signup-page {
@@ -74,28 +78,22 @@ input[type="password"] {
 #forgot-pwd {
   color: #ccc;
 }
-.login-form-error{
+.login-form-error {
   font-size: 12pt;
   color: red;
   margin: 4px;
 }
 
 @media (200px <= width <= 768px) {
-  body{
-    background-position-x: center;
-  }
+ 
   .container {
-    margin-left: 10px;
-    margin-right: 10px;
-      padding: 0.5em 1em;
-      border-radius: 0 0 10px 10px;
-      box-shadow: 0 3px 15px 2px rgb(1, 17, 1);
-    }
+    box-shadow: 0 3px 15px 2px rgb(1, 17, 1);
+  }
 }
 @media (width > 768px) {
-  body {
-    /* background-position-x: center;
-    background-position-y: top; */
-    background-attachment: fixed;
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    padding: 0.4em 2.5em;
   }
 }

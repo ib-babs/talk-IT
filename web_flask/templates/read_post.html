@@ -4,17 +4,31 @@
 <script src="../static/scripts/readPost.js"></script>
 <div id="read-post-container">
   <article>
-    <h2 id="post-title">{{ post.title}}</h2>
-    <p id="post-question" class="post-write-up">{{ post.question }}</p>
-
+    {% if post_author %}
+    <!-- Author detail -->
+    <div class="img-container">
+      <img
+        id="user-image"
+        src="data:image/{{jpg}};base64,{{ post_author.image }}"
+        alt="{{post_author.username}}{{cache_id}}"
+        />
+        <a href="{{url_for('other_user_profile', other_user_username=post_author.username)}}" 
+        class='user-username'>
+          <strong>{{post_author.username}}</strong>
+        </a>
+        <br>
+        <span>{{post_time_created}}</span>
+      </div>
+    {% endif %}
+    <p id="post-post" class="post-write-up">{{ post.post }}</p>
     <!-- Post images container -->
     {% if post.post_images %}
     <div class="post-imgs-div">
       {% for image in post.post_images %}
       <img
-        src="{{url_for('static', filename=image)}}"
-        alt="{{image}}"
-        class="post-imgs"
+      src="{{url_for('static', filename=image)}}"
+      alt="{{image}}"
+      class="post-imgs"
       />
       {% endfor %}
     </div>
@@ -25,7 +39,7 @@
         <i class="fa fa-comment" aria-hidden="true"></i> {{total_comment}}</span
       >
       <form
-        action="{{url_for('read_post', question_id=post.id)}}"
+        action="{{url_for('read_post', post_id=post.id)}}"
         method="post"
         name="like"
         ,
@@ -70,9 +84,9 @@
   <div id="comment-options">
     <span>{{time_created[loop.index - 1]}}</span>
     {% if comment.user_id == user_id %}
-    <a href="{{url_for('edit_comment', answer_id=comment.id)}}">Edit</a>
+    <a href="{{url_for('edit_comment', comment_id=comment.id)}}">Edit</a>
     <a
-      class="delete-question-btn"
+      class="delete-post-btn"
       href="{{url_for('delete_comment', comment_id=comment.id)}}"
       style="color: red"
       >Delete</a
@@ -88,7 +102,7 @@
 
   <div class="comment-box-form">
     <form
-      action="{{url_for('read_post', question_id=question_id)}}"
+      action="{{url_for('read_post', post_id=post_id)}}"
       ,
       id="comment-form"
       method="post"
@@ -104,7 +118,7 @@
 
 <!-- Preview Image -->
 <div id="preview-image">
-  <i class="fa fa-arrow-alt-circle-left" aria-hidden="true" id="back-arrow"></i>
+  <i class="fa fa-remove" aria-hidden="true" id="back-arrow"></i>
   <img src="" alt="" />
   <div id="prev-next">
     <i class="fa fa-chevron-circle-left" aria-hidden="true" id="prev"></i>

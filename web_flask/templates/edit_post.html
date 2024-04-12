@@ -3,14 +3,14 @@
 <div id='edit-post'>
 <h1>Edit a post</h1>
 <form
-  action="{{url_for('edit', question_id=question_id)}}"
+  action="{{url_for('edit', post_id=post_id)}}"
   method="post"
   enctype="application/x-www-form-urlencoded"
 >
   {{ edit_form.hidden_tag() }}
   
   <div>{{ edit_form.title}}</div>
-  <div>{{ edit_form.question }}</div>
+  <div>{{ edit_form.post }}</div>
   <div id="post-btn-div">{{ edit_form.done }}</div>
 </form>
 </div>

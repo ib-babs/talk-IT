@@ -2,7 +2,7 @@
 from flask import flash, render_template, url_for, redirect, session, request, abort
 from forms.login_resgistration import (RegistrationForm, LoginForm,
                                        UpdateProfile)
-from forms.question_form import QuestionForm, EditPostForm
+from forms.post_form import PostForm, EditPostForm
 from forms.reset_forms import RequestResetForm, ResetPasswordForm
 from web_flask import (app, save_image_to_db, login_manager,
                        send_reset_email, Image, BytesIO)
@@ -13,7 +13,7 @@ from pathlib import Path
 from uuid import uuid4
 from models import storage
 from flask_login import login_required, current_user, login_user, logout_user
-from forms.answer_form import CommentForm, EditCommentForm, LikeForm
+from forms.comment_form import CommentForm, EditCommentForm, LikeForm
 from datetime import timedelta
 from dotenv import load_dotenv
 
@@ -97,71 +97,69 @@ def login():
 
 @app.route('/new_post', methods=['GET', 'POST'])
 @login_required
-def ask_question():
+def post():
     '''Creating a new post'''
     user_info = current_user.to_dict()
-    ask_question = QuestionForm()
+    post_form = PostForm()
 
-    if ask_question.validate_on_submit():
-        question_detail = {
+    if post_form.validate_on_submit():
+        post_detail = {
             'user_id': user_info['id'],
-            'title': ask_question.title.data,
-            'question': ask_question.question.data,
+            'post': post_form.post.data,
         }
         images = request.files.getlist('post-images')
-        question = Post(**question_detail)
+        post_obj = Post(**post_detail)
         # Post images
         if images and images[0].filename:
-            question.post_images = [
-                f'post-images/{question.id}/{image.filename}' for image in images]
+            post.post_images = [
+                f'post-images/{post.id}/{image.filename}' for image in images]
             for image in images:
                 try:
                     import os
                     path = Path(
-                        f'{os.getcwd()}/web_flask/static/post-images/{question.id}')
+                        f'{os.getcwd()}/web_flask/static/post-images/{post.id}')
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
                     img.thumbnail((700, 700))
                     img.save(path.joinpath(image.filename))
                 except Exception as e:
                     print(e)
-        storage.new(question)
+        storage.new(post_obj)
         storage.save()
         return redirect(url_for('my_post'))
-    return render_template('new_post.html', ask_question=ask_question, nav=True, a=True)
+    return render_template('new_post.html', post=post_form, nav=True, a=True)
 
 
-@app.route('/edit/<question_id>', methods=['GET', 'POST'])
+@app.route('/edit/<post_id>', methods=['GET', 'POST'])
 @login_required
-def edit(question_id):
+def edit(post_id):
     '''Editing a post based on post_id'''
     edit_form = EditPostForm()
-    question_object = storage.get(Post, question_id)
-    if question_object is None:
+    post_object = storage.get(Post, post_id)
+    if post_object is None:
         return abort(404)
-    question_object_dict = question_object.to_dict()
-    edit_form.title.data = question_object_dict['title']
-    edit_form.question.data = question_object_dict['question']
+    post_object_dict = post_object.to_dict()
+    edit_form.post.data = post_object_dict['post']
     if edit_form.validate_on_submit():
-        question_object.title = request.form['edit-post-title']
-        question_object.question = request.form['edit-question-area']
+        post_object.post = request.form['edit-post-area']
         storage.save()
         return redirect(url_for('my_post'))
-    return render_template('edit_post.html', edit_form=edit_form, question_id=question_id, nav=True, a=True)
+    return render_template('edit_post.html', edit_form=edit_form, post_id=post_id, nav=True, a=True)
 
 
-@app.route('/read_post/<question_id>', methods=['GET', 'POST'])
-def read_post(question_id):
+@app.route('/read_post/<post_id>', methods=['GET', 'POST'])
+def read_post(post_id):
     '''Read a post based on post_id selected/clicked'''
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
 
-    question_object = storage.get(Post, question_id)
-
-    if question_object is None:
+    post_object = storage.get(Post, post_id)
+    post_author = storage.get(User, post_object.user_id)
+    post_time_created = post_object.to_dict()['created_at_time']
+    if post_object is None:
         return abort(404)
-    session['question_id'] = question_object.id
-    comments = storage.get_comments(Comment, question_id)
+    session['post_id'] = post_object.id
+    comments = storage.get_comments(Comment, post_id)
     sorted_comments = []
     time_created = []
     if comments:
@@ -179,34 +177,34 @@ def read_post(question_id):
         # Take comment
         if 'comment' in request.form:
             if comment_form.validate_on_submit():
-                answer_detail = {
+                comment_detail = {
                     'user_id': current_user.id,
-                    'post_id': question_id,
+                    'post_id': post_id,
                     'comment': comment_form.comment.data,
                     'like': 0
                 }
-                answer_obj = Comment(**answer_detail)
-                storage.new(answer_obj)
+                comment_obj = Comment(**comment_detail)
+                storage.new(comment_obj)
                 storage.save()
-                return redirect(url_for('read_post', question_id=question_id))
+                return redirect(url_for('read_post', post_id=post_id))
         # Take likes
         if 'like' in request.form:
             if form.validate():
-                if not question_object.has_liked:
-                    question_object.likes += 1
-                    question_object.has_liked = True
+                if not post_object.has_liked:
+                    post_object.likes += 1
+                    post_object.has_liked = True
                 else:
-                    question_object.likes -= 1
-                    question_object.has_liked = False
+                    post_object.likes -= 1
+                    post_object.has_liked = False
                 storage.save()
-                return redirect(url_for('read_post', question_id=question_id))
+                return redirect(url_for('read_post', post_id=post_id))
 
-    total_comment = storage.count_comment(question_id)
+    total_comment = storage.count_comment(post_id)
 
-    return render_template('read_post.html', post=question_object,
-                           comments=sorted_comments, nav=True, a=True, comment_form=comment_form, question_id=question_id, user_id=user_id,
+    return render_template('read_post.html', post=post_object,
+                           comments=sorted_comments, nav=True, a=True, comment_form=comment_form, post_id=post_id, user_id=user_id,
                            cache_id=uuid4(), read=True, total_comment=total_comment, like=form, title='Reading...',
-                           time_created=time_created)
+                           time_created=time_created, post_author=post_author, post_time_created=post_time_created)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -249,21 +247,21 @@ def new_feed():
     '''Other users posts'''
     if not current_user.is_authenticated:
         return redirect(url_for('home'))
-    all_questions = storage.all(Post)
-    gt = storage.get_other_question(User, current_user.id)
+    all_posts = storage.all(Post)
+    gt = storage.get_other_post(User, current_user.id)
     user = storage.get(User, current_user.id)
-    loader = [v.to_dict() for v in all_questions.values() if v.to_dict()['user_id'] !=
+    loader = [v.to_dict() for v in all_posts.values() if v.to_dict()['user_id'] !=
               current_user.id or []]
-    sorted_questions = []
+    sorted_posts = []
     time_created = []
     if gt:
-        sorted_questions = sorted(
+        sorted_posts = sorted(
             [q for q in gt], key=lambda x: x[0].created_at, reverse=True)
         time_created = [a[0].to_dict()['created_at_time']
-                        for a in sorted_questions]
+                        for a in sorted_posts]
     get_users = [storage.get(User, user['user_id'])
                  for user in loader or []]
-    return render_template('new_feed.html', questions=sorted_questions, nav=True, a=True, users=get_users, user=user, title='New Feed', time_created=time_created)
+    return render_template('new_feed.html', posts=sorted_posts, nav=True, a=True, users=get_users, user=user, title='New Feed', time_created=time_created)
 
 
 # My posts
@@ -272,19 +270,19 @@ def new_feed():
 def my_post():
     '''Current user post excluding other users posts'''
     user = storage.get_user(User, current_user.username)
-    loader = storage.get_questions(Post, current_user.id)
+    loader = storage.get_posts(Post, current_user.id)
 
-    # Sorting question in an ascending order
-    load_questions = [obj.to_dict() for obj in loader or []]
-    sorted_questions = []
+    # Sorting post in an ascending order
+    load_posts = [obj.to_dict() for obj in loader or []]
+    sorted_posts = []
     time_created = []
-    if load_questions:
-        sorted_questions = sorted(
-            load_questions, key=lambda x: x['created_at'], reverse=True)
-        time_created = [a['created_at_time'] for a in sorted_questions]
+    if load_posts:
+        sorted_posts = sorted(
+            load_posts, key=lambda x: x['created_at'], reverse=True)
+        time_created = [a['created_at_time'] for a in sorted_posts]
 
     return render_template('my_post.html', info=current_user, user=user, cache_id=uuid4(),
-                           title='My Post', questions=sorted_questions, nav=True, a=True,
+                           title='My Post', posts=sorted_posts, nav=True, a=True,
                            time_created=time_created)
 
 
@@ -299,23 +297,23 @@ def profile():
     return render_template('profile.html', nav=True, a=True,  user=user, logout=logout, title='Profile')
 
 
-@app.route('/edit_comment/<answer_id>', methods=['GET', 'POST'])
+@app.route('/edit_comment/<comment_id>', methods=['GET', 'POST'])
 @login_required
-def edit_comment(answer_id):
+def edit_comment(comment_id):
     '''Edit a comment made by the current user'''
     edit_cmt = EditCommentForm()
-    answer_obj = storage.get(Comment, answer_id)
-    if answer_obj is None:
+    comment_obj = storage.get(Comment, comment_id)
+    if comment_obj is None:
         return abort(404)
 
-    edit_cmt.edit_comment.data = answer_obj.comment
+    edit_cmt.edit_comment.data = comment_obj.comment
     if 'submit-edit-btn' in request.form:
         if edit_cmt.validate_on_submit():
-            answer_obj.comment = request.form['edit-comment']
+            comment_obj.comment = request.form['edit-comment']
             storage.save()
-            return redirect(url_for('read_post', question_id=answer_obj.post_id))
+            return redirect(url_for('read_post', post_id=comment_obj.post_id))
 
-    return render_template('edit_comment.html', edit=edit_cmt, answer_id=answer_id, nav=True, a=True, cache_id=uuid4())
+    return render_template('edit_comment.html', edit=edit_cmt, comment_id=comment_id, nav=True, a=True, cache_id=uuid4())
 
 
 @app.route('/delete-comment/<comment_id>', methods=['DELETE', 'POST', 'GET'])
@@ -327,20 +325,20 @@ def delete_comment(comment_id):
         return abort(404)
     storage.delete(comment)
     storage.save()
-    return redirect(url_for('read_post', question_id=session['question_id']))
+    return redirect(url_for('read_post', post_id=session['post_id']))
 
 
-@app.route('/delete-question/<question_id>', methods=['DELETE', 'POST', 'GET'])
+@app.route('/delete-post/<post_id>', methods=['DELETE', 'POST', 'GET'])
 @login_required
-def delete_post(question_id):
+def delete_post(post_id):
     '''Allow user to delete a post based on the post_id'''
     import shutil
-    question_obj = storage.get(Post, question_id)
-    if question_obj is None:
+    post_obj = storage.get(Post, post_id)
+    if post_obj is None:
         return abort(404)
-    storage.delete(question_obj)
+    storage.delete(post_obj)
     storage.save()
-    path = Path(f'web_flask/static/post-images/{question_id}')
+    path = Path(f'web_flask/static/post-images/{post_id}')
     if path.exists() and path.is_dir():
         shutil.rmtree(path)
     return redirect(url_for('my_post'))
@@ -432,20 +430,20 @@ def other_user_profile(other_user_username):
     other_user = storage.get_user(User, other_user_username)
     if other_user is None:
         return abort(404)
-    loader = storage.get_questions(Post, other_user.id)
+    loader = storage.get_posts(Post, other_user.id)
 
-    # Sorting question in an ascending order
-    load_questions = [obj.to_dict() for obj in loader or []]
-    sorted_questions = []
+    # Sorting post in an ascending order
+    load_posts = [obj.to_dict() for obj in loader or []]
+    sorted_posts = []
     time_created = []
-    if load_questions:
-        sorted_questions = sorted(
-            load_questions, key=lambda x: x['created_at'], reverse=True)
+    if load_posts:
+        sorted_posts = sorted(
+            load_posts, key=lambda x: x['created_at'], reverse=True)
         time_created = [a['created_at_time']
-                        for a in sorted_questions]
+                        for a in sorted_posts]
 
     return render_template('other_user_profile.html', user=other_user, other_u_username=other_user_username, nav=True, title=f'{other_user_username} Profile', cache_id=uuid4(),
-                           questions=sorted_questions, a=True, time_created=time_created)
+                           posts=sorted_posts, a=True, time_created=time_created)
 
 
 if __name__ == '__main__':

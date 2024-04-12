@@ -3,39 +3,33 @@ $(document).ready(() => {
     navLink = $("nav");
   function theme(property) {
     if (property == "dark") {
-      $(document.body).attr("style", "background:#222; color: white");
-      $("textarea,#question_title,#edit-post-title").attr(
+      $(document.body).attr("style", "background:#111; color: white");
+      $("textarea,#post_title,#edit-post-title").attr(
         "style",
         "background:#222; color: white"
       );
       $("#post-title").attr("style", "background:#222;");
-      $('.user-username').css('color', '#eee')
+      $(".user-username").css("color", "#eee");
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
-      $(".user-comments").attr(
-        "style",
-        "background: rgb(55, 55, 55);"
-      );
-      $(".question-body").css("box-shadow", "0 3px 10px 0.3px #000");
+      $(".user-comments").attr("style", "background: #222");
+      $(".post-body").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".container").attr(
         "style",
         "background-color:#222; box-shadow: 0 1px 8px 0.5px #000"
       );
     } else {
-      $("#question_title").attr("style", "background:initial;");
+      $("#post_title").attr("style", "background:initial;");
       $(document.body).attr("style", "background:initial; color: initial");
-      $('.user-username').css('color', 'initial')
+      $(".user-username").css("color", "initial");
       $(".container").attr(
         "style",
         "background-color:#fff; box-shadow: 0 1px 8px 0.5px #ccc"
       );
-      $(".question-body").css("box-shadow", "0 3px 10px 0.3px #ccc");
+      $(".post-body").css("box-shadow", "0 3px 10px 0.3px #ccc");
       $("header").css("box-shadow", "unset");
       $("footer").css("box-shadow", "unset");
-      $(".user-comments").attr(
-        "style",
-        "background:rgba(210, 210, 210, 0.5)"
-      );
+      $(".user-comments").attr("style", "background:rgba(210, 210, 210, 0.5)");
       $("#post-title").attr("style", "background:white");
       $("textarea").attr("style", "background:white; color: initial");
     }
@@ -122,5 +116,11 @@ $(document).ready(() => {
       );
 
     $(el).html(p);
+  });
+  $(".preview").click(() => {
+    $(".preview-user-image").css("display", "grid");
+  });
+  $(".stop-preview").click(() => {
+    $(".preview-user-image").css("display", "none");
   });
 });
