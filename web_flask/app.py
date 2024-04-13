@@ -11,6 +11,7 @@ from models.post import Post
 from models.comment import Comment
 from pathlib import Path
 from uuid import uuid4
+import os
 from models import storage
 from flask_login import login_required, current_user, login_user, logout_user
 from forms.comment_form import CommentForm, EditCommentForm, LikeForm
@@ -115,7 +116,7 @@ def post():
                 f'post-images/{post_obj.id}/{image.filename}' for image in images]
             for image in images:
                 try:
-                    import os
+
                     path = Path(
                         f'{os.getcwd()}/talk-IT/web_flask/static/post-images/{post_obj.id}')
                     path.mkdir(mode=511, exist_ok=True)
@@ -338,7 +339,8 @@ def delete_post(post_id):
         return abort(404)
     storage.delete(post_obj)
     storage.save()
-    path = Path(f'web_flask/static/post-images/{post_id}')
+    path = Path(
+        f'{os.getcwd()}/talk-IT/web_flask/static/post-images/{post_id}')
     if path.exists() and path.is_dir():
         shutil.rmtree(path)
     return redirect(url_for('my_post'))
