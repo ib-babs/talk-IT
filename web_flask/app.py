@@ -118,7 +118,7 @@ def post():
                 try:
 
                     path = Path(
-                        f'{os.getcwd()}/web_flask/static/post-images/{post_obj.id}')
+                        f'{os.getcwd()}/talk-IT/web_flask/static/post-images/{post_obj.id}')
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
                     img.thumbnail((700, 700))
@@ -340,7 +340,7 @@ def delete_post(post_id):
     storage.delete(post_obj)
     storage.save()
     path = Path(
-        f'{os.getcwd()}/web_flask/static/post-images/{post_id}')
+        f'{os.getcwd()}/talk-IT/web_flask/static/post-images/{post_id}')
     if path.exists() and path.is_dir():
         shutil.rmtree(path)
     return redirect(url_for('my_post'))
