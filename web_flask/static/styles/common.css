@@ -54,9 +54,9 @@ input[type="password"] {
   border-radius: 20px;
   padding: 8px;
 }
-/* #forgot-pwd {
-  color: #ccc;
-} */
+#remeber-div{
+  text-align: center;
+}
 .login-form-error {
   font-size: 12pt;
   color: red;
@@ -67,7 +67,7 @@ input[type="password"] {
   display: grid;
   place-content: center;
   padding: 5px;
-  background-color: #eee;
+  background-color: #fffefe;
 }
 
 @media (200px <= width <= 768px) {

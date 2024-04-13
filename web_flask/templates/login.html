@@ -37,7 +37,9 @@
       <p class="login-form-error">{{login.errors.username[0]}}</p>
       {% endif %}
     </div>
-    {{ login.remember_me }} {{ login.remember_me.label }}
+    <div id="remeber-div">
+      {{ login.remember_me }} {{ login.remember_me.label }}
+    </div>
     <br />
     <a href="{{url_for('reset_request')}}" id="forgot-pwd">Forgot password?</a>
     <div class="login_field">{{ login.sign_in}}</div>

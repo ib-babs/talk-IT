@@ -10,13 +10,27 @@
     {% endif %}
     <link rel="stylesheet" href="../static/image/css/all.css" />
     <link
-    rel="shortcut icon"
-    href="../static/teamspeak.svg"
-    type="image/x-icon"
-  />
+      rel="shortcut icon"
+      href="../static/teamspeak.svg"
+      type="image/x-icon"
+    />
+    <style>
+      #page-brand i{
+        margin-right: -8px;
+      }
+      #page-brand {
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        color: grey;
+      }
+    </style>
     <script src="../static/scripts/jquery-3.7.1.min.js"></script>
   </head>
   <body>
+    <h3 id="page-brand">
+      <i class="fab fa-teamspeak" aria-hidden="true"></i> TalkIT
+    </h3>
     {% block content %} {% endblock content %}
   </body>
 </html>
