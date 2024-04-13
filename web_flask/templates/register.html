@@ -1,6 +1,5 @@
 {% extends "log_reg_layout.html" %} {% block content %}
 <link href="../static/styles/common.css?{{cache_id}}" rel="stylesheet" />
-<!-- <link href="../static/styles/layout.css?{{cache_id}}" rel="stylesheet" /> -->
 <link href="../static/styles/register.css?{{cache_id}}" rel="stylesheet" />
 <script
   type="module"
@@ -8,15 +7,13 @@
   defer
 ></script>
 
-<div id="account-success">
-  <h3>Talk-IT Registration</h3>
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <span id="flash-message">{{messages[0]}}</span>
-  {% endif %} {% endwith %}
-</div>
-
-<div class="container">
-
+<div id="sign-up-div">
+  <div id="account-success">
+    <h2>Register and Enjoy!</h2>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <span id="flash-message">{{messages[0]}}</span>
+    {% endif %} {% endwith %}
+  </div>
   <!-- Registration Form -->
   <form
     id="register-form"
@@ -83,9 +80,14 @@
 
     <!-- Sign Up -->
     <div class="register_field">{{ register.signup }}</div>
-    <span id="goto-signup-page">
-      Already have account? <a href="{{ url_for('login') }}">Sign In</a>
-    </span>
   </form>
+</div>
+
+<div id="sign-in-div">
+  <h2>Already have an account?</h2>
+  <span>Sign in and enjoy a great deal of information!</span>
+  <span id="goto-signup-page">
+    <a href="{{ url_for('login') }}">Sign In</a>
+  </span>
 </div>
 {% endblock content %}

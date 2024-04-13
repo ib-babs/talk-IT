@@ -112,6 +112,7 @@ a {
 }
 .modal p {
   color: white;
+  font-size: large;
   margin-bottom: 0;
 }
 .modal button {

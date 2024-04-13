@@ -59,7 +59,7 @@ class LoginForm(FlaskForm):
         if user is None or user.password != md5(self.password.data.encode('utf-8')).hexdigest():
             raise ValidationError('Incorrect username or password!')
 
-    remember_me = BooleanField('Remeber Me', id='remember_me')
+    remember_me = BooleanField('Remember Me', id='remember_me')
     sign_in = SubmitField('Sign in')
 
 

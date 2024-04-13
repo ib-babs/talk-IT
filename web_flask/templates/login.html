@@ -5,12 +5,19 @@
   src="../static/scripts/login.js?{{cache_id}}"
   defer
 ></script>
-<div id="account-success">
-  <h3>Talk-IT Login</h3>
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <span id="flash-message">{{ messages[0] }}</span> {% endif %} {% endwith %}
-</div>
-<div class="container">
+<style>
+  #sign-up-div {
+    text-align: center;
+    background: repeating-linear-gradient(45deg, #39f 1%, #128 9%, blue 10%);
+    color: white;
+  }
+</style>
+<div id="sign-in-div">
+  <h3>Login To Your Account</h3>
+  <div id="account-success">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <span id="flash-message">{{ messages[0] }}</span> {% endif %} {% endwith %}
+  </div>
   <form id="login-form" action="{{ url_for('login') }}" method="POST">
     {{ login.hidden_tag() }}
 
@@ -27,18 +34,21 @@
         style="color: black"
       ></i>
       {% if login.errors.username %}
-      <p class="login-form-error">
-        {{login.errors.username[0]}}
-      </p>
+      <p class="login-form-error">{{login.errors.username[0]}}</p>
       {% endif %}
     </div>
     {{ login.remember_me }} {{ login.remember_me.label }}
-    <br>
+    <br />
     <a href="{{url_for('reset_request')}}" id="forgot-pwd">Forgot password?</a>
     <div class="login_field">{{ login.sign_in}}</div>
   </form>
+</div>
+
+<div id="sign-up-div">
+  <h2>New Here?</h2>
+  <span>Sign up and discover a great amount of new opportunities.</span>
   <span id="goto-signup-page">
-    New User? <a href="{{ url_for('register') }}">Sign Up</a>
+    <a href="{{ url_for('register') }}">Sign Up</a>
   </span>
 </div>
 {% endblock content %}

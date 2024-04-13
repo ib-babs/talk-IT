@@ -112,12 +112,12 @@ def post():
         # Post images
         if images and images[0].filename:
             post.post_images = [
-                f'post-images/{post.id}/{image.filename}' for image in images]
+                f'post-images/{post_obj.id}/{image.filename}' for image in images]
             for image in images:
                 try:
                     import os
                     path = Path(
-                        f'{os.getcwd()}/web_flask/static/post-images/{post.id}')
+                        f'{os.getcwd()}/web_flask/static/post-images/{post_obj.id}')
                     path.mkdir(mode=511, exist_ok=True)
                     img = Image.open(BytesIO(image.read()))
                     img.thumbnail((700, 700))
