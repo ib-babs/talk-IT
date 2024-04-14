@@ -32,7 +32,7 @@
     <div class="post-body">
       <!-- Options -->
       <div class="post-options-container">
-        <span>{{time_created[loop.index - 1]}}</span>
+        <span>{{post['created_at_time']}}</span>
         <!-- Read a post -->
         <a
           href="{{url_for('read_post', post_id=post.id)}}"
@@ -85,8 +85,10 @@
       <div class="lkes-and-comments-container">
         <span
           ><i class="far fa-thumbs-up" aria-hidden="true"></i>
-          <span>{{post.likes}} {% if post.likes > 1%} Likes {%else %} Like {% endif %}</span>
-            </span
+          <span>
+            {{total_like[loop.index - 1]}} {% if total_like[loop.index - 1] > 1
+            %} Likes {%else %} Like {%endif%}</span
+          ></span
         >
       </div>
       <!-- ======== -->

@@ -22,6 +22,8 @@ class User(BaseModel, Base, UserMixin):
         'Post', backref='user',  cascade="all, delete")
     comment_id = relationship(
         'Comment', backref='user',  cascade="all, delete")
+    post_like_id = relationship(
+        'PostLike', backref='user',  cascade="all, delete")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

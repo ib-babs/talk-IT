@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SubmitField, MultipleFileField, ValidationError
+from wtforms import TextAreaField, SubmitField, MultipleFileField, ValidationError
 from wtforms.validators import DataRequired, Length
 """post_form module has two main classes:
     PostForm - For taking user post, it includes title of the post,
@@ -18,7 +18,8 @@ class PostForm(FlaskForm):
 
     def validate_post_images(self, post_images):
         if len(post_images.data) > 10:
-            raise ValidationError(f'Maxiumun of 10 images. {len(post_images.data)} are selected')
+            raise ValidationError(
+                f'Maxiumun of 10 images. {len(post_images.data)} are selected')
 
     submit_post = SubmitField('Post', id='post-btn')
 
@@ -29,3 +30,8 @@ class EditPostForm(FlaskForm):
     post = TextAreaField(validators=[DataRequired(
     )], id='edit-post-area', name='edit-post-area', render_kw={'cols': 80, 'rows': 22})
     done = SubmitField('Done', id='edit-post-btn')
+
+
+class LikeForm(FlaskForm):
+    '''Form to like a post based on post ID'''
+    submit_like = SubmitField('Like', id='submit-like')

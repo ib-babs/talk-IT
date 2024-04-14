@@ -11,14 +11,16 @@
         id="user-image"
         src="data:image/{{jpg}};base64,{{ post_author.image }}"
         alt="{{post_author.username}}{{cache_id}}"
-        />
-        <a href="{{url_for('other_user_profile', other_user_username=post_author.username)}}" 
-        class='user-username'>
-          <strong>{{post_author.username}}</strong>
-        </a>
-        <br>
-        <span>{{post_time_created}}</span>
-      </div>
+      />
+      <a
+        href="{{url_for('other_user_profile', other_user_username=post_author.username)}}"
+        class="user-username"
+      >
+        <strong>{{post_author.username}}</strong>
+      </a>
+      <br />
+      <span>{{post.to_dict()['created_at_time']}}</span>
+    </div>
     {% endif %}
     <p id="post-post" class="post-write-up">{{ post.post }}</p>
     <!-- Post images container -->
@@ -26,9 +28,9 @@
     <div class="post-imgs-div">
       {% for image in post.post_images %}
       <img
-      src="{{url_for('static', filename=image)}}"
-      alt="{{image}}"
-      class="post-imgs"
+        src="{{url_for('static', filename=image)}}"
+        alt="{{image}}"
+        class="post-imgs"
       />
       {% endfor %}
     </div>
@@ -46,17 +48,14 @@
         id="like"
       >
         {{like.hidden_tag()}}
-        <label for="like-btn">
-          <i
-            class="far fa-thumbs-up"
-            aria-hidden="true"
-            style="color: {% if post.has_liked %}
-          blue {% else %} black {% endif %};"
-          ></i>
+        <label for="submit-like">
+          <i class="far fa-thumbs-up" aria-hidden="true"></i>
         </label>
-        <span>{{like.like}} {{post.likes}}<span>
+        {{like.submit_like}} {{total_like}}
       </form>
-      <span style='margin-left:1em;'><i class="fa fa-share-alt" aria-hidden="true" id="share-post"></i></span>
+      <span
+        ><i class="fa fa-share-alt" aria-hidden="true" id="share-post"></i
+      ></span>
     </div>
   </article>
 </div>
@@ -75,14 +74,20 @@
     <div class="user-comments">
       <a
         href="{{url_for('other_user_profile', other_user_username=user.username)}}"
-        ><strong class='user-username'>{{user.username}}</strong>
+        ><strong class="user-username">{{user.username}}</strong>
       </a>
       <p id="post-comment" class="post-write-up">{{comment.comment}}</p>
     </div>
   </div>
+  <br />
   <!--  Comment options -->
+  {%if total_reply and total_reply[loop.index - 1] > 0%}
+  <p class="reply-count">{{total_reply[loop.index - 1]}} {% if total_reply[loop.index - 1] > 1%}
+    replies {%else%} reply {%endif%}
+  </p>{%endif%}
   <div id="comment-options">
-    <span>{{time_created[loop.index - 1]}}</span>
+    <span>{{comment.to_dict()['created_at_time']}}</span>
+    <a href="{{url_for('reply_thread', comment_id=comment.id)}}">Reply</a>
     {% if comment.user_id == user_id %}
     <a href="{{url_for('edit_comment', comment_id=comment.id)}}">Edit</a>
     <a
@@ -131,7 +136,7 @@
 <div id="share-container">
   <h1><i class="fa fa-share-alt" aria-hidden="true"></i> Share</h1>
   <i class="fa fa-link" aria-hidden="true"></i>
-  <span id='share-text'></span>
+  <span id="share-text"></span>
   <div>
     <a target="_blank" href=""
       ><i class="fab fa-facebook-square" aria-hidden="true"></i

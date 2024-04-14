@@ -42,10 +42,8 @@
         ><strong class="user-username">{{user.username}}</strong><br
       /></a>
       <div class="post-options-container">
-        <span>{{time_created[loop.index - 1]}}</span>
-        <a
-          href="{{url_for('read_post', post_id=post.id)}}"
-          title="Read More"
+        <span>{{post.to_dict()['created_at_time']}}</span>
+        <a href="{{url_for('read_post', post_id=post.id)}}" title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i
         ></a>
       </div>
@@ -72,8 +70,8 @@
             ;
           ></i>
           <span>
-            {{post.likes}} {% if post.likes > 1%} Likes {%else %} Like
-            {% endif %}</span
+            {{total_like[loop.index - 1]}} {% if total_like[loop.index - 1] > 1
+            %} Likes {%else %} Like {%endif%}</span
           ></span
         >
       </div>

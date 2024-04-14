@@ -1,6 +1,7 @@
 #!/usr/bin/python3
-from sqlalchemy import Column, String, Text, ForeignKey, Integer, Boolean, JSON
+from sqlalchemy import Column, String, Text, ForeignKey, Integer, JSON
 from models.base_model import BaseModel, Base
+from sqlalchemy.orm import relationship
 
 
 class Post(BaseModel, Base):
@@ -10,7 +11,8 @@ class Post(BaseModel, Base):
     user_id = Column(String(45), ForeignKey('users.id'),
                      nullable=False)
     post_images = Column(JSON)
-    has_liked = Column(Boolean, default=False)
+    post_like_id = relationship(
+        'PostLike', backref='post',  cascade="all, delete")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

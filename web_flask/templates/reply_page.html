@@ -1,0 +1,85 @@
+{% extends "layout.html" %} {% block content %}
+<link href="../static/styles/read_post.css?{{cache_id}}" rel="stylesheet" />
+
+<!-- Comments -->
+<main>
+<div id="comments-container">
+  {% if comment %}
+  <div id="comment-div">
+    <img
+      src="data:image/{{comment_author.image_fmt}};base64,{{comment_author.image}}"
+      alt="comment_author-image"
+      id="comment_author-img"
+    />
+    <div class="comment_author-comments">
+      <a
+        href="{{url_for('other_user_profile', other_user_username=comment_author.username)}}"
+        ><strong class="user-username">{{comment_author.username}}</strong>
+      </a>
+      <p id="post-comment" class="post-write-up">{{comment.comment}}</p>
+    </div>
+    
+</div>
+<div id="comment-options">
+    <span>{{comment.to_dict()['created_at_time']}}</span>
+    {% if comment.id == user_id %}
+    <a
+    class="delete-post-btn"
+    href="{{url_for('delete_reply', reply_id=reply['id'])}}"
+    style="color: red"
+    >Delete</a>
+    {% endif %}
+</div>
+    
+    
+{% for reply in replies %} 
+<div id="reply-div">
+   <img
+     src="data:image/{{authors[loop.index - 1].image_fmt}};base64,{{authors[loop.index - 1].image}}"
+     alt="{{authors[loop.index - 1].id}}"
+     id="reply_author-img"
+   />
+   <div class="reply_author-comments">
+       <a
+       href="{{url_for('other_user_profile', other_user_username=authors[loop.index - 1].username)}}"
+       ><strong class="user-username">{{authors[loop.index - 1].username}}</strong>
+    </a>
+    <p id="post-comment" class="post-write-up">{{reply['content']}}</p>
+</div>
+
+</div>
+<!--  Comment options -->
+<div id="comment-options-2">
+    <span>{{reply['created_at_time']}}</span>
+    {% if reply['user_id'] == user_id %}
+    <a href="{{url_for('edit_reply', reply_id=reply['id'])}}">Edit</a>
+    <a
+      class="delete-post-btn"
+      href="{{url_for('delete_reply', reply_id=reply['id'])}}"
+      style="color: red"
+      >Delete</a
+    >
+    {% endif %}
+  </div>
+
+     {%endfor%}
+{%endif%}
+</main>
+    
+  
+  <div class="comment-box-form">
+    <form
+      action="{{url_for('reply_thread', comment_id=comment.id)}}"
+      ,
+      id="comment-form"
+      method="post"
+    >
+      {{ reply_comment.hidden_tag() }} {{ reply_comment.comment}}
+      <label id="submit-comment-label" for="submit-comment"
+        ><i class="fa fa-paper-plane" aria-hidden="true"></i
+      ></label>
+      {{ reply_comment.submit_comment}}
+    </form>
+  </div>
+  {% endblock content %}
+</div>

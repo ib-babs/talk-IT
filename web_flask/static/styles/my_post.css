@@ -19,7 +19,7 @@ body {
 }
 .container {
   position: sticky;
-  top: 2.18em;
+  top: 2.6em;
   padding-block: 1em 40px;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 1px 8px 0.5px #ccc;
@@ -181,6 +181,7 @@ a {
 @media (200px <= width <= 768px) {
   .post-card {
     margin: 35px 10px;
+    margin-top: 10px;
   }
   .post-imgs-div {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -188,7 +189,7 @@ a {
 }
 @media (width > 768px) {
   .container {
-    top: 2.9em;
+    top: 3em;
   }
   .modal {
     background: #222;

@@ -18,7 +18,16 @@ article p {
   flex-direction: row;
   gap: 10px;
 }
-#user-img {
+
+#reply-div {
+  display: flex;
+  margin-left: 3em;
+  flex-direction: row;
+  gap: 10px;
+}
+#user-img,
+#comment_author-img,
+#reply_author-img {
   border-radius: 100%;
   width: 40px;
   height: 40px;
@@ -33,12 +42,18 @@ section h3 {
   text-decoration-color: #ccc;
   text-underline-offset: 8px;
 }
-
-.user-comments p {
+.reply_author-comments p {
+  margin: 0;
+}
+.user-comments p,
+.comment_author-comments p,
+.reply_author-comments p {
   padding-block-start: 5px;
 }
 
-.user-comments {
+.user-comments,
+.comment_author-comments,
+.reply_author-comments {
   margin-bottom: 5px;
   padding: 10px;
   margin-right: 10px;
@@ -76,20 +91,31 @@ section h3 {
 a {
   text-decoration: none;
 }
-#comment-options {
+#comment-options,
+#comment-options-2 {
   margin-bottom: 10px;
   margin-left: 3.5em;
   display: flex;
   gap: 10px;
 }
-#like-btn {
+.reply-count {
+  margin: 0;
+  margin-left: 3.2em;
+  padding: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+#comment-options-2 {
+  margin-left: 6.4em;
+}
+#submit-like {
   display: none;
 }
 #lkes-and-comments-container {
   display: flex;
   gap: 1em;
 }
-#post-comment {
+.post-write-up {
   word-break: break-all;
 }
 
@@ -118,24 +144,22 @@ a {
 }
 
 #preview-image #back-arrow {
-  position: absolute;
-  top: 10px;
-  color: #fff;
-  background-color: blue;
-  border: none;
-  padding: 5px;
+  position: fixed;
+  top: 5%;
+  left: 10px;
   font-size: 20px;
+  background-color: blue;
+  color: white;
+  padding: 5px;
   z-index: 0;
 }
 #preview-image {
-  display: none;
   position: fixed;
-  backdrop-filter: blur(2px);
-  place-content: center;
-  background: rgba(50, 50, 50, 0.8);
   inset: 0;
+  background: black;
+  display: none;
+  place-content: center;
   z-index: 1;
-  padding: 10px;
 }
 
 #prev-next i {
@@ -222,7 +246,7 @@ a {
   padding: 25px 0 20px 0;
 }
 
-.img-container img{
+.img-container img {
   border-radius: 100%;
   margin-top: -20px;
   width: clamp(80px, 80px, 90px);
@@ -252,5 +276,8 @@ a {
   }
   #share-container {
     margin: 0 30px;
+  }
+  article{
+    margin: 20px;
   }
 }

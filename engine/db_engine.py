@@ -6,13 +6,16 @@ import models
 from models.base_model import BaseModel, Base
 from models.user import User
 from models.post import Post
+from models.post_like import PostLike
 from models.comment import Comment
+from models.reply_comment import Reply
 from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
-classes = {"User": User, 'Post': Post, 'Comment': Comment}
+classes = {"User": User, 'Post': Post,
+           'Comment': Comment, 'Postlike': PostLike, 'Reply': Reply}
 
 
 class DBStorage:
@@ -130,10 +133,17 @@ class DBStorage:
                 total += len(self.__session.query(classes[clss]).all())
         return total
 
-    def count_comment(self, post_id=None):
+    def count_comment_or_like(self, cls, post_id=None):
         """Return the number of comment in storage based on post_id"""
-        obj_total = self.__session.query(Comment).filter(
-            Comment.post_id == post_id).all() or None
+        obj_total = self.__session.query(cls).filter(
+            cls.post_id == post_id).all() or None
+        if obj_total:
+            return len(obj_total)
+        return 0
+    def count_reply(self, cls, comment_id=None):
+        """Return the number of reply in storage based on comment_id"""
+        obj_total = self.__session.query(cls).filter(
+            cls.comment_id== comment_id).all() or None
         if obj_total:
             return len(obj_total)
         return 0

@@ -18,7 +18,3 @@ class EditCommentForm(FlaskForm):
         validators=[DataRequired()], name='edit-comment', id='edit-comment', render_kw={'class': 'cmt-txt-area', 'cols': 80, 'rows': 20})
     submit_edit_btn = SubmitField(
         'Edit', name='submit-edit-btn', id='submit-edit-btn', render_kw={'class': 'cmt_sumit-btn'})
-
-
-class LikeForm(FlaskForm):
-    like = SubmitField('Submit-Like', name='like', id='like-btn')

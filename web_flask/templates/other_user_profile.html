@@ -19,7 +19,7 @@
     src="data:image/{{user.image_fmt}};base64,{{user.image}}"
     alt="user-image{{cache_id}}"
     id="user-image"
-    class='preview'
+    class="preview"
   />
   <p>Full Name: <strong>{{user.full_name}}</strong></p>
   <p>Username: <strong>{{user.username}}</strong></p>
@@ -40,7 +40,7 @@
     <div class="post-body">
       <!-- Options -->
       <div class="post-options-container">
-        <span>{{time_created[loop.index - 1]}}</span>
+        <span>{{post['created_at_time']}}</span>
         <!-- Read a post -->
         <a href="{{url_for('read_post', post_id=post.id)}}" title="Read More"
           ><i class="fab fa-readme" aria-hidden="true"></i>
@@ -67,7 +67,10 @@
       <div class="lkes-and-comments-container">
         <span
           ><i class="far fa-thumbs-up" aria-hidden="true"></i>
-          {{post.likes}}</span
+          <span>
+            {{total_like[loop.index - 1]}} {% if total_like[loop.index - 1] > 1
+            %} Likes {%else %} Like {%endif%}</span
+          ></span
         >
       </div>
       <!-- ======== -->

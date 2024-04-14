@@ -81,7 +81,6 @@ $(document).ready(() => {
           part[part.length - 2] != " " &&
           part != symbol
       );
-    console.log(style);
     return style;
   }
   $.each($(".post-write-up"), function (idx, el) {
@@ -92,7 +91,8 @@ $(document).ready(() => {
         "*"
       ),
       italic = parsingStyles(p, /(?<=_) +|(?!_)\n|(_(?=\S+)[^_]+_)/gm, "_"),
-      code = parsingStyles(p, /(?<=`) +|(?!`)\n|(`(?=\S+)[^`]+`)/gm, "`");
+      code = parsingStyles(p, /(?<=`) +|(?!`)\n|(`(?=\S+)[^`]+`)/gm, "`"),
+      linkText = p.match(/((https|http):\/\/)?(\w+|\d+)\.\w+(\S+)?/gim);
     p = p.replace(/</gim, "&lt;").replace(/>/gim, "&gt;");
     for (let index = 0; index < splitter.length; index++)
       p = p.replace(
@@ -114,6 +114,27 @@ $(document).ready(() => {
           ""
         )}</code>`
       );
+    if (linkText)
+      for (let index = 0; index < linkText.length; index++) {
+        if (linkText[index]) {
+          let handleLinkProtocol = undefined;
+          if (
+            linkText[index].includes("https://") ||
+            linkText[index].includes("http://") ||
+            linkText[index].includes("ftps://") ||
+            linkText[index].includes("ftp://")
+          ) {
+            handleLinkProtocol = linkText[index];
+          } else
+            handleLinkProtocol =
+              "https://" + linkText[index].trimStart().trimEnd();
+
+          p = p.replace(
+            linkText[index],
+            `<a href='${handleLinkProtocol}' target='_blank' referrerpolicy='no-referrer'>${linkText[index]}</a>`
+          );
+        }
+      }
 
     $(el).html(p);
   });

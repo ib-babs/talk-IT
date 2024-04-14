@@ -2,14 +2,34 @@ from models import storage
 from models.user import User
 from models.comment import Comment
 from models.post import Post
-# import flask_tinymce
+from models.reply_comment import Reply
+from models.post_like import PostLike
 
-user = User()
-comment = Comment()
-question = Post()
-
-
+like_post = Reply()
 storage.reload()
+# user = User()
+# comment = Comment()
+# question = Post()
+# from sqlalchemy import inspect
+#   # Import your SQLAlchemy model
+
+# # Create an inspector
+# inspector = inspect(PostLike)
+
+# # Get column information
+# columns = inspector.columns
+
+# Check the configuration of 'user_has_liked' column
+# if 'user_has_liked' in columns:
+#     column_info = columns['user_has_liked']
+#     print("Column 'user_has_liked' is defined as follows:")
+#     print(f"Type: {column_info.type}")
+#     print(f"Default: {column_info.default}")
+#     print(f"Nullable: {column_info.nullable}")
+# else:
+#     print("Column 'user_has_liked' not found in the model.")
+
+
 # # # from PIL import Image
 # # # import base64
 # # # from io import BytesIO

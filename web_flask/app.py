@@ -2,19 +2,21 @@
 from flask import flash, render_template, url_for, redirect, session, request, abort
 from forms.login_resgistration import (RegistrationForm, LoginForm,
                                        UpdateProfile)
-from forms.post_form import PostForm, EditPostForm
+from forms.post_form import PostForm, EditPostForm, LikeForm
 from forms.reset_forms import RequestResetForm, ResetPasswordForm
 from web_flask import (app, save_image_to_db, login_manager,
                        send_reset_email, Image, BytesIO)
 from models.user import User
+from models.post_like import PostLike
 from models.post import Post
+from models.reply_comment import Reply
 from models.comment import Comment
 from pathlib import Path
 from uuid import uuid4
 import os
 from models import storage
 from flask_login import login_required, current_user, login_user, logout_user
-from forms.comment_form import CommentForm, EditCommentForm, LikeForm
+from forms.comment_form import CommentForm, EditCommentForm
 from datetime import timedelta
 from dotenv import load_dotenv
 
@@ -155,25 +157,26 @@ def read_post(post_id):
         return redirect(url_for('login'))
 
     post_object = storage.get(Post, post_id)
-    post_author = storage.get(User, post_object.user_id)
-    post_time_created = post_object.to_dict()['created_at_time']
     if post_object is None:
         return abort(404)
+    post_author = storage.get(User, post_object.user_id)
     session['post_id'] = post_object.id
     comments = storage.get_comments(Comment, post_id)
+    user_has_liked = False
     sorted_comments = []
-    time_created = []
+    total_reply = []
     if comments:
         sorted_comments = sorted(
             [comment for comment in comments], key=lambda x: x[1].created_at)
-        time_created = [a[1].to_dict()['created_at_time']
-                        for a in sorted_comments]
+        total_reply = [storage.count_reply(
+            Reply, comment_id[1].id) for comment_id in sorted_comments]
 
     comment_form = CommentForm()
     form = LikeForm()
     user_id = current_user.id
 
     current_user.checked = False
+
     if request.method == 'POST':
         # Take comment
         if 'comment' in request.form:
@@ -189,23 +192,30 @@ def read_post(post_id):
                 storage.save()
                 return redirect(url_for('read_post', post_id=post_id))
         # Take likes
-        if 'like' in request.form:
-            if form.validate():
-                if not post_object.has_liked:
-                    post_object.likes += 1
-                    post_object.has_liked = True
-                else:
-                    post_object.likes -= 1
-                    post_object.has_liked = False
-                storage.save()
+        if 'submit_like' in request.form:
+            if form.validate_on_submit():
+                like_obj = PostLike(post_id=post_id, user_id=current_user.id)
+                all_like_objs = storage.all(PostLike)
+                for k, v in all_like_objs.items():
+                    if v.post_id == post_id and v.user_id == current_user.id:
+                        user_has_liked = True
+                        storage.delete(storage.get(PostLike, v.id))
+                        storage.save()
+                if not user_has_liked:
+                    storage.new(like_obj)
+                    storage.save()
                 return redirect(url_for('read_post', post_id=post_id))
 
-    total_comment = storage.count_comment(post_id)
-
-    return render_template('read_post.html', post=post_object,
-                           comments=sorted_comments, nav=True, a=True, comment_form=comment_form, post_id=post_id, user_id=user_id,
-                           cache_id=uuid4(), read=True, total_comment=total_comment, like=form, title='Reading...',
-                           time_created=time_created, post_author=post_author, post_time_created=post_time_created)
+    total_comment = storage.count_comment_or_like(Comment, post_id)
+    total_like = storage.count_comment_or_like(PostLike, post_id)
+    read_post_kwargs = {
+        'post': post_object,
+        'comments': sorted_comments, 'nav': True, 'a': True, 'comment_form': comment_form, 'post_id': post_id, 'user_id': user_id,
+        'cache_id': uuid4(), 'read': True, 'total_comment': total_comment, 'title': 'Reading...', 'like': form,
+        'post_author': post_author,
+        'total_like': total_like, 'total_reply': total_reply
+    }
+    return render_template('read_post.html', **read_post_kwargs)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -254,15 +264,15 @@ def new_feed():
     loader = [v.to_dict() for v in all_posts.values() if v.to_dict()['user_id'] !=
               current_user.id or []]
     sorted_posts = []
-    time_created = []
     if gt:
         sorted_posts = sorted(
             [q for q in gt], key=lambda x: x[0].created_at, reverse=True)
-        time_created = [a[0].to_dict()['created_at_time']
-                        for a in sorted_posts]
+        total_like = [storage.count_comment_or_like(
+            PostLike, post_id[0].id) for post_id in sorted_posts] or []
     get_users = [storage.get(User, user['user_id'])
                  for user in loader or []]
-    return render_template('new_feed.html', posts=sorted_posts, nav=True, a=True, users=get_users, user=user, title='New Feed', time_created=time_created)
+
+    return render_template('new_feed.html', posts=sorted_posts, nav=True, a=True, users=get_users, user=user, title='New Feed', total_like=total_like)
 
 
 # My posts
@@ -276,15 +286,14 @@ def my_post():
     # Sorting post in an ascending order
     load_posts = [obj.to_dict() for obj in loader or []]
     sorted_posts = []
-    time_created = []
     if load_posts:
         sorted_posts = sorted(
             load_posts, key=lambda x: x['created_at'], reverse=True)
-        time_created = [a['created_at_time'] for a in sorted_posts]
-
+        total_like = [storage.count_comment_or_like(
+            PostLike, post_id['id']) for post_id in sorted_posts] or []
     return render_template('my_post.html', info=current_user, user=user, cache_id=uuid4(),
                            title='My Post', posts=sorted_posts, nav=True, a=True,
-                           time_created=time_created)
+                           total_like=total_like)
 
 
 # Profile
@@ -428,6 +437,7 @@ def developer():
 
 
 @app.route('/other_user_profile/<other_user_username>')
+@login_required
 def other_user_profile(other_user_username):
     other_user = storage.get_user(User, other_user_username)
     if other_user is None:
@@ -437,15 +447,73 @@ def other_user_profile(other_user_username):
     # Sorting post in an ascending order
     load_posts = [obj.to_dict() for obj in loader or []]
     sorted_posts = []
-    time_created = []
     if load_posts:
         sorted_posts = sorted(
             load_posts, key=lambda x: x['created_at'], reverse=True)
-        time_created = [a['created_at_time']
-                        for a in sorted_posts]
-
+        total_like = [storage.count_comment_or_like(
+            PostLike, post_id['id']) for post_id in sorted_posts] or []
     return render_template('other_user_profile.html', user=other_user, other_u_username=other_user_username, nav=True, title=f'{other_user_username} Profile', cache_id=uuid4(),
-                           posts=sorted_posts, a=True, time_created=time_created)
+                           posts=sorted_posts, a=True, total_like=total_like)
+
+
+@app.route('/reply/<comment_id>', methods=['POST', 'GET'])
+@login_required
+def reply_thread(comment_id):
+    # comments = storage.get_comments(Comment, post_id)
+    comment = storage.get(Comment, comment_id)
+    comment_author = storage.get(User, comment.user_id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        reply_detail = {
+            'content': form.comment.data,
+            'user_id': current_user.id,
+            'comment_id': comment_id
+        }
+        reply_obj = Reply(**reply_detail)
+        storage.new(reply_obj)
+        storage.save()
+        return redirect(url_for('reply_thread', comment_id=comment_id))
+    all_replies = [reply.to_dict() for reply in storage.all(
+        Reply).values() if reply.comment_id == comment_id] or []
+    sorted_replies = []
+    authors = []
+    if all_replies:
+        sorted_replies = sorted(all_replies, key=lambda x: x['created_at'])
+        authors = [storage.get(User, user_id['user_id'])
+                   for user_id in sorted_replies] or []
+    return render_template('reply_page.html', reply_comment=form, comment=comment, replies=sorted_replies, authors=authors,
+                           comment_author=comment_author, nav=True, a=True, title='Reply', user_id=current_user.id)
+
+
+@app.route('/edit_reply/<reply_id>', methods=['GET', 'POST'])
+@login_required
+def edit_reply(reply_id):
+    '''Edit a reply made by the current user'''
+    edit_cmt = EditCommentForm()
+    reply_obj = storage.get(Reply, reply_id)
+    if reply_obj is None:
+        return abort(404)
+
+    edit_cmt.edit_comment.data = reply_obj.content
+    if 'submit-edit-btn' in request.form:
+        if edit_cmt.validate_on_submit():
+            reply_obj.content = request.form['edit-comment']
+            storage.save()
+            return redirect(url_for('reply_thread', comment_id=reply_obj.comment_id))
+
+    return render_template('edit_reply.html', edit=edit_cmt, reply_id=reply_id, nav=True, a=True, cache_id=uuid4())
+
+
+@app.route('/delete-reply/<reply_id>', methods=['DELETE', 'POST', 'GET'])
+@login_required
+def delete_reply(reply_id):
+    '''Delete a reply based on reply_id'''
+    reply = storage.get(Reply, reply_id)
+    if reply is None:
+        return abort(404)
+    storage.delete(reply)
+    storage.save()
+    return redirect(url_for('reply_thread', comment_id=reply.comment_id))
 
 
 if __name__ == '__main__':
