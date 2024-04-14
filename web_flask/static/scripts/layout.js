@@ -12,7 +12,7 @@ $(document).ready(() => {
       $(".user-username").css("color", "#eee");
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
-      $(".user-comments").attr("style", "background: #222");
+      $(".user-comments, .reply_author-comments, .comment_author-comments").attr("style", "background: #222");
       $(".post-body").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".container").attr(
         "style",
@@ -29,7 +29,7 @@ $(document).ready(() => {
       $(".post-body").css("box-shadow", "0 3px 10px 0.3px #ccc");
       $("header").css("box-shadow", "unset");
       $("footer").css("box-shadow", "unset");
-      $(".user-comments").attr("style", "background:rgba(210, 210, 210, 0.5)");
+      $(".user-comments, .reply_author-comments, .comment_author-comments").attr("style", "background:rgba(210, 210, 210, 0.5)");
       $("#post-title").attr("style", "background:white");
       $("textarea").attr("style", "background:white; color: initial");
     }
