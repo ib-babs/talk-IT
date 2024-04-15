@@ -254,6 +254,9 @@ a {
   height: clamp(80px, 80px, 90px);
   margin-right: 8px;
 }
+.reply-link, .edit-link{
+  color: grey;
+}
 @media (200px <= width <= 768px) {
   #read-post-container h2 {
     top: 30px;

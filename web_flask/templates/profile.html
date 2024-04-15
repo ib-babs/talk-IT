@@ -1,6 +1,6 @@
 {% extends "layout.html" %} {% block content %}
 <link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
-<link href="../static/styles/profile.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/profile.css" rel="stylesheet" />
 <script>
   $(document).ready(() => {
     let activeNav = $("nav .nav-link li");
@@ -8,6 +8,11 @@
     $(activeNav[2]).css("color", "white");
   });
 </script>
+<style>
+  a:visited {
+    color: blue;
+  }
+</style>
 <div class="user-profile">
   <img
     src="data:image/{{user.image_fmt}};base64,{{user.image}}"
@@ -15,6 +20,17 @@
     id="user-image"
     class="preview"
   />
+</div>
+
+<div class="user-profile">
+  <span class="user-bio">
+    {%if not user.bio %}No bio. {%else%} {{user.bio}}{%endif%}
+    <a href="{{url_for('edit_bio', user_id=user.id)}}"
+      ><i class="fa fa-edit" aria-hidden="true"></i
+    ></a>
+  </span>
+</div>
+<div class="user-profile">
   <p>Full Name: <strong>{{user.full_name}}</strong></p>
   <p>Username: <strong>{{user.username}}</strong></p>
   <p>Email: <strong>{{user.email}}</strong></p>

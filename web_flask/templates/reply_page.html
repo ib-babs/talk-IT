@@ -3,8 +3,9 @@
 
 <!-- Comments -->
 <main>
-<div id="comments-container">
   {% if comment %}
+  <p style="margin: 5px;"><a href="{{url_for('read_post', post_id=comment.post_id)}}" style="color: grey;">Back to the post...</a></p>
+<div id="comments-container">
   <div id="comment-div">
     <img
       src="data:image/{{comment_author.image_fmt}};base64,{{comment_author.image}}"
@@ -52,7 +53,7 @@
 <div id="comment-options-2">
     <span>{{reply['created_at_time']}}</span>
     {% if reply['user_id'] == user_id %}
-    <a href="{{url_for('edit_reply', reply_id=reply['id'])}}">Edit</a>
+    <a href="{{url_for('edit_reply', reply_id=reply['id'])}}" class='edit-link'>Edit</a>
     <a
       class="delete-post-btn"
       href="{{url_for('delete_reply', reply_id=reply['id'])}}"

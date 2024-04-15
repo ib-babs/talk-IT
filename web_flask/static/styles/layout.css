@@ -21,13 +21,14 @@ header {
   margin-right: -10px;
 }
 #page-brand {
+
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   padding: 0.2em;
   margin: 0;
   user-select: none;
-  color: white;
-  text-decoration: underline;
-  text-decoration-color: blue;
+  color: rgb(189, 181, 181);
+  /* text-decoration: underline;
+  text-decoration-color: blue; */
 }
 nav {
   z-index: 1;

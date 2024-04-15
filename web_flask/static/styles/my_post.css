@@ -135,7 +135,11 @@ a {
   transition: all 1s ease-in-out;
 }
 .fa-thumbs-up {
-  color: blue;
+  background: blue;
+  color: white;
+  font-size: 16px;
+  padding: 7px;
+  border-radius: 100%;
 }
 .post-imgs-div {
   margin-top: 15px;

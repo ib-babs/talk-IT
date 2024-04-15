@@ -5,7 +5,7 @@ from models.post import Post
 from models.reply_comment import Reply
 from models.post_like import PostLike
 
-like_post = Reply()
+like_post = User()
 storage.reload()
 # user = User()
 # comment = Comment()

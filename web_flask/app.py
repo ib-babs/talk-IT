@@ -16,7 +16,7 @@ from uuid import uuid4
 import os
 from models import storage
 from flask_login import login_required, current_user, login_user, logout_user
-from forms.comment_form import CommentForm, EditCommentForm
+from forms.comment_form import CommentForm, EditCommentForm, EditBioForm
 from datetime import timedelta
 from dotenv import load_dotenv
 
@@ -264,11 +264,12 @@ def new_feed():
     loader = [v.to_dict() for v in all_posts.values() if v.to_dict()['user_id'] !=
               current_user.id or []]
     sorted_posts = []
+    total_like = []
     if gt:
         sorted_posts = sorted(
             [q for q in gt], key=lambda x: x[0].created_at, reverse=True)
         total_like = [storage.count_comment_or_like(
-            PostLike, post_id[0].id) for post_id in sorted_posts] or []
+            PostLike, post_id[0].id) for post_id in sorted_posts]
     get_users = [storage.get(User, user['user_id'])
                  for user in loader or []]
 
@@ -286,6 +287,7 @@ def my_post():
     # Sorting post in an ascending order
     load_posts = [obj.to_dict() for obj in loader or []]
     sorted_posts = []
+    total_like = []
     if load_posts:
         sorted_posts = sorted(
             load_posts, key=lambda x: x['created_at'], reverse=True)
@@ -447,6 +449,7 @@ def other_user_profile(other_user_username):
     # Sorting post in an ascending order
     load_posts = [obj.to_dict() for obj in loader or []]
     sorted_posts = []
+    total_like = []
     if load_posts:
         sorted_posts = sorted(
             load_posts, key=lambda x: x['created_at'], reverse=True)
@@ -514,6 +517,26 @@ def delete_reply(reply_id):
     storage.delete(reply)
     storage.save()
     return redirect(url_for('reply_thread', comment_id=reply.comment_id))
+
+
+@app.route('/edit_bio/<user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_bio(user_id):
+    '''Edit a bio by the current user'''
+    edit_bio = EditBioForm()
+    user_obj = storage.get(User, current_user.id)
+    if user_obj is None:
+        return abort(404)
+    if user_obj.bio:
+        edit_bio.bio.data = user_obj.bio
+    if 'submit-bio-btn' in request.form:
+        if edit_bio.validate_on_submit():
+            user_obj.bio = request.form['edit-bio']
+            storage.save()
+            return redirect(url_for('profile'))
+        else:
+            print(edit_bio.errors)
+    return render_template('edit_bio.html', edit=edit_bio, user_id=user_id, nav=True, a=True, cache_id=uuid4())
 
 
 if __name__ == '__main__':

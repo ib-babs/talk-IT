@@ -54,7 +54,9 @@ input[type="password"] {
   border-radius: 20px;
   padding: 8px;
 }
-#remeber-div{
+#remeber-div {
+  margin-top: -10px; 
+  margin-bottom: -10px; 
   text-align: center;
 }
 .login-form-error {
@@ -70,6 +72,9 @@ input[type="password"] {
   background-color: #fffefe;
 }
 
+#sign-up-div h3, #sign-in-div h3 {
+  text-align: center;
+}
 @media (200px <= width <= 768px) {
   body {
     grid-template-columns: 100%;

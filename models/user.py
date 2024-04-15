@@ -18,6 +18,7 @@ class User(BaseModel, Base, UserMixin):
     image = Column(Text)
     image_fmt = Column(Text)
     gender = Column(String(20), nullable=True)
+    bio = Column(Text, default='No bio. Write a bio')
     post_id = relationship(
         'Post', backref='user',  cascade="all, delete")
     comment_id = relationship(

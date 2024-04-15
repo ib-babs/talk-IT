@@ -8,18 +8,20 @@ $(document).ready(() => {
         "style",
         "background:#222; color: white"
       );
-      $("#post-title").attr("style", "background:#222;");
+      $(".show-hide-profile").attr("style", "background:#222;");
       $(".user-username").css("color", "#eee");
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
-      $(".user-comments, .reply_author-comments, .comment_author-comments").attr("style", "background: #222");
+      $(
+        ".user-comments, .reply_author-comments, .comment_author-comments"
+      ).attr("style", "background: #222");
       $(".post-body").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".container").attr(
         "style",
         "background-color:#222; box-shadow: 0 1px 8px 0.5px #000"
       );
     } else {
-      $("#post_title").attr("style", "background:initial;");
+      $(".show-hide-profile").attr("style", "background:whitesmoke;");
       $(document.body).attr("style", "background:initial; color: initial");
       $(".user-username").css("color", "initial");
       $(".container").attr(
@@ -29,7 +31,9 @@ $(document).ready(() => {
       $(".post-body").css("box-shadow", "0 3px 10px 0.3px #ccc");
       $("header").css("box-shadow", "unset");
       $("footer").css("box-shadow", "unset");
-      $(".user-comments, .reply_author-comments, .comment_author-comments").attr("style", "background:rgba(210, 210, 210, 0.5)");
+      $(
+        ".user-comments, .reply_author-comments, .comment_author-comments"
+      ).attr("style", "background:rgba(210, 210, 210, 0.5)");
       $("#post-title").attr("style", "background:white");
       $("textarea").attr("style", "background:white; color: initial");
     }
@@ -97,7 +101,7 @@ $(document).ready(() => {
     for (let index = 0; index < splitter.length; index++)
       p = p.replace(
         splitter[index],
-        `<strong style="color: unset">${splitter[index].replace(
+        `<strong style="color: unset; font-weight: 550;">${splitter[index].replace(
           /\*/gm,
           ""
         )}</strong>`
@@ -143,5 +147,13 @@ $(document).ready(() => {
   });
   $(".stop-preview").click(() => {
     $(".preview-user-image").css("display", "none");
+  });
+
+  // Show or hide profile info
+  $(".other-user-profile #view-user-profile").click(() => {
+    $(".show-hide-profile").css("display", "grid");
+  });
+  $(".show-hide-profile #view-user-profile").click(() => {
+    $(".show-hide-profile").css("display", "none");
   });
 });

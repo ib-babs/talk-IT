@@ -21,10 +21,9 @@
     id="user-image"
     class="preview"
   />
-  <p>Full Name: <strong>{{user.full_name}}</strong></p>
-  <p>Username: <strong>{{user.username}}</strong></p>
-  <p>Email: <strong>{{user.email}}</strong></p>
-  <p>Gender: <strong>{{user.gender}}</strong></p>
+  <strong style="text-align: center; padding-top: 6px;">{{user.username}}</strong>
+  <p>{%if not user.bio %}No bio. {%else%} {{user.bio}}{%endif%}</p>
+  <button type="button" id='view-user-profile'>View Profile</button>
 </div>
 
 <div class="post-card">
@@ -65,9 +64,7 @@
 
       <!-- Likes and comments -->
       <div class="lkes-and-comments-container">
-        <span
-          ><i class="far fa-thumbs-up" aria-hidden="true"></i>
-          <span>
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
             {{total_like[loop.index - 1]}} {% if total_like[loop.index - 1] > 1
             %} Likes {%else %} Like {%endif%}</span
           ></span
@@ -84,9 +81,19 @@
 <div class="preview-user-image">
   <i class="fa fa-remove stop-preview" aria-hidden="true"></i>
   <img
-    src="data:image/{{user.image_fmt}};base64,{{user.image}}"
-    alt="{{user.username}}{{cache_id}}"
-    id="img-previewing"
+  src="data:image/{{user.image_fmt}};base64,{{user.image}}"
+  alt="{{user.username}}{{cache_id}}"
+  id="img-previewing"
   />
+</div>
+
+
+
+<div class="show-hide-profile">
+  <p>Full Name: <strong>{{user.full_name}}</strong></p>
+  <p>Username: <strong>{{user.username}}</strong></p>
+  <p>Email: <strong>{{user.email}}</strong></p>
+  <p>Gender: <strong>{{user.gender}}</strong></p>
+  <button type="button" id='view-user-profile'>OK</button>
 </div>
 {% endblock content %}

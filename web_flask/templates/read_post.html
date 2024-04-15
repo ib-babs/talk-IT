@@ -82,14 +82,28 @@
   <br />
   <!--  Comment options -->
   {%if total_reply and total_reply[loop.index - 1] > 0%}
-  <p class="reply-count">{{total_reply[loop.index - 1]}} {% if total_reply[loop.index - 1] > 1%}
-    replies {%else%} reply {%endif%}
-  </p>{%endif%}
+  <p class="reply-count">
+    <a
+      href="{{url_for('reply_thread', comment_id=comment.id)}}"
+      class="reply-link"
+      >{{total_reply[loop.index - 1]}} {% if total_reply[loop.index - 1] > 1%}
+      replies {%else%} reply {%endif%}</a
+    >
+  </p>
+  {%endif%}
   <div id="comment-options">
     <span>{{comment.to_dict()['created_at_time']}}</span>
-    <a href="{{url_for('reply_thread', comment_id=comment.id)}}">Reply</a>
+    <a
+      href="{{url_for('reply_thread', comment_id=comment.id)}}"
+      class="reply-link"
+      >Reply</a
+    >
     {% if comment.user_id == user_id %}
-    <a href="{{url_for('edit_comment', comment_id=comment.id)}}">Edit</a>
+    <a
+      href="{{url_for('edit_comment', comment_id=comment.id)}}"
+      class="edit-link"
+      >Edit</a
+    >
     <a
       class="delete-post-btn"
       href="{{url_for('delete_comment', comment_id=comment.id)}}"
@@ -104,21 +118,20 @@
     <i>No comments. Be the first person to comment!</i>
   </p>
   {% endif %}
-
-  <div class="comment-box-form">
-    <form
-      action="{{url_for('read_post', post_id=post_id)}}"
-      ,
-      id="comment-form"
-      method="post"
-    >
-      {{ comment_form.hidden_tag() }} {{ comment_form.comment}}
-      <label id="submit-comment-label" for="submit-comment"
-        ><i class="fa fa-paper-plane" aria-hidden="true"></i
-      ></label>
-      {{ comment_form.submit_comment}}
-    </form>
-  </div>
+</div>
+<div class="comment-box-form">
+  <form
+    action="{{url_for('read_post', post_id=post_id)}}"
+    ,
+    id="comment-form"
+    method="post"
+  >
+    {{ comment_form.hidden_tag() }} {{ comment_form.comment}}
+    <label id="submit-comment-label" for="submit-comment"
+      ><i class="fa fa-paper-plane" aria-hidden="true"></i
+    ></label>
+    {{ comment_form.submit_comment}}
+  </form>
 </div>
 
 <!-- Preview Image -->

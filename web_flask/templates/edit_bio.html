@@ -1,0 +1,12 @@
+{% extends "layout.html" %}{% block content %}
+<link href="../static/styles/my_post.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/layout.css?{{cache_id}}" rel="stylesheet" />
+<link href="../static/styles/edit_comment.css?{{cache_id}}" rel="stylesheet" />
+
+<form action="{{url_for('edit_bio', user_id=user_id)}}" method="post">
+  <div class="comment-box-form">
+    {{edit.hidden_tag()}} {{edit.bio}}<br />
+    {{edit.submit_bio_btn}}
+  </div>
+</form>
+{% endblock content %}
