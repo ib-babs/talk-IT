@@ -140,10 +140,16 @@ class DBStorage:
         if obj_total:
             return len(obj_total)
         return 0
+
     def count_reply(self, cls, comment_id=None):
         """Return the number of reply in storage based on comment_id"""
         obj_total = self.__session.query(cls).filter(
-            cls.comment_id== comment_id).all() or None
+            cls.comment_id == comment_id).all() or None
         if obj_total:
             return len(obj_total)
         return 0
+
+    def user_has_liked(self, cls, user_id, post_id):
+        obj = self.__session.query(cls).filter(
+            cls.user_id == user_id, cls.post_id == post_id).first()
+        return obj or None

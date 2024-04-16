@@ -6,8 +6,10 @@
 
 article p {
   word-wrap: break-word;
-  padding: 0 5px;
   white-space: pre-wrap; /* Preserve white space */
+}
+#comments-container h3{
+  color: grey;
 }
 #comments-container {
   margin: 10px;
@@ -57,7 +59,7 @@ section h3 {
   margin-bottom: 5px;
   padding: 10px;
   margin-right: 10px;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: rgba(210, 210, 210, 0.5);
 }
 .comment-box-form .cmt-txt-area {
@@ -76,11 +78,14 @@ section h3 {
   margin-left: -12px;
   width: 98%;
 }
+#share-text, .fa-link{
+  color: black;
+}
 #submit-comment {
   display: none;
 }
 #submit-comment-label {
-  background-color: blue;
+  background-color: #005bc5;
   padding: 6px;
   color: white;
   border-radius: 10px;
@@ -112,8 +117,9 @@ a {
   display: none;
 }
 #lkes-and-comments-container {
+  font-size: 18px;
   display: flex;
-  gap: 1em;
+  justify-content: space-between;
 }
 .post-write-up {
   word-break: break-all;
@@ -148,7 +154,7 @@ a {
   top: 5%;
   left: 10px;
   font-size: 20px;
-  background-color: blue;
+  background-color: #005bc5;
   color: white;
   padding: 5px;
   z-index: 0;
@@ -165,8 +171,8 @@ a {
 #prev-next i {
   opacity: 0.5;
   font-size: 2.5em;
-  color: blue;
-  text-shadow: 0 2px 1px blue;
+  color: #005bc5;
+  text-shadow: 0 2px 1px #005bc5;
 }
 #prev-next {
   display: flex;
@@ -258,17 +264,12 @@ a {
   color: grey;
 }
 @media (200px <= width <= 768px) {
-  #read-post-container h2 {
-    top: 30px;
-  }
+
   #submit-comment-label {
     right: 38px;
   }
 }
 @media (width > 768px) {
-  #read-post-container h2 {
-    top: 48px;
-  }
   #preview-image img {
     width: 70%;
     height: 90%;
@@ -280,7 +281,5 @@ a {
   #share-container {
     margin: 0 30px;
   }
-  article{
-    margin: 20px;
-  }
+
 }

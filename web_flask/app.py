@@ -160,7 +160,6 @@ def read_post(post_id):
     if post_object is None:
         return abort(404)
     post_author = storage.get(User, post_object.user_id)
-    session['post_id'] = post_object.id
     comments = storage.get_comments(Comment, post_id)
     user_has_liked = False
     sorted_comments = []
@@ -174,9 +173,6 @@ def read_post(post_id):
     comment_form = CommentForm()
     form = LikeForm()
     user_id = current_user.id
-
-    current_user.checked = False
-
     if request.method == 'POST':
         # Take comment
         if 'comment' in request.form:
@@ -208,12 +204,13 @@ def read_post(post_id):
 
     total_comment = storage.count_comment_or_like(Comment, post_id)
     total_like = storage.count_comment_or_like(PostLike, post_id)
+    user_has_liked = storage.user_has_liked(PostLike, current_user.id, post_id)
     read_post_kwargs = {
         'post': post_object,
         'comments': sorted_comments, 'nav': True, 'a': True, 'comment_form': comment_form, 'post_id': post_id, 'user_id': user_id,
         'cache_id': uuid4(), 'read': True, 'total_comment': total_comment, 'title': 'Reading...', 'like': form,
         'post_author': post_author,
-        'total_like': total_like, 'total_reply': total_reply
+        'total_like': total_like, 'total_reply': total_reply, 'user_has_liked': user_has_liked
     }
     return render_template('read_post.html', **read_post_kwargs)
 
@@ -337,7 +334,7 @@ def delete_comment(comment_id):
         return abort(404)
     storage.delete(comment)
     storage.save()
-    return redirect(url_for('read_post', post_id=session['post_id']))
+    return redirect(url_for('read_post', post_id=comment.post_id))
 
 
 @app.route('/delete-post/<post_id>', methods=['DELETE', 'POST', 'GET'])

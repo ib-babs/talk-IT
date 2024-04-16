@@ -82,13 +82,10 @@
       <!-- ===== -->
 
       <!-- Likes and comments -->
-      <div class="lkes-and-comments-container">
+      {% if  total_like[loop.index - 1] > 0 %} 
       <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-            {{total_like[loop.index - 1]}} {% if total_like[loop.index - 1] > 1
-            %} Likes {%else %} Like {%endif%}</span
-          ></span
-        >
-      </div>
+            {{total_like[loop.index - 1]}} 
+          {%endif%}
       <!-- ======== -->
     </div>
   </div>

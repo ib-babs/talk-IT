@@ -2,11 +2,7 @@ body {
   margin: 0;
 }
 :root {
-  --color-0: #001449;
-  --color-1: #012677;
   --color-2: #005bc5;
-  --color-3: #00b4fc;
-  --color-4: #17f9ff;
 }
 
 #user-image {
@@ -34,14 +30,16 @@ button,
 }
 
 .post-card {
-  margin: 35px;
+  margin: 5px;
 }
 
 .post-body {
-  box-shadow: 0 3px 10px 0.3px #bbb;
   border-top: none;
-  padding: 10px;
-  margin-bottom: 1rem;
+  padding: 5px;
+  margin-bottom: -10px;
+}
+.other-profile-post-body{
+margin-bottom: 10px;
 }
 .post-body p {
 
@@ -61,7 +59,7 @@ a {
   margin-top: 10px;
 }
 #edit-and-post a {
-  background: blue;
+  background: var(--color-2);
   padding: 8px;
   color: white;
 }
@@ -77,10 +75,10 @@ a {
   border: #ccc solid 1px;
 }
 .post-options-container a:nth-child(3) {
-  background-color: green;
+  background-color: var(--color-2);
 }
 .post-options-container .delete-post-btn {
-  background-color: red;
+  background-color: var(--color-2);
   color: whitesmoke;
   margin: 0;
 }
@@ -92,7 +90,7 @@ a {
   margin-left: 15px;
 }
 .delete-yes-btn {
-  background: blue;
+  background: var(--color-2);
 }
 .post-ids {
   display: none;
@@ -135,10 +133,10 @@ a {
   transition: all 1s ease-in-out;
 }
 .fa-thumbs-up {
-  background: blue;
+  background: var(--color-2);
   color: white;
-  font-size: 16px;
-  padding: 7px;
+  font-size: 12px;
+  padding: 5px;
   border-radius: 100%;
 }
 .post-imgs-div {
@@ -184,8 +182,7 @@ a {
 }
 @media (200px <= width <= 768px) {
   .post-card {
-    margin: 35px 10px;
-    margin-top: 10px;
+    margin: 5px;
   }
   .post-imgs-div {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));

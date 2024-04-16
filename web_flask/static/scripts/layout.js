@@ -1,24 +1,26 @@
 $(document).ready(() => {
   const collapseBtn = $("#collapse-btn"),
     navLink = $("nav");
+
+  $(".user-bio").text($(".user-bio").text().trimEnd().trimStart());
   function theme(property) {
     if (property == "dark") {
-      $(document.body).attr("style", "background:#111; color: white");
+      $(document.body).attr("style", "background:#1e1e1e; color: white");
       $("textarea,#post_title,#edit-post-title").attr(
         "style",
-        "background:#222; color: white"
+        "background:#1e1e1e; color: white"
       );
-      $(".show-hide-profile").attr("style", "background:#222;");
+      $(".show-hide-profile").attr("style", "background:#1e1e1e;");
       $(".user-username").css("color", "#eee");
       $("header").css("box-shadow", "0 3px 10px 0.3px #000");
       $("footer").css("box-shadow", "0 3px 10px 0.3px #000");
       $(
         ".user-comments, .reply_author-comments, .comment_author-comments"
-      ).attr("style", "background: #222");
+      ).attr("style", "background: #2f2f2f");
       $(".post-body").css("box-shadow", "0 3px 10px 0.3px #000");
       $(".container").attr(
         "style",
-        "background-color:#222; box-shadow: 0 1px 8px 0.5px #000"
+        "background-color:#1e1e1e; box-shadow: 0 1px 8px 0.5px #000"
       );
     } else {
       $(".show-hide-profile").attr("style", "background:whitesmoke;");
@@ -96,15 +98,16 @@ $(document).ready(() => {
       ),
       italic = parsingStyles(p, /(?<=_) +|(?!_)\n|(_(?=\S+)[^_]+_)/gm, "_"),
       code = parsingStyles(p, /(?<=`) +|(?!`)\n|(`(?=\S+)[^`]+`)/gm, "`"),
-      linkText = p.match(/((https|http):\/\/)?(\w+|\d+)\.\w+(\S+)?/gim);
+      linkText = p.match(
+        /((https|http|ftp):\/\/)?(www.)?(\w+|\d+)\.(com|net|org|gov|biz|edu|info|io|me|uk|de|us|ca|au|fr|jp|cn|ru|it|es|nl|ch|se|no|dk|fi|be|tech)(\S+)?/gim
+      );
     p = p.replace(/</gim, "&lt;").replace(/>/gim, "&gt;");
     for (let index = 0; index < splitter.length; index++)
       p = p.replace(
         splitter[index],
-        `<strong style="color: unset; font-weight: 550;">${splitter[index].replace(
-          /\*/gm,
-          ""
-        )}</strong>`
+        `<strong style="color: unset; font-weight: 550;">${splitter[
+          index
+        ].replace(/\*/gm, "")}</strong>`
       );
 
     for (let index = 0; index < italic.length; index++)
@@ -125,7 +128,6 @@ $(document).ready(() => {
           if (
             linkText[index].includes("https://") ||
             linkText[index].includes("http://") ||
-            linkText[index].includes("ftps://") ||
             linkText[index].includes("ftp://")
           ) {
             handleLinkProtocol = linkText[index];

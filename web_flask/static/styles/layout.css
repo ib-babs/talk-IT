@@ -2,6 +2,10 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+:root {
+  --color-2: #005bc5;
+}
+
 p,
 textarea {
   font-size: 120%;
@@ -11,7 +15,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #222;
+  background-color: #1e1e1e;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -28,7 +32,7 @@ header {
   user-select: none;
   color: rgb(189, 181, 181);
   /* text-decoration: underline;
-  text-decoration-color: blue; */
+  text-decoration-color: var(--color-2); */
 }
 nav {
   z-index: 1;
@@ -41,7 +45,7 @@ nav ul {
   padding-top: 5px;
 }
 nav ul li:hover {
-  background-color: blue;
+  background-color: var(--color-2);
 }
 nav ul li {
   padding: 15px;
@@ -58,7 +62,7 @@ nav ul .nav-link {
   font-size: 1em;
   margin-right: 2em;
   color: white;
-  background-color: #222;
+  background-color: #1e1e1e;
   border: none;
 }
 .fa-equals {
@@ -81,7 +85,7 @@ nav ul {
   top: 10%;
   right: 10px;
   font-size: 20px;
-  background-color: blue;
+  background-color: var(--color-2);
   color: white;
   padding: 5px;
 }
@@ -103,16 +107,16 @@ nav ul {
     position: fixed;
     inset: 0;
     text-align: center;
-    background-color: #222;
+    background-color: #1e1e1e;
     margin: 40px 0 5px 30%;
-    filter: drop-shadow(0px 0px 10px #222);
+    filter: drop-shadow(0px 0px 10px #1e1e1e);
   }
   .fa-equals {
     display: block;
   }
   .fa-equals:active {
     font-size: 1.2em;
-    color: blue;
+    color: var(--color-2);
   }
 }
 .user-username {
@@ -131,14 +135,14 @@ nav ul {
     grid-auto-flow: column;
     inset: 0;
     text-align: center;
-    background-color: #222;
+    background-color: #1e1e1e;
   }
   .fa-equals {
     display: block;
   }
   .fa-equals:active {
     font-size: 1.2em;
-    color: blue;
+    color: var(--color-2);
   }
 }
 @media screen and (width >= 768px) {
@@ -149,6 +153,7 @@ nav ul {
     border: none;
   }
   nav ul {
+    padding-block-start: 0px;
     display: grid;
     grid-auto-flow: column;
   }
@@ -156,7 +161,7 @@ nav ul {
   #sign-up,
   #sign-in i {
     text-decoration: underline;
-    text-decoration-color: blue;
+    text-decoration-color: var(--color-2);
     text-decoration-thickness: 4px;
     text-underline-offset: 5px;
   }

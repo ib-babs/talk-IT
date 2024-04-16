@@ -4,7 +4,7 @@
 {% if other_u_username %}
 <script>
   let activeNav = $("nav .nav-link li");
-  $(activeNav[4]).css("background", "blue");
+  $(activeNav[4]).css("background", "#005bc5");
   $(activeNav[4]).css("color", "white");
 </script>
 {% endif %}
@@ -21,22 +21,20 @@
     id="user-image"
     class="preview"
   />
-  <strong style="text-align: center; padding-top: 6px;">{{user.username}}</strong>
-  <p>{%if not user.bio %}No bio. {%else%} {{user.bio}}{%endif%}</p>
-  <button type="button" id='view-user-profile'>View Profile</button>
+  <strong style="text-align: center; padding-top: 6px"
+    >{{user.username}}</strong
+  >
+</div>
+<div class="user-profile other-user-profile" style='margin:10px; padding:0;'>
+  <span class="user-bio">{%if not user.bio %}No bio. {%else%} {{user.bio}}{%endif%}</span>
+  <button type="button" id="view-user-profile" style="margin-top: 10px;">View Profile</button>
 </div>
 
 <div class="post-card">
   {% if posts %} {% for post in posts%}
   <div class="post-container">
-    <!-- Title -->
-    <div class="post-title">
-      <h3>{{ post.title }}</h3>
-    </div>
-    <!-- === -->
-
     <!-- Post Body -->
-    <div class="post-body">
+    <div class="post-body other-profile-post-body">
       <!-- Options -->
       <div class="post-options-container">
         <span>{{post['created_at_time']}}</span>
@@ -63,13 +61,9 @@
       <!-- ===== -->
 
       <!-- Likes and comments -->
-      <div class="lkes-and-comments-container">
-        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-            {{total_like[loop.index - 1]}} {% if total_like[loop.index - 1] > 1
-            %} Likes {%else %} Like {%endif%}</span
-          ></span
-        >
-      </div>
+      {% if total_like[loop.index - 1] > 0 %}
+      <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+      {{total_like[loop.index - 1]}} {%endif%}
       <!-- ======== -->
     </div>
   </div>
@@ -81,19 +75,17 @@
 <div class="preview-user-image">
   <i class="fa fa-remove stop-preview" aria-hidden="true"></i>
   <img
-  src="data:image/{{user.image_fmt}};base64,{{user.image}}"
-  alt="{{user.username}}{{cache_id}}"
-  id="img-previewing"
+    src="data:image/{{user.image_fmt}};base64,{{user.image}}"
+    alt="{{user.username}}{{cache_id}}"
+    id="img-previewing"
   />
 </div>
-
-
 
 <div class="show-hide-profile">
   <p>Full Name: <strong>{{user.full_name}}</strong></p>
   <p>Username: <strong>{{user.username}}</strong></p>
   <p>Email: <strong>{{user.email}}</strong></p>
   <p>Gender: <strong>{{user.gender}}</strong></p>
-  <button type="button" id='view-user-profile'>OK</button>
+  <button type="button" id="view-user-profile">OK</button>
 </div>
 {% endblock content %}

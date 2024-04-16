@@ -1,7 +1,7 @@
 import { shortenPostImages } from "./common.js";
 $(document).ready(() => {
   let activeNav = $("nav .nav-link li");
-  $(activeNav[1]).css("background", "blue");
+  $(activeNav[1]).css("background", "#005bc5");
   $(activeNav[1]).css("color", "white");
 
   $.each($(".delete-post-btn"), function (indexInArray, deleteBtn) {
