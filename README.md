@@ -124,7 +124,7 @@ Both application and the database are deployed/host on [pythonanywhere](https://
 - TALK_IT_MYSQL_USER - Username
 - TALK_IT_MYSQL_PWD - MySQL database account password
 - EMAIL_USER - The email username which resetting password link will be sent if a user request for password resetting.
-- EMAIL_PASS - Email password. Note: You may encountered an error with the Email password even if the password provided is correct. SET up 2 Factor Validation and use the pass provided as the email password
+- EMAIL_PASS - Email password. Note: You may encountered an error with the Email password even if the password provided is correct. SET up 2 Factors Authentication and use the pass provided as the email password
 
 # DEVELOPER
 
