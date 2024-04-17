@@ -1,4 +1,6 @@
-<img src='logo.jpg' style='display:grid; margin:auto;' />
+<div style='display:grid; justify-content: center;'>
+<img src='logo.jpg'  alt='talk-it-log' />
+</div>
 
 # TalkIT /tɔːk aI tee/
 
@@ -23,16 +25,15 @@
 - **/home** - To landing page
 - **/developer** - To the deveolper page
 - **/other_user_profile/<other_user_id>** - To the other user profile page
-
-<div style='display: flex; flex-wrap: wrap;'>
-![landing-page](landing-page.jpg)
-![new-feed](new-feed.jpg)
-![reading...](read-post.jpg)
-![reply](reply.jpg)
-![register](register-page.jpg)
-![edit-a-post](edit-post.jpg)
-![user-profie](user-profile.jpg)
-![other-user-profie](other-user-profile.jpg)
+<div style='display:flex; flex-wrap: wrap;'>
+<img src='landing-page.jpg'  alt='landing-page' />
+<img src='new-feed.jpg'  alt='new-feed' />
+<img src='read-post.jpg'  alt='read-post' />
+<img src='reply.jpg'  alt='reply' />
+<img src='register-page.jpg'  alt='register-page' />
+<img src='edit-post.jpg'  alt='edit-post' />
+<img src='user-profile.jpg'  alt='user-profile' />
+<img src='other-user-profile.jpg'  alt='other-user-profile' />
 </div>
 
 ## USAGE
