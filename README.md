@@ -1,4 +1,4 @@
-![talkIT-logo](https://imgur.com/wQ4wiYT)
+![talkIT-logo](logo.jpg)
 
 # TalkIT /tɔːk aI tee/
 
@@ -24,9 +24,14 @@
 - **/developer** - To the deveolper page
 - **/other_user_profile/<other_user_id>** - To the other user profile page
 <div style='display: flex; flex-wrap: wrap;>
-![landing-page](https://i.imgur.com/rsegXWk.png)
-![new-feed](https://i.imgur.com/IbDgvvG.png)
-![reading...](https://i.imgur.com/hZrsSBr.png)
+![landing-page](landing-page.jpg)
+![new-feed](new-feed.jpg)
+![reading...](read-post.jpg)
+![reply](reply.jpg)
+![register](register-page.jpg)
+![edit-a-post](edit-post.jpg)
+![user-profie](user-profile.jpg)
+![other-user-profie](other-user-profile.jpg)
 </div>
 
 ## USAGE
