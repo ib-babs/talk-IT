@@ -4,14 +4,18 @@
 
 # TalkIT /tɔːk aI tee/
 
-[![Flask Button](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/1200px-Flask_logo.svg.png)](https://flask.palletsprojects.com/)
-[![HTML5 Button](https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
-[![CSS Button](https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript Button](https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![MySQL Button](https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg)](https://dev.mysql.com/doc/)
-[![GitHub Button](https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg)](https://github.com/)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/1200px-Flask_logo.svg.png" width=50 height=50>
 
-[![Python Button](https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg)](https://www.python.org/)
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" width=50 height=50>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" width=50 height=50>
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Unofficial_JavaScript_logo_2.svg" width=50 height=50>
+
+<img src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" width=50 height=50>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" width=50 height=50>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" width=50 height=50>
 
 **TalkIT** is a mini web-based social platform for Tech Enthuasiats - Software Developer, Software Engineer, Low-Level Engineer, Game Developer, Website Dev and others. It is a platform to share your insights, knowledge, or even tech-related jokes/memes.
 **TalkIT** is a comosition of both Frontend and Backend.
