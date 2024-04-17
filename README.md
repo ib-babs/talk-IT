@@ -69,15 +69,32 @@ Some of the features has TalkIT are:
 - **Share** - Ability to share the post has been implmented
 - **Bio** - Users can have a bio as a short/long description about themselves.
 - **Theme** - Light and dark theme. To activate this, click on the **TalkIT** logo/brand at the heading
-![page-brand](page-brand.jpg)
+  ![page-brand](page-brand.jpg)
 
-- **RICH-TEXT FORMATTING** - I tred _flask_tinymace_ for text formatting however, I encountered so many errors and warnings and therefore I decided to manually formatted the post, comment, and reply made by the users by extracting the needed text for formatting using **REGULAR EXPRESSION** from JavaScript.
-  And more!
+- **RICH-TEXT FORMATTING** - I tred _flask_tinymace_ for text formatting however, I encountered so many errors and warnings and therefore I decided to manually format the post, comment, and reply made by the users by extracting the needed text for formatting using **REGULAR EXPRESSION** from JavaScript. This took me a whole day before I finally came to the solution.
+
+- **Link Extraction** - Links are formatted as a text with blue color.
+  _And more!_
 
 # HOW CAN YOU FORMAT POST, COMMENT, AND REPLY TEXT?
 
-- Bold formatting: Surround the text (The beginning and the end) you want to bold with an asterisk. EXAMPLE:
-![bold-it](bold.jpg)
+- Bold formatting: Surround the text (The beginning and the end) you want to bold with an asterisk(\*). EXAMPLE:
+  ![bold-it](bold.jpg)
 
 ### Result
+
 ![done-bold-it](done-bold.jpg)
+
+- Italics formatting: Surround the text (The beginning and the end) you want it to be italicized with an underscore (\_). EXAMPLE:
+  ![italics](italics.jpg)
+
+### Result
+
+![done-italicized-it](done-italicized.jpg)
+
+- Code formatting: Surround the text (The beginning and the end) you want it to be coded with a backward apostrophe typically called backtick or 'grave accent' (`). EXAMPLE:
+  ![code](code.jpg)
+
+### Result
+
+![done-coding-it](coded.jpg)
