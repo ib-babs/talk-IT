@@ -4,7 +4,14 @@
 
 # TalkIT /tɔːk aI tee/
 
-**TalkIT** is a mini social web-based platform for Tech Enthuasiats - Software Developer, Software Engineer, Low-Level Engineer, Game Developer, Website Dev and others. It is a platform to share your insights, knowledge, or even tech-related jokes/memes.
+<button style='background: teal; padding: 5px; border-radius: 5px'>Flask</button>
+<button style='background: #2f4; padding: 5px; border-radius: 5px'>HTML</button>
+<button style='background: green; padding: 5px; border-radius: 5px'>CSS</button>
+<button style='background: purple; padding: 5px; border-radius: 5px'>JavaScript</button>
+<button style='background: pink; padding: 5px; border-radius: 5px'>MySQL</button>
+
+**TalkIT** is a mini web-based social platform for Tech Enthuasiats - Software Developer, Software Engineer, Low-Level Engineer, Game Developer, Website Dev and others. It is a platform to share your insights, knowledge, or even tech-related jokes/memes.
+**TalkIT** is a comosition of both Frontend and Backend.
 
 # TalkIT platform ROUTES:
 
@@ -22,9 +29,13 @@
 - **/delete_post/<post_id>** - Allows a current user to delete his/her post
 - **/reset_request** To request password resetting page
 - **/reset_token/<token>** - To resetting password page using generated token
-- **/home** - To landing page
+- **/** or **/home** - To the landing page
 - **/developer** - To the deveolper page
 - **/other_user_profile/<other_user_id>** - To the other user profile page
+
+<aside style='background-color: #20e1f8;'><h3>Note:</h3> MOST of these routes are protected i.e a user needsto be logged in before he/she can access them, while few of them are public (Needn't to be logged in)
+</aside>
+
 <div style='display:flex; flex-wrap: wrap;'>
 <img src='landing-page.jpg'  alt='landing-page' />
 <img src='new-feed.jpg'  alt='new-feed' />
