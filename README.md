@@ -1,4 +1,4 @@
-![talkIT-logo](logo.jpg)
+<img src='logo.jpg' style='display:grid; margin:auto;' />
 
 # TalkIT /tɔːk aI tee/
 
@@ -23,7 +23,8 @@
 - **/home** - To landing page
 - **/developer** - To the deveolper page
 - **/other_user_profile/<other_user_id>** - To the other user profile page
-<div style='display: flex; flex-wrap: wrap;>
+
+<div style='display: flex; flex-wrap: wrap;'>
 ![landing-page](landing-page.jpg)
 ![new-feed](new-feed.jpg)
 ![reading...](read-post.jpg)
