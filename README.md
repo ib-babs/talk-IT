@@ -1,5 +1,5 @@
 <div style='display:grid; place-content: center;'>
-<img src='logo.jpg'  alt='talk-it-log' width='200' height='200' />
+<img src='logo.jpg'  alt='talk-it-log' width='200' height='150' />
 </div>
 
 # TalkIT /tɔːk aI tee/
