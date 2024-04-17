@@ -29,10 +29,11 @@ class User(BaseModel, Base, UserMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.password is not None:
+            # Hashing password
             self.password = md5(str(self.password).encode('utf-8')).hexdigest()
 
     def get_reset_token(self, expire_sec=1800):
-        '''Reset password'''
+        '''Get the reset token. Expires in thirty minutes'''
         s = Serializer(app.config['SECRET_KEY'], expires_in=expire_sec)
         return s.dumps({'user_id': self.id}).decode('utf-8')
 

@@ -2,9 +2,12 @@
 from sqlalchemy import Column, String, Text, ForeignKey, Integer, JSON
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import relationship
+'''Class module'''
 
 
 class Post(BaseModel, Base):
+    '''BaseModel and Base subclass'''
+
     __tablename__ = 'posts'
     post = Column(Text, nullable=False)
     likes = Column(Integer, default=0)

@@ -10,7 +10,7 @@ from wtforms.validators import DataRequired, Length
 
 
 class PostForm(FlaskForm):
-    '''Flask form subclass'''
+    '''Flask form subclass - Form to make a post'''
     post = TextAreaField(validators=[DataRequired(
     )], id='post-area', name='post-area', render_kw={'placeholder': 'Your post goes here', 'cols': 80, 'rows': 22})
     post_images = MultipleFileField(render_kw={

@@ -1,5 +1,5 @@
 <div style='display:grid; place-content: center;'>
-<img src='logo.jpg'  alt='talk-it-log' width='200' height='100' />
+<img src='readme-images/logo.jpg'  alt='talk-it-log' width='200' height='100' />
 </div>
 [Goto TalkIT](https://ibbabs.pythonanywhere.com/)
 
@@ -48,14 +48,14 @@
 </aside>
 
 <br>
-<img src='landing-page.jpg'  alt='landing-page' />
-<img src='new-feed.jpg'  alt='new-feed' />
-<img src='read-post.jpg'  alt='read-post' />
-<img src='reply.jpg'  alt='reply' />
-<img src='register-page.jpg'  alt='register-page' />
-<img src='edit-post.jpg'  alt='edit-post' />
-<img src='user-profile.jpg'  alt='user-profile' />
-<img src='other-user-profile.jpg'  alt='other-user-profile' />
+<img src='readme-images/landing-page.jpg'  alt='landing-page' />
+<img src='readme-images/new-feed.jpg'  alt='new-feed' />
+<img src='readme-images/read-post.jpg'  alt='read-post' />
+<img src='readme-images/reply.jpg'  alt='reply' />
+<img src='readme-images/register-page.jpg'  alt='register-page' />
+<img src='readme-images/edit-post.jpg'  alt='edit-post' />
+<img src='readme-images/user-profile.jpg'  alt='user-profile' />
+<img src='readme-images/other-user-profile.jpg'  alt='other-user-profile' />
 
 ## FEATURES
 
@@ -71,7 +71,7 @@ Some of the features has TalkIT are:
 - **Share** - Ability to share the post has been implmented
 - **Bio** - Users can have a bio as a short/long description about themselves.
 - **Theme** - Light and dark theme. To activate this, click on the **TalkIT** logo/brand at the heading
-  ![page-brand](page-brand.jpg)
+  ![page-brand](readme-images/page-brand.jpg)
 
 - **RICH-TEXT FORMATTING** - I tred _flask_tinymace_ for text formatting however, I encountered so many errors and warnings and therefore I decided to manually format the post, comment, and reply made by the users by extracting the needed text for formatting using **REGULAR EXPRESSION** from JavaScript. This took me a whole day before I finally came to the solution.
 
@@ -81,25 +81,25 @@ Some of the features has TalkIT are:
 # HOW CAN YOU FORMAT POST, COMMENT, AND REPLY TEXT?
 
 - Bold formatting: Surround the text (The beginning and the end) you want to bold with an asterisk(\*). EXAMPLE:
-  ![bold-it](bold.jpg)
+  ![bold-it](readme-images/bold.jpg)
 
 ### Result
 
-![done-bold-it](done-bold.jpg)
+![done-bold-it](readme-images/done-bold.jpg)
 
 - Italics formatting: Surround the text (The beginning and the end) you want it to be italicized with an underscore (\_). EXAMPLE:
-  ![italics](italics.jpg)
+  ![italics](readme-images/italics.jpg)
 
 ### Result
 
-![done-italicized-it](done-italicized.jpg)
+![done-italicized-it](readme-images/done-italicized.jpg)
 
 - Code formatting: Surround the text (The beginning and the end) you want it to be coded with a backward apostrophe typically called backtick or 'grave accent' (`). EXAMPLE:
-  ![code](code.jpg)
+  ![code](readme-images/code.jpg)
 
 ### Result
 
-![done-coding-it](coded.jpg)
+![done-coding-it](readme-images/coded.jpg)
 
 # DEPLOYMENT
 
@@ -111,18 +111,31 @@ Both application and the database are deployed/host on [pythonanywhere](https://
   Any developer who wants to play around TalkIT source code and testing it on their local enviroment will encounter an issue/error (Wrong path issue) at the make_post page when the image(s) is/are added. REASON: The reason behind this issue/error is that on the website that I deployed the source code to takes a **getcwd()** property on **os** module as **/home/ib-bas/** and meanwhile it is a correct path during testing stage on the local environment.
   ### Remedy:
   Go to the application file named **app.py** and move on to line _122_, then remove _talk-IT_ and also in line _350_ too so that any post deleted will also be deleted with image(s) added if any. Check the images below:
-  ![make_post](make-post.jpg)
-  ![delete_post](delete-post.jpg)
+  ![make_post](readme-images/make-post.jpg)
+  ![delete_post](readme-images/delete-post.jpg)
 - ### On the site TalkIT is deployed to
   - As the account I have on [pythonanywhere](https://www.pythonanywhere.com) is a free account therefore, I need to stayed login and be reloading the app with the button named **Reload ib-babs.pythonanywhere.com** to load on the webpage about every 10 minutes otherwise the link will display 500 http status code and the site will be inaccessible. Also i couldn't add custom domain so my username is my domain name
-    ![realod](reload.jpg)
+    ![realod](readme-images/reload.jpg)
+
+# ENVIRONMENT VARIABLES IN TalkIT FOR DEVELOPER
+
+- TALK_IT_MYSQL_DB - Name of the MySQL database
+- TALK_IT_MYSQL_HOST - MySQL Database host
+- TALK_IT_MYSQL_USER - Username
+- TALK_IT_MYSQL_PWD - MySQL database account password
+- EMAIL_USER - The email username which resetting password link will be sent if a user request for password resetting.
+- EMAIL_PASS - Email password. Note: You may encountered an error with the Email password even if the password provided is correct. SET up 2 Factor Validation and use the pass provided as the email password
 
 # DEVELOPER
+
 - Babatunde Ibrahim [babatundeibrahim436@gmail.com] [https://github.com/ib-babs]
 
-
 ### Portfolio Project
+
 ### TalkIT
+
 ### ALX - Software Engineering
+
 ### Holberton
+
 ### ENJOY!

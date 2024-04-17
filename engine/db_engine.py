@@ -19,7 +19,7 @@ classes = {"User": User, 'Post': Post,
 
 
 class DBStorage:
-    """interaacts with the MySQL database"""
+    """interacts with the MySQL database"""
     __engine = None
     __session = None
 
@@ -93,7 +93,6 @@ class DBStorage:
             cls.username == username).all()
         if objects is not None:
             for obj in objects:
-                # if obj.id == id:
                 return obj
         return None
 
@@ -121,6 +120,7 @@ class DBStorage:
         return None
 
     def get_user_by_email(self, cls, email):
+        '''Get user by the email if exist'''
         obj = self.__session.query(cls).filter(
             cls.email == email).first() or None
         return obj
@@ -150,6 +150,7 @@ class DBStorage:
         return 0
 
     def user_has_liked(self, cls, user_id, post_id):
+        """Check if the user has liked the post"""
         obj = self.__session.query(cls).filter(
             cls.user_id == user_id, cls.post_id == post_id).first()
         return obj or None

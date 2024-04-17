@@ -7,6 +7,7 @@ from wtforms import StringField, EmailField, PasswordField, SubmitField, FileFie
 
 
 class RegistrationForm(FlaskForm):
+    '''Registration form'''
     full_name = StringField('Full Name:', validators=[
         DataRequired(), Length(3, 100)], id='fullname',
         name='fullname', render_kw={'placeholder': 'Full Name'})
@@ -47,12 +48,13 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    '''Login form'''
     username = StringField('Username', validators=[
         DataRequired()], render_kw={'placeholder': 'Username'})
     password = PasswordField('Password', validators=[
                              DataRequired()], render_kw={'placeholder': 'Password'})
+    
     # Validating username
-
     def validate_username(self, username):
         from hashlib import md5
         user = storage.get_user(User, username.data)
@@ -64,10 +66,12 @@ class LoginForm(FlaskForm):
 
 
 class LogOutForm(FlaskForm):
+    '''Logout form'''
     logout = SubmitField('Log out', id='logout', name='logout')
 
 
 class UpdateProfile(FlaskForm):
+    '''Update user profile form'''
     full_name = StringField('Full Name:', validators=[
         DataRequired(), Length(3, 100)], id='full_name',
         name='full_name', render_kw={'placeholder': 'Full Name'})

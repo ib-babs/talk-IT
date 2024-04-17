@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
-from wtforms import SubmitField, TextAreaField, BooleanField
+from wtforms import SubmitField, TextAreaField
 
 
 class CommentForm(FlaskForm):
@@ -13,7 +13,7 @@ class CommentForm(FlaskForm):
 
 
 class EditCommentForm(FlaskForm):
-    '''Comment form'''
+    '''Edit Comment form'''
     edit_comment = TextAreaField(
         validators=[DataRequired()], name='edit-comment', id='edit-comment', render_kw={'class': 'cmt-txt-area', 'cols': 80, 'rows': 20})
     submit_edit_btn = SubmitField(
@@ -21,7 +21,7 @@ class EditCommentForm(FlaskForm):
 
 
 class EditBioForm(FlaskForm):
-    '''Bio form'''
+    '''Profile Bio form'''
     bio = TextAreaField(
         validators=[DataRequired()], name='edit-bio', id='edit-bio', render_kw={'class': 'cmt-txt-area', 'cols': 80, 'rows': 20})
     submit_bio_btn = SubmitField(

@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+'''Class module'''
+
 from typing import Any
 from uuid import uuid4
 from sqlalchemy import Column, String, DateTime
@@ -8,16 +10,16 @@ from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
 
 Base = declarative_base()
-time = "%Y-%m-%d %H:%M:%S.%f"
+time = "%Y-%m-%d %H:%M:%S.%f" # Human readable time
 
 
 class BaseModel:
+    '''A parent class inherited by all the model classes'''
     id = Column(String(45), nullable=False, primary_key=True)
     created_at = Column(DateTime, default=datetime.now)
     updated_at = Column(DateTime, default=datetime.now)
 
     def __init__(self, *args, **kwargs):
-
         if kwargs:
             for k, v in kwargs.items():
                 if k != '__class__':
@@ -40,23 +42,24 @@ class BaseModel:
             self.updated_at = self.created_at
 
     def to_dict(self):
+        '''Convert all the info provided by class to a dictionary'''
         new_dict = self.__dict__.copy()
         if 'created_at' in new_dict:
             new_dict['created_at'] = new_dict['created_at'].strftime(time)
         if 'updated_at' in new_dict:
             new_dict['updated_at'] = new_dict['updated_at'].strftime(time)
 
-        if not 'created_at_time' in new_dict:
+        if not 'created_at_time' in new_dict:  # Human-readable time - Created_at
             new_dict['created_at_time'] = timeConversion(
                 new_dict['created_at'])
-        if not 'updated_at_time' in new_dict:
+        if not 'updated_at_time' in new_dict:  # Human-readable time - Updated_at
             new_dict['updated_at_time'] = timeConversion(
                 new_dict['updated_at'])
 
         if '__class__' in new_dict:
             new_dict['__class__'] = self.__class__.__name__
         if 'password' in new_dict:
-            del new_dict['password']
+            del new_dict['password']  # Removing password from the dictionary
         if '_sa_instance_state' in new_dict:
             del new_dict['_sa_instance_state']
         if 'image' in new_dict:
