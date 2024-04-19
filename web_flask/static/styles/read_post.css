@@ -126,7 +126,7 @@ a {
 }
 
 #preview-image img {
-  z-index: 2;
+  z-index: -1;
   width: 350px;
   display: grid;
   margin: auto;
