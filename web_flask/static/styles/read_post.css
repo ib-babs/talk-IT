@@ -128,7 +128,6 @@ a {
 #preview-image img {
   z-index: 2;
   width: 350px;
-  height: 350px;
   display: grid;
   margin: auto;
 }
