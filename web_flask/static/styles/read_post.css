@@ -8,7 +8,7 @@ article p {
   word-wrap: break-word;
   white-space: pre-wrap; /* Preserve white space */
 }
-#comments-container h3{
+#comments-container h3 {
   color: grey;
 }
 #comments-container {
@@ -78,7 +78,8 @@ section h3 {
   margin-left: -12px;
   width: 98%;
 }
-#share-text, .fa-link{
+#share-text,
+.fa-link {
   color: black;
 }
 #submit-comment {
@@ -259,19 +260,18 @@ a {
   height: clamp(80px, 80px, 90px);
   margin-right: 8px;
 }
-.reply-link, .edit-link{
+.reply-link,
+.edit-link {
   color: grey;
 }
 @media (200px <= width <= 768px) {
-
   #submit-comment-label {
     right: 38px;
   }
 }
 @media (width > 768px) {
   #preview-image img {
-    width: 70%;
-    height: 90%;
+    width: 760px;
   }
   #prev-next {
     left: 80px;
@@ -280,5 +280,4 @@ a {
   #share-container {
     margin: 0 30px;
   }
-
 }
