@@ -89,7 +89,7 @@ window.onload = () => {
   $.each($(".post-imgs"), function (indexInArray, img) {
     $(img).click(function () {
       trackIndex = indexInArray;
-      prevImgDiv.attr("style", "display:block");
+      prevImgDiv.attr("style", "display:grid;");
       $(prevImg).attr("src", img.src);
 
       // Previous image
